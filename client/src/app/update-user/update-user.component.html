@@ -1,0 +1,20 @@
+<br> <br> <br>
+<div class ="col-md-6 offset-md-3">
+<h3> Update User </h3>
+<form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="exampleInputPassword1">Nom</label>
+        <input type="text" class="form-control" id="exampleInputPassword1"  [(ngModel)] = "user.nom" name="nom">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Prenom</label>
+        <input type="text" class="form-control" id="exampleInputPassword1"  [(ngModel)] = "user.prenom" name="prenom">
+      </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  [(ngModel)] = "user.email" name="email">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+
