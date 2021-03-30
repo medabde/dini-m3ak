@@ -21,7 +21,7 @@ public class PfaApplication {
         FilterRegistrationBean<AuthFilter> registrationBean = new FilterRegistrationBean<>();
         AuthFilter authFilter = new AuthFilter();
         registrationBean.setFilter(authFilter);
-        registrationBean.addUrlPatterns("/api/something/*");
+        registrationBean.addUrlPatterns("/api/*");
         return registrationBean;
     }
 
