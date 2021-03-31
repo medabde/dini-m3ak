@@ -5,10 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.example.demo.Constants;
+import com.example.demo.utils.Constants;
+import com.example.demo.exception.AuthException;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Role;
 import com.example.demo.repository.RoleRepository;
+import com.example.demo.utils.Utils;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,13 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/")
+@RequestMapping("app/api/users")
 public class UserController {
 
 
@@ -27,13 +33,21 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    Utils utils;
 
 
-    @GetMapping("/users")
-    public List<User> getAllUsers(){
+    @GetMapping("/")
+    public List<User> getAllUsers(HttpServletRequest httpRequest){
+        int id = (int) httpRequest.getAttribute("userId");
+
+        if (!utils.checkRole(id,Constants.ADMIN_ROLE)) throw new AuthException("you don't have the right to access to this information");
+
+
+
         return userRepository.findAll();
     }
-    @PostMapping("/users")
+    @PostMapping("/")
     public User createUser(@RequestBody Map<String,Object> userMap){
         String first_name = (String) userMap.get("first_name");
         String last_name = (String) userMap.get("last_name");
@@ -49,13 +63,13 @@ public class UserController {
 
         return userRepository.save(user);
     }
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable long id){
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("no user with id :" +id ));
         return ResponseEntity.ok(user);
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/{id}")
     public  ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails){
         User user = userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no user with id :" +id ));
 //        user.setNom(userDetails.getNom());
@@ -64,7 +78,7 @@ public class UserController {
         User updateUser = userRepository.save(user);
         return ResponseEntity.ok(updateUser);
     }
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Boolean>> DeleteUser(@PathVariable Long id){
         User user = userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no user with id :" +id));
         userRepository.delete(user);

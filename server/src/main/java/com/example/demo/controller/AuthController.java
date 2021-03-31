@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.Constants;
+import com.example.demo.utils.Constants;
 import com.example.demo.exception.AuthException;
 import com.example.demo.model.User;
 import com.example.demo.repository.RoleRepository;
@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/auth")
+@RequestMapping("app/auth")
 public class AuthController {
 
     @Autowired
@@ -32,14 +32,16 @@ public class AuthController {
     public ResponseEntity<Map<String,String>> loginUser(@RequestBody Map<String, Object> userMap){
         String email = (String) userMap.get("email");
         String password = (String) userMap.get("password");
-        int role = Integer.parseInt((String) userMap.get("role"));
+        int role = (int) userMap.get("role");
 
         User user;
 
         try{
-            String cryptedPass = BCrypt.hashpw(password,BCrypt.gensalt(Constants.ROUNDS));
-            user = userRepository.findByEmailAndPassword(email,cryptedPass,role);
-            if(user == null) throw new AuthException("Invalid email/password");
+            user = userRepository.findByEmailAndRole(email,roleRepository.getOne((long) role));
+            if(user == null || !BCrypt.checkpw(password,user.getPassword())){
+                throw new AuthException("Invalid email/password");
+            }
+
         }catch (Exception e){
             throw new AuthException("Invalid email/password");
         }
@@ -56,7 +58,7 @@ public class AuthController {
         String lName = (String) userMap.get("lname");
         String email = (String) userMap.get("email");
         String password = (String) userMap.get("password");
-        long role = Long.parseLong((String) userMap.get("role"));
+        int role = (int) userMap.get("role");
 
         Pattern pattern = Pattern.compile(Constants.EMAIL_FORMAT);
         if(email!=null) email = email.toLowerCase();
@@ -74,7 +76,7 @@ public class AuthController {
         user.setLast_name(lName);
         user.setEmail(email);
         user.setPassword(cryptedPass);
-        user.setRole(roleRepository.getOne(role));
+        user.setRole(roleRepository.getOne((long) role));
 
         user = userRepository.save(user);
 

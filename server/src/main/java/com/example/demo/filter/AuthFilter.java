@@ -1,6 +1,6 @@
 package com.example.demo.filter;
 
-import com.example.demo.Constants;
+import com.example.demo.utils.Constants;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.http.HttpStatus;
