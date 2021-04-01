@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
+
 import com.example.demo.exception.AuthException;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.City;
-import com.example.demo.repository.CityRepository;
+import com.example.demo.model.Type;
+import com.example.demo.repository.TypeRepository;
 import com.example.demo.utils.Constants;
 import com.example.demo.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,56 +19,57 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("app/api/cities")
-public class CityController {
-
+@RequestMapping("app/api/types")
+public class TypeController {
     @Autowired
-    CityRepository cityRepository;
+    TypeRepository typeRepository;
     @Autowired
     Utils utils;
 
     @GetMapping("/")
-    public List<City> getAllCities(HttpServletRequest httpRequest){
+    public List<Type> getAllTypes(HttpServletRequest httpRequest){
         int id = (int) httpRequest.getAttribute("userId");
         if (!utils.checkRole(id, Constants.ADMIN_ROLE)) throw new AuthException("you don't have the right to access to this information");
 
 
-        return cityRepository.findAll();
+        return typeRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<City> getCityById(@PathVariable long id,HttpServletRequest httpRequest){
+    public ResponseEntity<Type> getTypeById(@PathVariable long id, HttpServletRequest httpRequest){
         int userId = (int) httpRequest.getAttribute("userId");
         if (!utils.checkRole(userId, Constants.ADMIN_ROLE)) throw new AuthException("you don't have the right to access to this information");
 
-        City city = cityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("no city with id :" +id ));
-        return ResponseEntity.ok(city);
+        Type type = typeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("no type with id :" +id ));
+        return ResponseEntity.ok(type);
     }
 
     @PutMapping("/{id}")
-    public  ResponseEntity<City> updateCity(@PathVariable Long id, @RequestBody City cityDetails,HttpServletRequest httpRequest){
+    public  ResponseEntity<Type> updateType(@PathVariable Long id, @RequestBody Type typeDetails,HttpServletRequest httpRequest){
         int userId = (int) httpRequest.getAttribute("userId");
         if (!utils.checkRole(userId, Constants.ADMIN_ROLE)) throw new AuthException("you don't have the right to access to this information");
 
-        City city = cityRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no city with id :" +id ));
-        city.setCity_name(cityDetails.getCity_name());
-        City updateCity = cityRepository.save(city);
-        return ResponseEntity.ok(updateCity);
+        Type type = typeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no type with id :" +id ));
+        type.setType(typeDetails.getType());
+        Type updateType = typeRepository.save(type);
+        return ResponseEntity.ok(updateType);
     }
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String, Boolean>> DeleteCity(@PathVariable Long id,HttpServletRequest httpRequest){
+    public ResponseEntity<Map<String, Boolean>> DeleteType(@PathVariable Long id, HttpServletRequest httpRequest){
         int userId = (int) httpRequest.getAttribute("userId");
         if (!utils.checkRole(userId, Constants.ADMIN_ROLE)) throw new AuthException("you don't have the right to access to this information");
 
 
-        City city = cityRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no city with id :" +id));
-        cityRepository.delete(city);
+        Type type = typeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no type with id :" +id));
+        typeRepository.delete(type);
         Map<String, Boolean> response = new HashMap<>();
-        response.put("city deleted", Boolean.TRUE);
+        response.put("type deleted", Boolean.TRUE);
         return ResponseEntity.ok(response);
 
     }
+
+
 
 }
