@@ -1,0 +1,47 @@
+
+ngb-carousel img {
+    height: 110vh;
+    background-size: cover;
+    outline: none;
+    display: flex; 
+    background-position: center; 
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+
+h1{
+    color: white;
+    margin-bottom: 70px;
+    font-size: 45px;
+    letter-spacing: 2px;
+    text-align: center;
+    }
+    .search-field{
+      height: 50px;
+      padding: 10px;
+      border: none;
+      border-radius: 25px;
+      outline: none;
+    }
+    .search-btn{
+      height: 50px;
+      width: 150px;
+      border: none;
+      background-color: rgb(189, 133, 69);
+      border-radius: 25px;
+    }
+    .search-btn:hover{
+      background-color:white;
+    }
+    .search_form{
+      background: rgba(0,0,0,0.5);
+      padding: 30px;
+    }
+    @media screen and (max-width: 600px) {
+        .search-field .search-btn h1 {
+          width: 100%;
+          margin-top: 0;
+        }}     
+    

@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+    <ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+        <ng-template ngbSlide *ngFor="let image of images">
+          <div class="picsum-img-wrapper">
+            <img [src]="image" alt="Random slide">
+          </div>
+    <div class="carousel-caption d-flex h-100  align-items-center justify-content-center">
+        <form>
+            <h1>Trouvez ou offrez un couvoiturage ! </h1>
+          <div class="search_form">
+           <input type="text" class="search-field" placeholder="Depart" />
+           <input type="text" class="search-field" placeholder="Destination">
+           <input type="date" class="search-field" placeholder="Aujourdh'huit">
+           <input type="text" class="search-field" placeholder="Passager">
+           <button class="search-btn" type="button">search</button>
+          </div>
+          </form>    
+    </div>
+        </ng-template>
+      </ngb-carousel>
+    
+  

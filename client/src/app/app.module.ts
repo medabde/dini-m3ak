@@ -1,30 +1,37 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserlistComponent } from './userlist/userlist.component';
-import { AddUserComponent } from './add-user/add-user.component';
-import {FormsModule} from '@angular/forms';
-import { UpdateUserComponent } from './update-user/update-user.component';
-import { SearchfilterPipe } from './searchfilter.pipe';
-import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavbarComponent } from './navbar/navbar.component';
+import { HeaderComponent } from './header/header.component';
+import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { FooterComponent } from './footer/footer.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProfilComponent } from './profil/profil.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
-    UserlistComponent,
-    AddUserComponent,
-    UpdateUserComponent,
-    SearchfilterPipe,
-    LoginComponent
+    NavbarComponent,
+    HeaderComponent,
+    RegisterComponent,
+    LoginComponent,
+    FooterComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
+    NgbModule,
     FormsModule,
-    NgxPaginationModule
+    FontAwesomeModule,
+    MDBBootstrapModule.forRoot()
+
   ],
   providers: [],
   bootstrap: [AppComponent]
