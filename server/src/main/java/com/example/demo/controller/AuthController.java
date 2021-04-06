@@ -6,7 +6,7 @@ import com.example.demo.exception.AuthException;
 import com.example.demo.model.User;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.utils.SendEmail;
+import com.example.demo.utils.Utils;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,7 +85,7 @@ public class AuthController {
 
         user = userRepository.save(user);
 
-        SendEmail.sendEmail(user.getEmail(),
+        Utils.sendEmail(user.getEmail(),
                 "Hello "+user.getFirst_name()+" "+user.getLast_name()
                         +",\nThank you for joining us , Please confirm your email by clicking the link below : \n\n"
                         +"http://localhost:8081/app/auth/confirm/"+user.getToken());
