@@ -19,6 +19,9 @@ public class User {
     @Column(name = "phone")
     private String phone;
 
+    @Column(name = "token")
+    private String token;
+
     @Column(name = "email")
     private String email;
 
@@ -151,10 +154,19 @@ public class User {
         this.rides = rides;
     }
 
-    public User(String first_name, String last_name, String phone, String email, String password, String address, String CIN, Role role, boolean isEnabled, Set<Vehicle> vehicles, Set<Ride> ridesOwned, Set<Ride> rides) {
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public User(String first_name, String last_name, String phone, String token, String email, String password, String address, String CIN, Role role, boolean isEnabled, Set<Vehicle> vehicles, Set<Ride> ridesOwned, Set<Ride> rides) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.phone = phone;
+        this.token = token;
         this.email = email;
         this.password = password;
         this.address = address;

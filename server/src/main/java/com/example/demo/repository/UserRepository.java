@@ -13,4 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT count(*) FROM User u WHERE u.email = ?1")
     int getCountByEmail(String email);
+
+    @Query("SELECT u FROM User u WHERE u.token = ?1")
+    User findByToken(String token);
 }

@@ -1,10 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.BadRequestException;
 import com.example.demo.utils.Constants;
 import com.example.demo.exception.AuthException;
 import com.example.demo.model.User;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.utils.SendEmail;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 @RestController
@@ -76,13 +79,34 @@ public class AuthController {
         user.setLast_name(lName);
         user.setEmail(email);
         user.setPassword(cryptedPass);
+        user.setToken(generateToken());
+        user.setEnabled(false);
         user.setRole(roleRepository.getOne((long) role));
 
         user = userRepository.save(user);
 
+        SendEmail.sendEmail(user.getEmail(),
+                "Hello "+user.getFirst_name()+" "+user.getLast_name()
+                        +",\nThank you for joining us , Please confirm your email by clicking the link below : \n\n"
+                        +"http://localhost:8081/app/auth/confirm/"+user.getToken());
+
         return new ResponseEntity<>(generateJWTToken(user), HttpStatus.OK);
     }
 
+    @GetMapping("/confirm/{token}")
+    public String confirmUser(@PathVariable String token){
+
+        User user = userRepository.findByToken(token);
+        if(user == null) throw new BadRequestException("Please check that you have the right link for confirming your email and try again.");
+        if(user.isEnabled()) throw new BadRequestException("Email already Confirmed");
+
+        user.setEnabled(true);
+        userRepository.save(user);
+        return "Thank you "+ user.getFirst_name() +" "+user.getLast_name()
+                +"<br>for confirming your email, now you can login to our website and enjoy our services.<br>Happy travelling :D"
+                +"<br><a href='http://localhost:4200/login'>Login Page</a>";
+
+    }
 
 
     private Map<String,String> generateJWTToken(User user){
@@ -99,6 +123,21 @@ public class AuthController {
         Map<String,String> map = new HashMap<>();
         map.put("token",token);
         return map;
+    }
+
+    private String generateToken(){
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+        StringBuilder buffer = new StringBuilder(targetStringLength);
+        for (int i = 0; i < targetStringLength; i++) {
+            int randomLimitedInt = leftLimit + (int)
+                    (random.nextFloat() * (rightLimit - leftLimit + 1));
+            buffer.append((char) randomLimitedInt);
+        }
+
+        return buffer.toString();
     }
 
 

@@ -8,4 +8,7 @@ public class Constants {
 
     public static final String CLIENT_ROLE = "client";
     public static final String ADMIN_ROLE = "admin";
+
+    public static final String EMAIL = "";
+    public static final String EMAIL_PASS = "";
 }
