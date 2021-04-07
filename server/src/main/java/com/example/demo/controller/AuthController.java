@@ -6,7 +6,6 @@ import com.example.demo.exception.AuthException;
 import com.example.demo.model.User;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.utils.Utils;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +14,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.*;
 import java.util.regex.Pattern;
 
 @RestController
@@ -79,13 +78,13 @@ public class AuthController {
         user.setLast_name(lName);
         user.setEmail(email);
         user.setPassword(cryptedPass);
-        user.setToken(generateToken());
+        user.setToken(generateConfirmationToken());
         user.setEnabled(false);
         user.setRole(roleRepository.getOne((long) role));
 
         user = userRepository.save(user);
 
-        Utils.sendEmail(user.getEmail(),
+        sendEmail(user.getEmail(),
                 "Hello "+user.getFirst_name()+" "+user.getLast_name()
                         +",\nThank you for joining us , Please confirm your email by clicking the link below : \n\n"
                         +"http://localhost:8081/app/auth/confirm/"+user.getToken());
@@ -118,16 +117,20 @@ public class AuthController {
                 .claim("email",user.getEmail())
                 .claim("first_name",user.getFirst_name())
                 .claim("last_name",user.getLast_name())
+                .claim("cin",user.getCIN())
+                .claim("address",user.getAddress())
+                .claim("phone",user.getPhone())
                 .claim("is_enabled",user.isEnabled())
+                .claim("is_admin",user.getRole().getRole().equals(Constants.ADMIN_ROLE))
                 .compact();
         Map<String,String> map = new HashMap<>();
         map.put("token",token);
         return map;
     }
 
-    private String generateToken(){
-        int leftLimit = 97; // letter 'a'
-        int rightLimit = 122; // letter 'z'
+    private String generateConfirmationToken(){
+        int leftLimit = 97;
+        int rightLimit = 122;
         int targetStringLength = 10;
         Random random = new Random();
         StringBuilder buffer = new StringBuilder(targetStringLength);
@@ -138,6 +141,43 @@ public class AuthController {
         }
 
         return buffer.toString();
+    }
+
+    public void sendEmail(String to,String body) {
+        String result;
+
+        Properties props = new Properties();
+        props.put("mail.smtp.host", Constants.HOST);
+        props.put("mail.transport.protocol", Constants.MAIL_PROTOCOL);
+        System.setProperty("https.protocols", Constants.HTTPS_PROTOCOL);
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.user", Constants.EMAIL);
+        props.put("mail.password", Constants.EMAIL_PASS);
+        props.put("mail.smtp.port",Constants.PORT);
+
+        Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(Constants.EMAIL, Constants.EMAIL_PASS);
+            }
+        });
+
+        try {
+            MimeMessage message = new MimeMessage(mailSession);
+            message.setFrom(new InternetAddress(Constants.EMAIL));
+            message.addRecipient(Message.RecipientType.TO,
+                    new InternetAddress(to));
+            message.setSubject(Constants.CONFIRMATION_EMAIL_SUBJECT);
+            message.setText(body);
+            Transport.send(message);
+            result = "Your mail sent successfully....";
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+            result = "Error: unable to send mail....";
+        }
+
+        System.out.println(result);
     }
 
 
