@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+
+html,body{
+  margin  : 0;
+}
+
+.register {
+  span {
+    color         : #4A4A4A;
+    font-size     : 12px;
+    margin-right  : 10px;
+    font-family   : 'Roboto', sans-serif;
+  }
+  button {
+    cursor            : pointer;
+    color             : #4A80E2;
+    border            : 1px solid #4A80E2;
+    padding           : 10px;
+    font-size         : 12px;
+    margin-right      : 20px;
+    border-radius     : 20px;
+    background-color  : #FFFFFF;
+  }
+  button:hover {
+    color             : #FFFFFF;
+    background-color  : #4A80E2;
+  }
+}
+
+.left-container {
+  height    : 100vh;
+  position  : relative;
+}
+.col-5{ padding: 0px;}
+
+.cursor { cursor: pointer;}
+
+
+.form-container{
+  color       : #4A4A4A;
+  padding     : 20vh 2vw;
+  font-family : 'Roboto', sans-serif;
+
+    input.form-control {
+      border            : none;
+      background-color  : #EEEEEE;
+    }
+    select.form-control {
+      border            : none;
+      background-color  :#EEEEEE;
+    }
+
+    h1 {
+      font-size   : 36px;
+      font-weight : 300;
+    }
+    h3 {
+      font-size       : 14px;
+      text-align      : left;
+      font-weight     : 200;
+      padding-bottom  : 40px;
+    }
+    label {
+      font-size   : 13px;
+      font-weight : 400;
+      padding-top : 5px;
+    }
+    button {
+      width             : 264px;
+      color             :#FFFFFF;
+      cursor            : pointer;
+      height            : 41px;
+      border            : none;
+      padding           : 10px;
+      font-size         : 16px;
+      margin-top        : 15px;
+      border-radius     : 8px;
+      background-color  : #4A80E2;
+    }
+    button:disabled { background-color  : #4A4A4A;}
+
+    .show-password {
+      cursor     : pointer;
+      color      : #B4B4B4;
+      float      : right;
+      font-size  : 12px;
+      margin-top : 10px;
+    }
+
+    .error-message {
+      margin-top  : 15px;
+      font-size   : 14px;
+    }
+}
+
+.profile {
+    color       : #4A4A4A;
+    padding-top : 20vh;
+    font-family : 'Roboto', sans-serif;
+  }
+  
+  .user {
+    height: 250px;
+    width: 250px;
+    background-color: #00C851 ;
+    color: #FFF;
+    font-size: 100px;
+    text-align: center;
+    padding-top: 50px;
+  }
+  
+  .form-container {
+    padding: 0;
+    input.h4 {
+      border      : none;
+      outline     : none!important;
+      font-size   : 36px;
+      font-weight : 300;
+      width       : 60%;
+    }
+    button.btn-danger {
+      background-color: #f44336;
+    }
+  }
+  
