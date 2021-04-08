@@ -30,7 +30,7 @@ public class CityController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<City> getCityById(@PathVariable long id,HttpServletRequest httpRequest){
+    public ResponseEntity<City> getCityById(@PathVariable long id, HttpServletRequest httpRequest){
         if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
         City city = cityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("no city with id :" +id ));
@@ -38,7 +38,7 @@ public class CityController {
     }
 
     @PutMapping("/{id}")
-    public  ResponseEntity<City> updateCity(@PathVariable Long id, @RequestBody City cityDetails,HttpServletRequest httpRequest){
+    public  ResponseEntity<City> updateCity(@PathVariable Long id, @RequestBody City cityDetails, HttpServletRequest httpRequest){
         if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
         City city = cityRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no city with id :" +id ));

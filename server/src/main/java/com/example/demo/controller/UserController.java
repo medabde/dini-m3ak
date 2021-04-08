@@ -1,20 +1,18 @@
 package com.example.demo.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.example.demo.exception.AuthException;
 import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.model.User;
 import com.example.demo.repository.RoleRepository;
+import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.model.User;
-import com.example.demo.repository.UserRepository;
-
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -36,7 +34,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable long id,HttpServletRequest httpRequest){
+    public ResponseEntity<User> getUserById(@PathVariable long id, HttpServletRequest httpRequest){
         if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
 
@@ -45,7 +43,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public  ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails,HttpServletRequest httpRequest){
+    public  ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails, HttpServletRequest httpRequest){
         if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
 

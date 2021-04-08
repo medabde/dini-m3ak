@@ -1,11 +1,11 @@
 package com.example.demo.controller;
 
-import com.example.demo.exception.BadRequestException;
-import com.example.demo.utils.Constants;
 import com.example.demo.exception.AuthException;
+import com.example.demo.exception.BadRequestException;
 import com.example.demo.model.User;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.utils.Constants;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,7 +112,7 @@ public class AuthController {
         long timestamp = System.currentTimeMillis();
         String token = Jwts.builder().signWith(SignatureAlgorithm.HS256, Constants.API_SECRET_KEY)
                 .setIssuedAt(new Date(timestamp))
-                .setExpiration(new Date(timestamp+Constants.TOKEN_VALIDITY))
+                .setExpiration(new Date(timestamp+ Constants.TOKEN_VALIDITY))
                 .claim("userId",user.getId_user())
                 .claim("email",user.getEmail())
                 .claim("first_name",user.getFirst_name())
@@ -154,9 +154,9 @@ public class AuthController {
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.user", Constants.EMAIL);
         props.put("mail.password", Constants.EMAIL_PASS);
-        props.put("mail.smtp.port",Constants.PORT);
+        props.put("mail.smtp.port", Constants.PORT);
 
-        Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
+        Session mailSession = Session.getInstance(props, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(Constants.EMAIL, Constants.EMAIL_PASS);

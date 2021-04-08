@@ -3,8 +3,8 @@ package com.example.demo.controller;
 
 import com.example.demo.exception.AuthException;
 import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.Type;
-import com.example.demo.repository.TypeRepository;
+import com.example.demo.model.Role;
+import com.example.demo.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,51 +16,48 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("app/api/types")
-public class TypeController {
-    @Autowired
-    TypeRepository typeRepository;
+@RequestMapping("app/api/roles")
+public class RoleController {
 
+    @Autowired
+    RoleRepository roleRepository;
     @GetMapping("/")
-    public List<Type> getAllTypes(HttpServletRequest httpRequest){
+    public List<Role> getAllRoles(HttpServletRequest httpRequest){
         if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
 
-        return typeRepository.findAll();
+        return roleRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Type> getTypeById(@PathVariable long id, HttpServletRequest httpRequest){
+    public ResponseEntity<Role> getRoleById(@PathVariable long id, HttpServletRequest httpRequest){
         if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
-        Type type = typeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("no type with id :" +id ));
-        return ResponseEntity.ok(type);
+        Role role = roleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("no role with id :" +id ));
+        return ResponseEntity.ok(role);
     }
 
     @PutMapping("/{id}")
-    public  ResponseEntity<Type> updateType(@PathVariable Long id, @RequestBody Type typeDetails, HttpServletRequest httpRequest){
+    public  ResponseEntity<Role> updateRole(@PathVariable Long id, @RequestBody Role roleDetails, HttpServletRequest httpRequest){
         if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
-        Type type = typeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no type with id :" +id ));
-        type.setType(typeDetails.getType());
-        Type updateType = typeRepository.save(type);
-        return ResponseEntity.ok(updateType);
+        Role role = roleRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no role with id :" +id ));
+        role.setRole(roleDetails.getRole());
+
+        Role updateRole = roleRepository.save(role);
+        return ResponseEntity.ok(updateRole);
     }
 
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String, Boolean>> DeleteType(@PathVariable Long id, HttpServletRequest httpRequest){
+    public ResponseEntity<Map<String, Boolean>> deleteRole(@PathVariable Long id, HttpServletRequest httpRequest){
         if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
 
-        Type type = typeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no type with id :" +id));
-        typeRepository.delete(type);
+        Role role = roleRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no role with id :" +id));
+        roleRepository.delete(role);
         Map<String, Boolean> response = new HashMap<>();
-        response.put("type deleted", Boolean.TRUE);
+        response.put("role deleted", Boolean.TRUE);
         return ResponseEntity.ok(response);
 
     }
-
-
-
 }
