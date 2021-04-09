@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-5">
+        <div class="left-container bg">
+        </div>
+      </div>
+      <div class="col-7">
+        <div class="pt-5 text-right register">
+          <span>Not registered?</span>
+          <button [routerLink]="['/register/']">Register</button>
+        </div>
+        <div class="form-container">
+          <h1 class="text-left">Login to Dini M3ak</h1>
+          <h3>Enter your information below</h3>
+          <label for="username">Login</label>
+          <input id="username" class="form-control" type="text" [(ngModel)]="username" required minlength="4" #usernameForm="ngModel">
+
+          <label for="password">Password</label>
+          <input id="password" class="form-control" type="{{ isVisible ? 'text' : 'password'}}" [(ngModel)]="password" minlength="8" required #passwordForm="ngModel">
+          <span class="show-password" (click)="isVisible = !isVisible">
+            <fa-icon [icon]="faeye"></fa-icon>
+          </span> <br>  
+          <div class="text-center text-danger error-message" *ngIf="usernameForm.invalid && (usernameForm.dirty || usernameForm.touched)">
+              <i class="fas fa-user-times pr-2"></i>
+              <span *ngIf="usernameForm?.errors?.required"> Username must be Informed</span>
+              <span *ngIf="usernameForm?.errors?.minlength"> Username must be more than 4</span>
+          </div>
+
+          <div class="text-center text-danger error-message" *ngIf="messageError">
+            <i class="fas fa-lock pr-2 "></i> {{messageError}}
+          </div>
+
+          <div class="text-center">
+            <button > Login </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
