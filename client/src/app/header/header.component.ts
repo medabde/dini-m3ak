@@ -7,6 +7,9 @@ import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  title = 'appBootstrap';  
+    
+  model :any;  
 
   showNavigationArrows = false;
   showNavigationIndicators = false;

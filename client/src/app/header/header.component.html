@@ -1,22 +1,44 @@
 <app-navbar></app-navbar>
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500" rel="stylesheet" />
+
     <ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
         <ng-template ngbSlide *ngFor="let image of images">
           <div class="picsum-img-wrapper">
             <img [src]="image" alt="Random slide">
           </div>
-    <div class="carousel-caption d-flex h-100  align-items-center justify-content-center">
-        <form>
-            <h1>Trouvez ou offrez un couvoiturage ! </h1>
-          <div class="search_form">
-           <input type="text" class="search-field" placeholder="Depart" />
-           <input type="text" class="search-field" placeholder="Destination">
-           <input type="date" class="search-field" placeholder="Aujourdh'huit">
-           <input type="text" class="search-field" placeholder="Passager">
-           <button class="search-btn" type="button">search</button>
+  <div class="carousel-caption d-flex h-100  align-items-center justify-content-center">
+  <form >           
+     <h1>Trouvez ou offrez un covoiturage ! ! </h1>
+    <div class="search_form">
+    <div class="search-field  first">
+      <input type="text" id="form11Example1" placeholder="Depart" />          
+        </div>
+        <div class="search-field second">
+          <div class="form-outline">    
+            <input type="text" id="form11Example3"  placeholder="Destination "/>
           </div>
-          </form>    
-    </div>
+        </div>
+        <div class="search-field third">
+          <div class="form-outline">
+            <input type="date" id="form11Example3" placeholder="" />     
+          </div>
+        </div>
+        <div class="search-field fouth">
+          <select class="choices__inner" name="choices-single-defaul">
+            <option selected>Persone...</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+      </div>
+        <div class="search-field fifth">
+          <button type="submit" class="search-btn"><i class="fas fa-search"></i>
+            Search</button>
+        </div>
+     </div>    
+   </form>   
+  </div>
         </ng-template>
       </ngb-carousel>
-    
+     
   

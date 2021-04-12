@@ -1,4 +1,5 @@
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark white lighten-1 darken-4 fixed-top scrolling-navbar" [containerInside]="false">
+
+  <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark white lighten-1 darken-4 fixed-top scrolling-navbar" [containerInside]="false">
     <logo><a class="navbar-brand text-dark">Dini M3ak</a></logo>
       <links>
       <ul class="navbar-nav mr-auto">
@@ -12,24 +13,27 @@
             <a class="nav-link text-dark" mdbWavesEffect>Couvoiturage</a>
           </li>
       </ul>
-      <div class="navbar-nav ml-auto">
-        <h5><fa-icon [icon]="plus"></fa-icon><a> Proposer un trajet</a></h5>
-      </div>
-      <ul class="navbar-nav ml-auto nav-flex-icons">       
+      <ul class="navbar-nav">
         <li class="nav-item text-dark ">
-          <a class="nav-link text-dark">
-            <div class="btn-group" mdbDropdown>
-                <fa-icon [icon]="fauser" class="rounded-circle user white-text"  mdbDropdownToggle></fa-icon>
-              <div class="dropdown-menu dropdown-menu-right dropdown-primary">
-                <a class="dropdown-item" href="#">Profil</a>
-                <a class="dropdown-item" href="#">Logout</a>
-              </div>
-            </div>
-          </a>
+          <form class="form" mdbWavesEffect> 
+            <h5><a><fa-icon [icon]="plus"></fa-icon> Proposer un trajet</a></h5>          
+         </form>
         </li>
       </ul>
+        
+         <ul class="navbar-nav nav-flex-icons">       
+          <li class="nav-item text-dark ">
+            <a class="nav-link text-dark">
+              <div class="btn-group" mdbDropdown>
+                  <fa-icon [icon]="fauser" class="rounded-circle user white-text"  mdbDropdownToggle></fa-icon>
+                <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+                  <a class="dropdown-item" href="#">Profil</a>
+                  <a class="dropdown-item" href="#">Logout</a>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
     </links>
-    <!-- Collapsible content -->
-  
-  </mdb-navbar>
-  <!--/.Navbar-->
+
+</mdb-navbar>
