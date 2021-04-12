@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+
+html,body{
+  margin  : 0;
+}
+
+.register {
+  span {
+    color         : #4A4A4A;
+    font-size     : 12px;
+    margin-right  : 10px;
+    font-family   : 'Roboto', sans-serif;
+  }
+  button {
+    cursor            : pointer;
+    color             : #4A80E2;
+    border            : 1px solid #4A80E2;
+    padding           : 10px;
+    font-size         : 12px;
+    margin-right      : 20px;
+    border-radius     : 20px;
+    background-color  : #FFFFFF;
+  }
+  button:hover {
+    color             : #FFFFFF;
+    background-color  : #4A80E2;
+  }
+}
+
+.left-container {
+  height    : 100vh;
+  position  : relative;
+}
+.col-5{ padding: 0px;}
+
+.cursor { cursor: pointer;}
+
+
+.form-container{
+  color       : #4A4A4A;
+  padding     : 20vh 2vw;
+  font-family : 'Roboto', sans-serif;
+
+    input.form-control {
+      border            : none;
+      background-color  : #EEEEEE;
+    }
+    select.form-control {
+      border            : none;
+      background-color  : #EEEEEE;
+    }
+
+    h1 {
+      font-size   : 36px;
+      font-weight : 300;
+    }
+    h3 {
+      font-size       : 14px;
+      text-align      : left;
+      font-weight     : 200;
+      padding-bottom  : 40px;
+    }
+    label {
+      font-size   : 13px;
+      font-weight : 400;
+      padding-top : 5px;
+    }
+    button {
+      width             : 264px;
+      color             : #FFFFFF;
+      cursor            : pointer;
+      height            : 41px;
+      border            : none;
+      padding           : 10px;
+      font-size         : 16px;
+      margin-top        : 15px;
+      border-radius     : 8px;
+      background-color  : #4A80E2;
+    }
+    button:disabled { background-color  : #B4B4B4;}
+
+    .show-password {
+      cursor     : pointer;
+      color      : #B4B4B4;
+      float      : right;
+      font-size  : 12px;
+      margin-top : 10px;
+    }
+
+    .error-message {
+      margin-top  : 15px;
+      font-size   : 14px;
+    }
+}
+.bg {
+  background-size     : cover;
+  background-image    : url("../../assets/image/co.jpg");
+  background-repeat   : no-repeat;
+  background-position : fixed;
+}
+label { font-weight: 500}
+.form-container {
+  padding     : 8vh 12vw;
+  input { transition: .2s all;}
+
+  .ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+  }
+
+  .ng-invalid:not(form)  {
+    border-left: 5px solid #c62828 /* red */
+  }
+}

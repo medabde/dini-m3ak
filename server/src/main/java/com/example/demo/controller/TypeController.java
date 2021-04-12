@@ -3,6 +3,7 @@ package com.example.demo.controller;
 
 import com.example.demo.exception.AuthException;
 import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.model.City;
 import com.example.demo.model.Type;
 import com.example.demo.repository.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,16 @@ public class TypeController {
         if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
         Type type = typeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("no type with id :" +id ));
+        return ResponseEntity.ok(type);
+    }
+
+    @PostMapping("/")
+    public  ResponseEntity<Type> createType(@RequestBody Type typeDetails, HttpServletRequest httpRequest){
+        if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
+
+        Type type = new Type();
+        type.setType(type.getType());
+        type = typeRepository.save(type);
         return ResponseEntity.ok(type);
     }
 

@@ -37,6 +37,16 @@ public class CityController {
         return ResponseEntity.ok(city);
     }
 
+    @PostMapping("/")
+    public  ResponseEntity<City> createCity(@RequestBody City cityDetails, HttpServletRequest httpRequest){
+        if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
+
+        City city = new City();
+        city.setCity_name(cityDetails.getCity_name());
+        city = cityRepository.save(city);
+        return ResponseEntity.ok(city);
+    }
+
     @PutMapping("/{id}")
     public  ResponseEntity<City> updateCity(@PathVariable Long id, @RequestBody City cityDetails, HttpServletRequest httpRequest){
         if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");

@@ -3,6 +3,7 @@ package com.example.demo.controller;
 
 import com.example.demo.exception.AuthException;
 import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.model.City;
 import com.example.demo.model.Role;
 import com.example.demo.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,17 @@ public class RoleController {
         if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
         Role role = roleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("no role with id :" +id ));
+        return ResponseEntity.ok(role);
+    }
+
+
+    @PostMapping("/")
+    public  ResponseEntity<Role> createRole(@RequestBody Role roleDetails, HttpServletRequest httpRequest){
+        if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
+
+        Role role = new Role();
+        role.setRole(roleDetails.getRole());
+        role = roleRepository.save(role);
         return ResponseEntity.ok(role);
     }
 

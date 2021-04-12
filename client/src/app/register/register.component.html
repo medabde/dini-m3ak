@@ -1,76 +1,76 @@
 <div class="container-fluid">
-    <div class="row">
-      <div class="col-5">
-          <div class="bg"><img  src="../../assets/image/Carpool.png" ></div>
+  <div class="row">
+    <div class="col-5">
+      <div class="left-container bg"></div>
+    </div>
+    <div class="col-7">
+      <div class="pt-5 text-right register">
+        <span>Vous avez deja un compte ? </span>
+        <button mdbBtn type="button" gradient="aqua" [routerLink]="['/login/']">Login</button>
       </div>
-      <div class="col-7">
-        <div class="pt-5 text-right register">
-          <span>Vous avez deja un compte ? </span>
-          <button mdbBtn type="button" gradient="aqua" [routerLink]="['/login/']">Login</button>
-        </div>
-        <div class="form-container">
-          <h1 class="text-left">
-            <br>
-            Dini M3ak 
-          </h1>
-          <h3>Creer un neuveau compte</h3>
-          <label for="username">Username</label>
-          <input id="username" class="form-control" type="text" [(ngModel)]="username" required minlength="4" #usernameForm="ngModel">
+      <div class="form-container">
+        <h1 class="text-left">
+          <br>
+          Dini M3ak 
+        </h1>
+        <h3>Creer un neuveau compte</h3>
+        <label for="username">Username</label>
+        <input id="username" class="form-control" type="text" [(ngModel)]="username" required minlength="4" #usernameForm="ngModel">
 
-          <label for="email">Email</label>
-          <input id="email" class="form-control" type="email" [pattern]="emailRegex"  [(ngModel)]="email" required #emailForm="ngModel">
-          <mdb-error *ngIf="input.invalid && (input.dirty || input.touched)">
-            <span *ngIf="input.errors.required">Email is required</span>
-            <span *ngIf="input.errors.email">This email address is not valid</span>
-          </mdb-error>
-          <label for="password">Mot de passe</label>
-          <input id="password" class="form-control" type="{{ isVisible ? 'text' : 'password'}}" [(ngModel)]="password" minlength="8" required #passwordForm="ngModel">
-          <span class="show-password" (click)="isVisible = !isVisible">
-            <fa-icon [icon]="faeye"></fa-icon>
-          </span> <br>         
-          <label for="confirm-password">Confirmer mot de passe</label>
-          <input id="confirm-password" class="form-control" type="{{ isConfirmationVisible ? 'text' : 'password'}}" [(ngModel)]="confirmPassword"  minlength="8" required #confirmPasswordForm="ngModel">
-          <span class="show-password" (click)="isConfirmationVisible = !isConfirmationVisible">
-            <fa-icon [icon]="faeye"></fa-icon>
+        <label for="email">Email</label>
+        <input id="email" class="form-control" type="email" [pattern]="emailRegex"  [(ngModel)]="email" required #emailForm="ngModel">
+        <mdb-error *ngIf="input.invalid && (input.dirty || input.touched)">
+          <span *ngIf="input.errors.required">Email is required</span>
+          <span *ngIf="input.errors.email">This email address is not valid</span>
+        </mdb-error>
+        <label for="password">Mot de passe</label>
+        <input id="password" class="form-control" type="{{ isVisible ? 'text' : 'password'}}" [(ngModel)]="password" minlength="8" required #passwordForm="ngModel">
+        <span class="show-password" (click)="isVisible = !isVisible">
+          <fa-icon [icon]="faeye"></fa-icon>
+        </span> <br>         
+        <label for="confirm-password">Confirmer mot de passe</label>
+        <input id="confirm-password" class="form-control" type="{{ isConfirmationVisible ? 'text' : 'password'}}" [(ngModel)]="confirmPassword"  minlength="8" required #confirmPasswordForm="ngModel">
+        <span class="show-password" (click)="isConfirmationVisible = !isConfirmationVisible">
+          <fa-icon [icon]="faeye"></fa-icon>
+        </span>
+        <!-- Validations -->
+        <!-- Username -->
+        <div class="text-center text-danger error-message" *ngIf="usernameForm.invalid && (usernameForm.dirty || usernameForm.touched)">
+            <i class="fas fa-user-times pr-2"></i>
+            <span *ngIf="usernameForm?.errors?.required"> Le nom d'utilisateur doit être informé
           </span>
-          <!-- Validations -->
-          <!-- Username -->
-          <div class="text-center text-danger error-message" *ngIf="usernameForm.invalid && (usernameForm.dirty || usernameForm.touched)">
-              <i class="fas fa-user-times pr-2"></i>
-              <span *ngIf="usernameForm?.errors?.required"> Le nom d'utilisateur doit être informé
+            <span *ngIf="usernameForm?.errors?.minlength"> Le nom d'utilisateur doit comporter au moins 4 caractères</span>
+        </div>
+        <!-- Email -->
+        <div class="text-center text-danger error-message" *ngIf="emailForm.invalid && (emailForm.dirty || emailForm.touched)">
+            <i class="far fa-envelope pr-2"></i>
+            <span *ngIf="emailForm?.errors?.required"> l' email doit ètre Informé
             </span>
-              <span *ngIf="usernameForm?.errors?.minlength"> Le nom d'utilisateur doit comporter au moins 4 caractères</span>
-          </div>
-          <!-- Email -->
-          <div class="text-center text-danger error-message" *ngIf="emailForm.invalid && (emailForm.dirty || emailForm.touched)">
-              <i class="far fa-envelope pr-2"></i>
-              <span *ngIf="emailForm?.errors?.required"> l' email doit ètre Informé
-              </span>
-              <span *ngIf="emailForm?.errors?.pattern"> Entrez une adresse mail valide</span>
-          </div>
-          <!-- Password -->
-          <div class="text-center text-danger error-message" *ngIf="passwordForm.invalid && (passwordForm.dirty || passwordForm.touched)">
-              <i class="fas fa-lock pr-2"></i>
-              <span *ngIf="passwordForm?.errors?.required"> Entrer un mot de passe</span>
-              <span *ngIf="passwordForm?.errors?.minlength"> Votre mot de passe doit comporter au moins 8 caractères.</span>
-          </div>
+            <span *ngIf="emailForm?.errors?.pattern"> Entrez une adresse mail valide</span>
+        </div>
+        <!-- Password -->
+        <div class="text-center text-danger error-message" *ngIf="passwordForm.invalid && (passwordForm.dirty || passwordForm.touched)">
+            <i class="fas fa-lock pr-2"></i>
+            <span *ngIf="passwordForm?.errors?.required"> Entrer un mot de passe</span>
+            <span *ngIf="passwordForm?.errors?.minlength"> Votre mot de passe doit comporter au moins 8 caractères.</span>
+        </div>
 
-          <div class="text-center text-danger error-message" *ngIf="confirmPasswordForm.invalid && (confirmPasswordForm.dirty || confirmPasswordForm.touched)">
-              <span *ngIf="confirmPasswordForm?.errors?.required"> Entrer un mot de passe</span>
-              <span *ngIf="confirmPasswordForm?.errors?.minlength">Votre mot de passe doit comporter au moins 8 caractères.</span>
-          </div>
+        <div class="text-center text-danger error-message" *ngIf="confirmPasswordForm.invalid && (confirmPasswordForm.dirty || confirmPasswordForm.touched)">
+            <span *ngIf="confirmPasswordForm?.errors?.required"> Entrer un mot de passe</span>
+            <span *ngIf="confirmPasswordForm?.errors?.minlength">Votre mot de passe doit comporter au moins 8 caractères.</span>
+        </div>
 
-          <div class="text-center text-danger error-message" *ngIf="confirmPasswordForm.value !== passwordForm.value && (confirmPasswordForm.dirty || confirmPasswordForm.touched)">
-              <span> Les mots de passe ne correspondent pas</span>
-          </div>
-          <div class="text-center text-danger error-message" *ngIf="messageError">
-            <i class="fas fa-user-times pr-2 "></i> {{messageError}}
-          </div>
+        <div class="text-center text-danger error-message" *ngIf="confirmPasswordForm.value !== passwordForm.value && (confirmPasswordForm.dirty || confirmPasswordForm.touched)">
+            <span> Les mots de passe ne correspondent pas</span>
+        </div>
+        <div class="text-center text-danger error-message" *ngIf="messageError">
+          <i class="fas fa-user-times pr-2 "></i> {{messageError}}
+        </div>
 
-          <div class="text-center">
-            <button  mdbBtn type="button" gradient="aqua" [disabled]="usernameForm.invalid || emailForm.invalid || passwordForm.invalid || confirmPasswordForm.invalid || passwordForm.value !== confirmPasswordForm.value" (click)="register()"> Inscrire</button>
-          </div>
+        <div class="text-center">
+          <button  mdbBtn type="button" gradient="aqua" [disabled]="usernameForm.invalid || emailForm.invalid || passwordForm.invalid || confirmPasswordForm.invalid || passwordForm.value !== confirmPasswordForm.value" (click)="register()"> Inscrire</button>
         </div>
       </div>
     </div>
   </div>
+</div>

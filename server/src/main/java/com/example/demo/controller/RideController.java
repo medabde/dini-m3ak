@@ -3,7 +3,9 @@ package com.example.demo.controller;
 import com.example.demo.exception.AuthException;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Ride;
+import com.example.demo.model.User;
 import com.example.demo.repository.RideRepository;
+import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,8 @@ public class RideController {
 
     @Autowired
     RideRepository rideRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping("/")
     public List<Ride> getAllRides(HttpServletRequest httpRequest){
@@ -31,7 +35,7 @@ public class RideController {
 
     @GetMapping("/enabled")
     public List<Ride> getAllEnabledRides(){
-        return rideRepository.findEnabledRies();
+        return rideRepository.findEnabledRides();
     }
 
     @GetMapping("/{id}")
@@ -39,6 +43,36 @@ public class RideController {
         if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
         Ride ride = rideRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("no ride with id :" +id ));
+
+        return ResponseEntity.ok(ride);
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<Ride> createRide(@RequestBody Ride rideDetails, HttpServletRequest httpRequest){
+        long id = (Integer) httpRequest.getAttribute("userId");
+        User user = userRepository.getOne(id);
+        Ride ride = new Ride();
+
+        ride.setUser(user);
+        ride.setPrice(rideDetails.getPrice());
+        ride.setSeats(rideDetails.getSeats());
+        ride  = rideRepository.save(ride);
+
+        return ResponseEntity.ok(ride);
+
+    }
+
+    @PutMapping("/joinride/{id}")
+    public ResponseEntity<Ride> joinRide(@PathVariable Long id,HttpServletRequest httpRequest){
+        if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
+
+        long idUser = (Integer) httpRequest.getAttribute("userId");
+        User user = userRepository.getOne(idUser);
+
+        Ride ride = rideRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no city with id :" +id ));
+        ride.getPassengers().add(user);
+
+        ride  = rideRepository.save(ride);
         return ResponseEntity.ok(ride);
     }
 

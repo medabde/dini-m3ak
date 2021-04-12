@@ -138,17 +138,17 @@ public class User {
         this.vehicles = vehicles;
     }
 
-    public Set<Ride> getRidesOwned() {
-        return ridesOwned;
-    }
+//    public Set<Ride> getRidesOwned() {
+//        return ridesOwned;
+//    }
 
     public void setRidesOwned(Set<Ride> ridesOwned) {
         this.ridesOwned = ridesOwned;
     }
 
-    public Set<Ride> getRides() {
-        return rides;
-    }
+//    public Set<Ride> getRides() {
+//        return rides;
+//    }
 
     public void setRides(Set<Ride> rides) {
         this.rides = rides;
