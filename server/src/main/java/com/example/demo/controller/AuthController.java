@@ -151,10 +151,11 @@ public class AuthController {
         props.put("mail.transport.protocol", Constants.MAIL_PROTOCOL);
         System.setProperty("https.protocols", Constants.HTTPS_PROTOCOL);
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.starttls.enable", "false");
         props.put("mail.user", Constants.EMAIL);
         props.put("mail.password", Constants.EMAIL_PASS);
         props.put("mail.smtp.port", Constants.PORT);
+        props.put("mail.debug", "true");
 
         Session mailSession = Session.getInstance(props, new Authenticator() {
             @Override

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
-
+import {AuthService} from 'src/app/services/auth.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -13,6 +13,8 @@ export class RegisterComponent implements OnInit {
   validatingForm:any;
   faeye=faEye;
 
+  public firstname='';
+  public lastname ='';
 /**
    * Username Field
    */
@@ -60,8 +62,9 @@ export class RegisterComponent implements OnInit {
   * @param { Router } router - Angular Router
   */
  constructor(
-   private router: Router
- ) {}
+   private router: Router, private auth :AuthService
+ ) {    if(localStorage.getItem('profile'))this.router.navigate(['header']);
+}
 
  /**
   * Initializer
@@ -75,15 +78,23 @@ export class RegisterComponent implements OnInit {
  /**
   * Register
   */
- public register(): void {
-   const data = {
-     'username'  : this.username,
-     'email'     : this.email,
-     'password'  : this.password,
-   };
+  register():void{
+    //this.usersService.signUp(this.user.email,this.user.password,this.user.confirmPassword,this.user.firstname,this.user.lastname); 
+    this.auth.signUpClient(this.email,this.password,this.firstname,this.lastname).subscribe(data =>
+    {//localStorage.setItem('profile',JSON.stringify(data));
+    //this.router.navigate(['login']);
+    this.messageError="Please confirm your email to complete your registration"
+    this.firstname="";
+    this.lastname="";
+    this.email="";
+    this.password="";
+    this.confirmPassword="";
+  },error =>{this.messageError=error.error.message;});
+   
+  }
 
    
- }
+ 
   get input() { return this.validatingForm.get('email'); }
 
 

@@ -14,9 +14,10 @@
           Dini M3ak 
         </h1>
         <h3>Creer un neuveau compte</h3>
-        <label for="username">Username</label>
-        <input id="username" class="form-control" type="text" [(ngModel)]="username" required minlength="4" #usernameForm="ngModel">
-
+        <label for="username">First Name</label>
+        <input id="username" class="form-control" type="text" [(ngModel)]="firstname" required minlength="4" #usernameForm="ngModel">
+        <label for="username">Last Name</label>
+        <input id="username" class="form-control" type="text" [(ngModel)]="lastname" required minlength="4" #usernameForm="ngModel">
         <label for="email">Email</label>
         <input id="email" class="form-control" type="email" [pattern]="emailRegex"  [(ngModel)]="email" required #emailForm="ngModel">
         <mdb-error *ngIf="input.invalid && (input.dirty || input.touched)">

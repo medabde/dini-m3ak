@@ -13,7 +13,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfilComponent } from './profil/profil.component';
 import { TeamComponent } from './team/team.component';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +31,7 @@ import { TeamComponent } from './team/team.component';
     NgbModule,
     FormsModule,
     FontAwesomeModule,
+    HttpClientModule,
     MDBBootstrapModule.forRoot()
 
   ],

@@ -11,6 +11,7 @@ const routes: Routes = [
 { path: 'register', component: RegisterComponent },
 { path: 'header', component: HeaderComponent },
 { path: 'Profil', component: ProfilComponent },
+{ path: '**', component: HeaderComponent}
 ];
 
 @NgModule({
