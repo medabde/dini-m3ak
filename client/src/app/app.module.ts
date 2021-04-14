@@ -14,6 +14,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfilComponent } from './profil/profil.component';
 import { TeamComponent } from './team/team.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AddRideComponent } from './add-ride/add-ride.component';
+import { InfoRideComponent } from './info-ride/info-ride.component';
+import { RideComponent } from './ride/ride.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +26,10 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     FooterComponent,
     ProfilComponent,
-    TeamComponent
+    TeamComponent,
+    AddRideComponent,
+    InfoRideComponent,
+    RideComponent
   ],
   imports: [
     BrowserModule,
