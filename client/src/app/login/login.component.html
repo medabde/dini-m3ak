@@ -7,7 +7,7 @@
       <div class="col-7">
         <div class="pt-5 text-right register">
           <span>Not registered?</span>
-          <button [routerLink]="['/register/']">Register</button>
+          <button gradient="purple"  [routerLink]="['/register']">Register</button>
         </div>
         <div class="form-container">
           <h1 class="text-left">Login to Dini M3ak</h1>
@@ -31,7 +31,7 @@
           </div>
 
           <div class="text-center">
-            <button  [disabled]="usernameForm.invalid"  [disabled]="passwordForm.invalid"(click)="login()"> Login </button>
+            <button   [disabled]="usernameForm.invalid"  [disabled]="passwordForm.invalid"(click)="login()"> Login </button>
           </div>
         </div>
       </div>

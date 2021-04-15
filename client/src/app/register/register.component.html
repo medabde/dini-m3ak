@@ -6,7 +6,7 @@
     <div class="col-7">
       <div class="pt-5 text-right register">
         <span>Vous avez deja un compte ? </span>
-        <button mdbBtn type="button" gradient="aqua" [routerLink]="['/login/']">Login</button>
+        <button  [routerLink]="['/login']">Login</button>
       </div>
       <div class="form-container">
         <h1 class="text-left">
@@ -20,26 +20,21 @@
         <input id="username" class="form-control" type="text" [(ngModel)]="lastname" required minlength="4" #usernameForm="ngModel">
         <label for="email">Email</label>
         <input id="email" class="form-control" type="email" [pattern]="emailRegex"  [(ngModel)]="email" required #emailForm="ngModel">
-        <mdb-error *ngIf="input.invalid && (input.dirty || input.touched)">
-          <span *ngIf="input.errors.required">Email is required</span>
-          <span *ngIf="input.errors.email">This email address is not valid</span>
-        </mdb-error>
-        <label for="password">Mot de passe</label>
+        <label for="password">Password</label>
         <input id="password" class="form-control" type="{{ isVisible ? 'text' : 'password'}}" [(ngModel)]="password" minlength="8" required #passwordForm="ngModel">
         <span class="show-password" (click)="isVisible = !isVisible">
           <fa-icon [icon]="faeye"></fa-icon>
-        </span> <br>         
-        <label for="confirm-password">Confirmer mot de passe</label>
+        </span>       
+        <label for="confirm-password">Confirme Password</label>
         <input id="confirm-password" class="form-control" type="{{ isConfirmationVisible ? 'text' : 'password'}}" [(ngModel)]="confirmPassword"  minlength="8" required #confirmPasswordForm="ngModel">
         <span class="show-password" (click)="isConfirmationVisible = !isConfirmationVisible">
           <fa-icon [icon]="faeye"></fa-icon>
-        </span>
+        </span><br>
         <!-- Validations -->
         <!-- Username -->
         <div class="text-center text-danger error-message" *ngIf="usernameForm.invalid && (usernameForm.dirty || usernameForm.touched)">
             <i class="fas fa-user-times pr-2"></i>
-            <span *ngIf="usernameForm?.errors?.required"> Le nom d'utilisateur doit être informé
-          </span>
+            <span *ngIf="usernameForm?.errors?.required"> Le nom d'utilisateur doit être informé</span>
             <span *ngIf="usernameForm?.errors?.minlength"> Le nom d'utilisateur doit comporter au moins 4 caractères</span>
         </div>
         <!-- Email -->
@@ -69,7 +64,7 @@
         </div>
 
         <div class="text-center">
-          <button  mdbBtn type="button" gradient="aqua" [disabled]="usernameForm.invalid || emailForm.invalid || passwordForm.invalid || confirmPasswordForm.invalid || passwordForm.value !== confirmPasswordForm.value" (click)="register()"> Inscrire</button>
+          <button [disabled]="usernameForm.invalid || emailForm.invalid || passwordForm.invalid || confirmPasswordForm.invalid || passwordForm.value !== confirmPasswordForm.value" (click)="register()"> Inscrire</button>
         </div>
       </div>
     </div>

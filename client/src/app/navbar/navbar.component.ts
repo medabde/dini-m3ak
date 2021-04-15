@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCar } from '@fortawesome/free-solid-svg-icons';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth.service';
 import decode from 'jwt-decode';
@@ -12,6 +13,7 @@ import decode from 'jwt-decode';
 export class NavbarComponent implements OnInit {
   fauser=faUser;
   plus=faPlusCircle;
+  car=faCar;
   name :string ='';
   constructor(private auth:AuthService, private router :Router) {
     if(!localStorage.getItem('profile'))this.router.navigate(['login']);

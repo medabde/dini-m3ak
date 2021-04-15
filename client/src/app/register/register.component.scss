@@ -13,17 +13,16 @@ html,body{
   }
   button {
     cursor            : pointer;
-    color             : #4A80E2;
-    border            : 1px solid #4A80E2;
+    color             : white;
+    border            : 1px solid #af7d51;;
     padding           : 10px;
     font-size         : 12px;
     margin-right      : 20px;
-    border-radius     : 20px;
-    background-color  : #FFFFFF;
+    background-color  : #af7d51;
   }
   button:hover {
     color             : #FFFFFF;
-    background-color  : #4A80E2;
+    background-color  : #8a5b31;
   }
 }
 
@@ -74,8 +73,7 @@ html,body{
       padding           : 10px;
       font-size         : 16px;
       margin-top        : 15px;
-      border-radius     : 8px;
-      background-color  : #4A80E2;
+      background-color  : #af7d51;
     }
     button:disabled { background-color  : #B4B4B4;}
 
@@ -94,9 +92,10 @@ html,body{
 }
 .bg {
   background-size     : cover;
-  background-image    : url("../../assets/image/Carpool.png");
+  background-image    : url("../../assets/image/carpool-intro.jpg");
   background-repeat   : no-repeat;
   background-position : fixed;
+  height: 100%;
 }
 label { font-weight: 500}
 .form-container {
