@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
+import { faPlus, faMinus,faEye } from '@fortawesome/free-solid-svg-icons';
+
 import {Router} from '@angular/router';
 
 @Component({
@@ -9,6 +11,9 @@ import {Router} from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   title = 'appBootstrap';  
+  join = faPlus;
+  unjoin =  faMinus;
+  viewMore = faEye;
     
   model :any;  
   name :string='';
