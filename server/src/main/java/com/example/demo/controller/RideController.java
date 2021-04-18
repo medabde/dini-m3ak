@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.exception.AuthException;
+import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Ride;
 import com.example.demo.model.User;
@@ -64,13 +65,29 @@ public class RideController {
 
     @PutMapping("/joinride/{id}")
     public ResponseEntity<Ride> joinRide(@PathVariable Long id,HttpServletRequest httpRequest){
-        if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
+//        if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
         long idUser = (Integer) httpRequest.getAttribute("userId");
         User user = userRepository.getOne(idUser);
 
         Ride ride = rideRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no city with id :" +id ));
+        if(ride.getPassengers().size() == ride.getSeats()) throw new BadRequestException("the Ride is full");
+
         ride.getPassengers().add(user);
+
+        ride  = rideRepository.save(ride);
+        return ResponseEntity.ok(ride);
+    }
+
+    @PutMapping("/unjoinride/{id}")
+    public ResponseEntity<Ride> unjoinRide(@PathVariable Long id,HttpServletRequest httpRequest){
+//        if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
+
+        long idUser = (Integer) httpRequest.getAttribute("userId");
+        User user = userRepository.getOne(idUser);
+
+        Ride ride = rideRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no city with id :" +id ));
+        ride.getPassengers().remove(user);
 
         ride  = rideRepository.save(ride);
         return ResponseEntity.ok(ride);
