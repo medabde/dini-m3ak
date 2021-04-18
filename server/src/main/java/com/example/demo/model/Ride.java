@@ -65,6 +65,29 @@ public class Ride {
     public Set<User> getPassengers() {
         return passengers;
     }
+    public int getNbPassengers(){
+        return passengers.size();
+    }
+
+    public String getMotorist(){
+        return user.getFirst_name() +" "+ user.getLast_name();
+    }
+    public long motoristId(){
+        return user.getId_user();
+    }
+
+    public String getStarting_city_name() {
+        return starting_city.getCity_name();
+    }
+
+    public String getDestination_city_name() {
+        return destination_city.getCity_name();
+    }
+
+    public String getRide_type_name(){
+        return ride_type.getType();
+    }
+
 
     public void setPassengers(Set<User> passengers) {
         this.passengers = passengers;
