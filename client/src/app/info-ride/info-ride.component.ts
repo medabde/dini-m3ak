@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-info-ride',
   templateUrl: './info-ride.component.html',
-  styleUrls: ['./info-ride.component.css']
+  styleUrls: ['./info-ride.component.scss']
 })
 export class InfoRideComponent implements OnInit {
 
