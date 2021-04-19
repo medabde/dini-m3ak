@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
   */
  constructor(
    private router: Router, private auth :AuthService
- ) {    if(localStorage.getItem('profile'))this.router.navigate(['header']);
+ ) {    if(localStorage.getItem('profile'))this.router.navigate(['home']);
 }
 
  /**

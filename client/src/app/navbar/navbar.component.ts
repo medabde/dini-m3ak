@@ -16,12 +16,12 @@ export class NavbarComponent implements OnInit {
   car=faCar;
   name :string ='';
   constructor(private auth:AuthService, private router :Router) {
-  //   if(!localStorage.getItem('profile'))this.router.navigate(['login']);
+    if(!localStorage.getItem('profile'))this.router.navigate(['login']);
     
-  //  const decodedToken:any = decode(JSON.parse(localStorage.getItem('profile')|| "").token);
-  //  this.name = decodedToken.first_name+' '+decodedToken.last_name;
+   const decodedToken:any = decode(JSON.parse(localStorage.getItem('profile')|| "").token);
+   this.name = decodedToken.first_name+' '+decodedToken.last_name;
 
-  //  if(decodedToken.exp * 1000 < new Date().getTime()) this.dec();
+   if(decodedToken.exp * 1000 < new Date().getTime()) this.dec();
    }
 
   ngOnInit(): void {
@@ -30,4 +30,18 @@ export class NavbarComponent implements OnInit {
     this.auth.logOut();
     this.router.navigate(['login']);
   }
+
+  navigateHome(){
+    this.router.navigate(['home']);
+  }
+
+  navigateProfile(){
+    this.router.navigate(['profile']);
+  }
+
+  navigateMyRides(){
+    console.log("h")
+    this.router.navigate(['ride']);
+  }
+
 }

@@ -117,5 +117,8 @@ export class HeaderComponent implements OnInit {
     
   }
 
+  infoRide(ride_id:any){
+    this.router.navigate(["info"]);
+  }
  
 }

@@ -1,6 +1,6 @@
 
   <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark white lighten-1 darken-4 fixed-top scrolling-navbar" [containerInside]="false">
-    <logo><a class="navbar-brand text-dark">Dini M3ak</a></logo>
+    <logo><a class="navbar-brand text-dark" (click)="navigateHome()" >Dini M3ak</a></logo>
       <links>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
@@ -20,7 +20,7 @@
          </form>
         </li>
         <li class="nav-item text-dark ">
-          <form class="form" mdbWavesEffect> 
+          <form class="form" mdbWavesEffect (click)="navigateMyRides()"> 
             <h5><a><fa-icon [icon]="car"></fa-icon> Mes trajets</a></h5>          
          </form>
         </li>
@@ -31,8 +31,8 @@
               <div class="btn-group" mdbDropdown>
                   <fa-icon [icon]="fauser" class="rounded-circle user white-text"  mdbDropdownToggle></fa-icon>
                 <div class="dropdown-menu dropdown-menu-right dropdown-primary">
-                  <a class="dropdown-item" href="#">Profil</a>
-                  <a class="dropdown-item" href="#" (click)="dec()">Logout</a>
+                  <a class="dropdown-item"  (click)="navigateProfile()">Profile</a>
+                  <a class="dropdown-item"  (click)="dec()">Logout</a>
                 </div>
               </div>
             </a>

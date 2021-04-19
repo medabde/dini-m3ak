@@ -5,23 +5,15 @@ import {HeaderComponent} from './header/header.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {ProfilComponent} from './profil/profil.component';
-<<<<<<< HEAD
-import {InfoRideComponent} from './info-ride/info-ride.component';
-import { from } from 'rxjs';
-
-=======
 import {RideComponent} from './ride/ride.component';
->>>>>>> 121e4ffc677ad662fd39f9e4bf4f4272dc3ac982
+import { InfoRideComponent } from './info-ride/info-ride.component';
 const routes: Routes = [
 { path: 'login', component: LoginComponent },
 { path: 'register', component: RegisterComponent },
 { path: 'home', component: HeaderComponent },
-{ path: 'Profil', component: ProfilComponent },
-<<<<<<< HEAD
+{ path: 'profile', component: ProfilComponent },
 { path: 'info', component: InfoRideComponent },
-=======
 { path: 'ride', component: RideComponent },
->>>>>>> 121e4ffc677ad662fd39f9e4bf4f4272dc3ac982
 { path: '**', component: HeaderComponent}
 ];
 

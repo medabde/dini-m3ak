@@ -1,5 +1,4 @@
 import { Component,  ViewChild,OnInit } from '@angular/core';
-import { TabsetComponent } from 'ng-uikit-pro-standard';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { RideService } from '../services/ride.service';
 import { Ride } from '../models/Ride';

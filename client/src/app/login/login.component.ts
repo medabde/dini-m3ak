@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,private auth :AuthService
   ) {
-    if(localStorage.getItem('profile'))this.router.navigate(['header']);
+    if(localStorage.getItem('profile'))this.router.navigate(['home']);
 
   }
 
@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
       }
       else{
         localStorage.setItem('profile',JSON.stringify(data));
-         this.router.navigate(['header']);
+         this.router.navigate(['home']);
       }
      
       },error =>{this.messageError=error.error.message;});
