@@ -22,7 +22,10 @@ export class HeaderComponent implements OnInit {
 
   ridesInPage:Ride[] = [];
 
-  ridesPerPage = 5;
+
+  page = 1;
+  pageSize = 5;
+  collectionSize = 0;
 
 
     
@@ -41,13 +44,29 @@ export class HeaderComponent implements OnInit {
 
     rideService.getRides().subscribe(data => {
       this.rides = data;
+      this.rides.push(new Ride());
+      this.rides.push(new Ride());
+      this.rides.push(new Ride());
+      this.rides.push(new Ride());
+      this.rides.push(new Ride());
+      this.rides.push(new Ride());
+      this.rides.push(new Ride());
+      this.rides.push(new Ride());
+      this.rides.push(new Ride());
+      this.rides.push(new Ride());
+      this.rides.push(new Ride());
+      this.rides.push(new Ride());
+      this.rides.push(new Ride());
+      this.rides.push(new Ride());
+      this.collectionSize = this.rides.length;
       this.rides.forEach(r =>{
         r.isUserJoined = this.isUserJoined(r.passengers);
       }) 
+      this.handlePageChange();
+
       
     },error =>{console.log(error)});
 
-    this.handlePageChange(1);
   }
 
   private isUserJoined(passengers:User[]):boolean{
@@ -75,6 +94,7 @@ export class HeaderComponent implements OnInit {
           this.rides[index].isUserJoined = this.isUserJoined(this.rides[index].passengers);
         }
       }
+      this.handlePageChange();
     });
   }
   unJoinRide(rideId:any):void{
@@ -85,15 +105,16 @@ export class HeaderComponent implements OnInit {
           this.rides[index].isUserJoined = this.isUserJoined(this.rides[index].passengers);
         }
       }
+      this.handlePageChange();
     });
   }
 
-  handlePageChange(pageNumber:number){
-    for(let i=0;i<this.rides.length;i++){
-      if(i< this.ridesPerPage * pageNumber && i>= this.ridesPerPage * (pageNumber-1)){
-        this.ridesInPage.push(this.rides[i]);
-      }
-    }
+  handlePageChange(){
+    this.ridesInPage = this.rides
+      .map((ride, i) => ({id: i + 1, ...ride}))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  
+    
   }
 
  
