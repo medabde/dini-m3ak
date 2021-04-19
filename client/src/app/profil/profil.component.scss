@@ -4,28 +4,7 @@ html,body{
   margin  : 0;
 }
 
-.register {
-  span {
-    color         : #4A4A4A;
-    font-size     : 12px;
-    margin-right  : 10px;
-    font-family   : 'Roboto', sans-serif;
-  }
-  button {
-    cursor            : pointer;
-    color             : #4A80E2;
-    border            : 1px solid #4A80E2;
-    padding           : 10px;
-    font-size         : 12px;
-    margin-right      : 20px;
-    border-radius     : 20px;
-    background-color  : #FFFFFF;
-  }
-  button:hover {
-    color             : #FFFFFF;
-    background-color  : #4A80E2;
-  }
-}
+
 
 .left-container {
   height    : 100vh;
@@ -72,10 +51,10 @@ html,body{
       height            : 41px;
       border            : none;
       padding           : 10px;
-      font-size         : 16px;
+      font-size         : 18px;
       margin-top        : 15px;
-      border-radius     : 8px;
-      background-color  : #4A80E2;
+      border-radius     : 0px 7px 0px 7px;
+      background-color  : #4A4A4A;
     }
     button:disabled { background-color  : #4A4A4A;}
 
@@ -98,17 +77,16 @@ html,body{
     padding-top : 20vh;
     font-family : 'Roboto', sans-serif;
   }
-  
+
   .user {
-    height: 250px;
-    width: 250px;
-    background-color: #00C851 ;
-    color: #FFF;
+    height: 190px;
+    width: 245px;
+    background-image    : url("../../assets/image/OIP-removebg-preview.png");
     font-size: 100px;
     text-align: center;
-    padding-top: 50px;
+    padding-top: 150px;
+    padding-right: 100px;
   }
-  
   .form-container {
     padding: 0;
     input.h4 {

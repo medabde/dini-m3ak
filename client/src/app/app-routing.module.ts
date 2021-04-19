@@ -12,7 +12,7 @@ const routes: Routes = [
 { path: 'register', component: RegisterComponent },
 { path: 'home', component: HeaderComponent },
 { path: 'profile', component: ProfilComponent },
-{ path: 'info', component: InfoRideComponent },
+{ path: 'info/:id', component: InfoRideComponent },
 { path: 'ride', component: RideComponent },
 { path: '**', component: HeaderComponent}
 ];

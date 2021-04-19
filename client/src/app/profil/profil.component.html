@@ -1,43 +1,36 @@
-
 <app-navbar></app-navbar>
-<div class="profile">
-    <div class="container">
+<div class="profile"  >
+    <div class="container" >
       <div class="row">
         <div class="col-xl-4 col-md-6 col-sm-12">
           <div class="ml-5 pb-3">
-            <div class="user rounded-circle">
+            <div class="user img-fluid">
             </div>
           </div>
         </div>
-        <div class="col-xl-8 col-md-6 col-sm-12">
-          <h2> <i class="fas fa-user-edit pr-2 pb-2"></i> Modifier Profil</h2>
-          <div class="form-container">
-              <label for="name">Nom</label>
-              <input type="text"id="name" [(ngModel)]="name" class="form-control mb-2">
-  
-              <label for="geralRegister">Prenom</label>
-              <input id="geralRegister" class="form-control" type="text" [(ngModel)]="geral_register">
+        <div class="col-xl-8 col-md-6 col-sm-12" >
+          <h2> <i class="fas fa-user-edit pr-2 pb-2"></i> Modifier profile</h2>
+          <div class="form-container" >
+              <label for="name">Nom :</label>
+              <input type="text" id="floatingInput" [(ngModel)]="user.last_name" class="form-control col-sm-7">
+
+              <label for="geralRegister">Prenom :</label>
+              <input id="geralRegister" class="form-control col-sm-7" type="text" [(ngModel)]="user.first_name">
   
               <label for="address">Adress</label>
-              <input id="address" class="form-control" type="text" [(ngModel)]="address">
+              <input id="address" class="form-control col-sm-7" type="text" [(ngModel)]="user.address">
 
-              <label for="ZIP">Email</label>
-              <input id="ZIP" class="form-control" type="text" [(ngModel)]="ZIP">
+              <label for="ZIP">Email :</label>
+              <input id="ZIP" class="form-control col-sm-7" type="text" [(ngModel)]="user.email">
   
-              <label for="neighborhood ">CIN</label>
-              <input id="neighborhood " class="form-control" type="text" [(ngModel)]="neighborhood">
+              <label for="neighborhood ">CIN :</label>
+              <input id="neighborhood " class="form-control col-sm-7" type="text" [(ngModel)]="user.cin">
   
   
-              <label for="phone">Telephone</label>
-              <input id="phone" class="form-control" type="text" [(ngModel)]="phone">
+              <label for="phone">Telephone :</label>
+              <input id="phone" class="form-control col-sm-7" type="text" [(ngModel)]="user.phone">
   
     
-            <button class="btn btn-success" >   Modifier </button>
-          </div>
-        </div>
-  
+            <button class="btn btn-outline-success mb-3" (click)="updateProfile()" > Modifier </button>
+          
       </div>
-    </div>
-  </div>
-  
-  

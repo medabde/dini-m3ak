@@ -80,7 +80,7 @@ export class HeaderComponent implements OnInit {
     }
 
     return false;
-}
+  }
  
 
   ngOnInit(): void {
@@ -118,7 +118,7 @@ export class HeaderComponent implements OnInit {
   }
 
   infoRide(ride_id:any){
-    this.router.navigate(["info"]);
+    this.router.navigate(["info/"+ride_id]);
   }
  
 }

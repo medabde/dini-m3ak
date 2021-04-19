@@ -6,6 +6,7 @@ import com.example.demo.model.User;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.utils.Constants;
+import com.example.demo.utils.Utils;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class AuthController {
 
 
 
-        return new ResponseEntity<>(generateJWTToken(user), HttpStatus.OK);
+        return new ResponseEntity<>(Utils.generateJWTToken(user), HttpStatus.OK);
 
     }
 
@@ -89,7 +90,7 @@ public class AuthController {
                         +",\nThank you for joining us , Please confirm your email by clicking the link below : \n\n"
                         +"http://localhost:8081/app/auth/confirm/"+user.getToken());
 
-        return new ResponseEntity<>(generateJWTToken(user), HttpStatus.OK);
+        return new ResponseEntity<>(Utils.generateJWTToken(user), HttpStatus.OK);
     }
 
     @GetMapping("/confirm/{token}")
@@ -105,27 +106,6 @@ public class AuthController {
                 +"<br>for confirming your email, now you can login to our website and enjoy our services.<br>Happy travelling :D"
                 +"<br><a href='http://localhost:4200/login'>Login Page</a>";
 
-    }
-
-
-    private Map<String,String> generateJWTToken(User user){
-        long timestamp = System.currentTimeMillis();
-        String token = Jwts.builder().signWith(SignatureAlgorithm.HS256, Constants.API_SECRET_KEY)
-                .setIssuedAt(new Date(timestamp))
-                .setExpiration(new Date(timestamp+ Constants.TOKEN_VALIDITY))
-                .claim("userId",user.getId_user())
-                .claim("email",user.getEmail())
-                .claim("first_name",user.getFirst_name())
-                .claim("last_name",user.getLast_name())
-                .claim("cin",user.getCIN())
-                .claim("address",user.getAddress())
-                .claim("phone",user.getPhone())
-                .claim("is_enabled",user.isEnabled())
-                .claim("is_admin",user.getRole().getRole().equals(Constants.ADMIN_ROLE))
-                .compact();
-        Map<String,String> map = new HashMap<>();
-        map.put("token",token);
-        return map;
     }
 
     private String generateConfirmationToken(){

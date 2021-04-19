@@ -6,6 +6,7 @@ export class Ride {
     motorist:string;
     seats:number;
     motoristId:number;
+    user:User;
     passengers:User[];
     starting_date:Date;
     starting_city_name:string;
@@ -30,6 +31,7 @@ export class Ride {
         this.motoristId = -1;
         this.enabled=false;
         this.isUserJoined =false;
+        this.user=new User();
     }
 
 }
