@@ -39,6 +39,7 @@ import { UpdateRideComponent } from './update-ride/update-ride.component';
     NgbModule,
     FormsModule,
     FontAwesomeModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MDBBootstrapModule.forRoot()
 

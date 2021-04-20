@@ -1,1 +1,102 @@
 <p>add-ride works!</p>
+<app-navbar></app-navbar>
+<div class="profile" *ngIf="myForm">
+    <form [formGroup]="myForm" (ngSubmit)="saveRide()">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-4 col-md-6 col-sm-12">
+          <div class="ml-5 pb-3">
+            <div class="user rounded-circle" >
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-8 col-md-6 col-sm-12">
+          <div class="row max-viewport align-items-center">
+            <div class="col text-center bg-light">
+                <h1 class="display-3">Ajouter un trajet <strong class="text-uppercase"></strong></h1>
+                </div></div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Prix</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            <input type="text" class="form-control" id="price" placeholder="veuillez saisir le prix" formControlName="price">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Nombre de place</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            <input type="number" class="form-control" id="seats" placeholder="veuillez saisir le nombre de places" formControlName="seats">
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Date de depart</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            <input type="datetime-local" placeholder=" starting_date" name="starting_date" formControlName="starting_date"  id="starting_date" >
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Date de destination</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            <input type="datetime-local" placeholder="" name="destination_date" formControlName="destination_date"  id="destination_date" >
+                        </div>
+                      </div>
+                      <hr>
+                     
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Ville de depart</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            <select class="form-control ecrituerModal" name="starting_city" id="starting_city" formControleName="starting_city">
+                                <option class="ecrituerModal" *ngFor="let dest of starting_city" [value]="dest.id_city">{{dest.city_name}}</option>
+                              </select>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Ville de destination</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            <select class="form-control ecrituerModal" name="destination_city" id="destination_city" formControlName="destination_city" (change)="cityChange($event)">
+        
+                                <option class="ecrituerModal" *ngFor="let dest of destination_city" [value]="dest.id_city">{{dest.city_name}}</option>
+                              </select>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Type Ride</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                            <select class="form-control ecrituerModal" formControlName="ride_type" name="ride_type" id="ride_type">
+                                <option class="ecrituerModal" *ngFor="let r of ride_type" [value]="r.id_type">{{r.type}}</option>
+                              </select>
+                        </div>
+                      </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary btn-lg">Ajouter trajet</button>
+                    </div>
+                 </div>
+                     
+                    
+   
+</div>
+</div>
+</form>
+</div>
+
+

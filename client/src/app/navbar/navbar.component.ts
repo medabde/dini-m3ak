@@ -43,5 +43,8 @@ export class NavbarComponent implements OnInit {
     console.log("h")
     this.router.navigate(['ride']);
   }
+  navigateAddRide(){
+    this.router.navigate(['add-ride'])
+  }
 
 }
