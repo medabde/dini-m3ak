@@ -33,9 +33,15 @@ export class RideService {
     return this.http.get<Ride[]>("/app/api/rides/ridesJoinedByUser",{headers:this.getHeader()});
   }
 
-  deleteList(_id:any):Observable<Ride>{
+  deleteRide(_id:any):Observable<Ride>{
     return this.http.delete<Ride>(`/app/api/rides/${_id}`,{headers:this.getHeader()});
   }
+
+  updateride(newRide:Ride):Observable<Ride>{
+   
+    return this.http.patch<Ride>(`/app/api/rides/${newRide.id_ride}`,newRide,{headers:this.getHeader()});
+  }
+  
   joinRide(id_ride:number):Observable<Ride>{
     
     return this.http.put<Ride>("/app/api/rides/joinride/"+id_ride,{},{headers:this.getHeader()});

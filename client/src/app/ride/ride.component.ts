@@ -13,6 +13,7 @@ import { faMinus } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./ride.component.scss']
 })
 export class RideComponent implements OnInit {
+
   trash=faTrash;
   edit=faEdit;
   eye=faEye;
@@ -21,34 +22,95 @@ export class RideComponent implements OnInit {
   EnabledRidesByUser:Ride[]=[];
   DisabledRidesByUser:Ride[]=[];
   RidesJoinedByUse:Ride[]=[];
-  ridesInPage:Ride[] = [];
+  inPageEnabledRidesByUser:Ride[]=[];
+  inPageDisabledRidesByUser:Ride[]=[];
+  inPageRidesJoinedByUse:Ride[]=[];
+  pageDisabledRidesByUser=1;
+  pageRidesJoinedByUse=1;
+  pageEnabledRidesByUser = 1;
+  pageSize = 4;
+  collectionSizeEnabledRidesByUser = 0;
+  collectionSizeDisabledRidesByUser=0;
+  collectionSizeRidesJoinedByUse=0;
 
   @ViewChild('staticTabs', { static: true }) staticTabs: any;
 
   toggleDisabledState() {
   this.staticTabs.tabs[2].disabled = !this.staticTabs.tabs[2].disabled;
   }
-  page = 1;
-  pageSize = 4;
-  collectionSize = Ride.length;
+ 
   
 
   constructor(private rideService:RideService,private router:Router) {
-     //this.rides = [];
-     this.rideService.getAllEnabledRidesByUser().subscribe(data => {this.EnabledRidesByUser = data ; console.log(data)});
-     this.rideService.getAllDisabledRidesByUser().subscribe(data => {this.DisabledRidesByUser = data ; console.log(data)});
-     this.rideService.getAllRidesJoinedByUser().subscribe(data => {this.RidesJoinedByUse = data ; console.log(data)});
-
-    this.refreshCountries();
+    this.getdata();
+    this.refreshEnabledRidesByUser();
   }
 
 
-  refreshCountries() {
-    this.ridesInPage = this.rides
+  refreshEnabledRidesByUser () {
+    this.inPageEnabledRidesByUser = this.EnabledRidesByUser
       .map((ride, i) => ({id: i + 1, ...ride}))
-      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+      .slice((this.pageEnabledRidesByUser- 1) * this.pageSize, (this.pageEnabledRidesByUser - 1) * this.pageSize + this.pageSize);
+  }
+  refreshDisabledRidesByUser () {
+    this. inPageDisabledRidesByUser= this.DisabledRidesByUser
+      .map((ride, i) => ({id: i + 1, ...ride}))
+      .slice((this.pageDisabledRidesByUser- 1) * this.pageSize, (this.pageDisabledRidesByUser- 1) * this.pageSize + this.pageSize);
+  }
+  refreshRidesJoinedByUse () {
+    this.inPageRidesJoinedByUse = this.RidesJoinedByUse
+      .map((ride, i) => ({id: i + 1, ...ride}))
+      .slice((this.pageRidesJoinedByUse- 1) * this.pageSize, (this.pageRidesJoinedByUse - 1) * this.pageSize + this.pageSize);
+  }
+  delete(id:any,i:any):void{
+    
+    this.rideService.deleteRide(id).subscribe(res=>{
+      this.rides.splice(i, 1);
+      this.router.navigate(['/ride']);
+    });
   }
 
+ unjoin(rideId:any):void{
+  this.rideService.unjoinRide(rideId).subscribe(data =>{this.getdata()})
+ }
+ getdata(){
+  this.rideService.getAllEnabledRidesByUser().subscribe(data => 
+    {this.EnabledRidesByUser = data ; 
+      this.EnabledRidesByUser.push(new  Ride());
+      this.EnabledRidesByUser.push(new  Ride());
+      this.EnabledRidesByUser.push(new  Ride());
+      this.EnabledRidesByUser.push(new  Ride());
+      this.EnabledRidesByUser.push(new  Ride());
+      this.EnabledRidesByUser.push(new  Ride());
+      this.EnabledRidesByUser.push(new  Ride());
+      this.collectionSizeEnabledRidesByUser=this.EnabledRidesByUser.length;
+      this.refreshEnabledRidesByUser();
+    });
+  this.rideService.getAllDisabledRidesByUser().subscribe(data => 
+    {this.DisabledRidesByUser = data ; 
+      this.DisabledRidesByUser.push(new  Ride());
+      this.DisabledRidesByUser.push(new  Ride());
+      this.DisabledRidesByUser.push(new  Ride());
+      this.DisabledRidesByUser.push(new  Ride());
+      this.DisabledRidesByUser.push(new  Ride());
+      this.DisabledRidesByUser.push(new  Ride());
+      this.DisabledRidesByUser.push(new  Ride());
+      this.collectionSizeDisabledRidesByUser=this.DisabledRidesByUser.length;
+      this.refreshDisabledRidesByUser();
+    });
+  this.rideService.getAllRidesJoinedByUser().subscribe(data =>
+     {this.RidesJoinedByUse = data ; 
+    this.RidesJoinedByUse.push(new  Ride());
+    this.RidesJoinedByUse.push(new  Ride()); 
+    this.RidesJoinedByUse.push(new  Ride()); 
+    this.RidesJoinedByUse.push(new  Ride()); 
+    this.RidesJoinedByUse.push(new  Ride()); 
+    this.RidesJoinedByUse.push(new  Ride()); 
+    this.collectionSizeRidesJoinedByUse=this.RidesJoinedByUse.length;
+    this.refreshRidesJoinedByUse(); 
+    
+  });
+ }
   ngOnInit(): void {
   }
 

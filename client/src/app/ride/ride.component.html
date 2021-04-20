@@ -9,7 +9,7 @@
 <div class="container">
     <ul ngbNav #nav="ngbNav" class="nav-tabs">
         <li ngbNavItem>
-          <a ngbNavLink>First</a>
+          <a ngbNavLink>Vos trajets</a>
           <ng-template ngbNavContent>
             <table class="table table-striped">
                 <thead>
@@ -20,27 +20,29 @@
                   <th scope="col">date de destination</th>
                   <th scope="col">Nombre de passage</th>
                   <th scope="col">Type de trajet</th>
+                   <th scope="col">Prix</th>
                   <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let ride of EnabledRidesByUser">
+                <tr *ngFor="let ride of inPageEnabledRidesByUser ; let i = index">
                   <td>
                     <!--<img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">-->
                     {{ ride.starting_city_name}}
                   </td>
                   <td>{{ ride.destination_city_name }}</td>
-                  <td>{{ ride.starting_date  }}</td>
-                  <td>{{ ride.destination_date  }}</td>
-                  <td>{{ ride.nbPassengers  }}</td>
+                  <td>{{ ride.starting_date | date:'MMM d, y, h:mm:ss a' }}</td>
+                  <td>{{ ride.destination_date | date:'MMM d, y, h:mm:ss a' }}</td>
+                  <td>{{ride.nbPassengers}} / {{ride.seats}}</td>
+                  <td>{{ ride.ride_type_name }}</td>
                   <td>{{ ride.price }}</td> 
-                  <td><a style="padding: 10px;"><fa-icon [icon]="trash"style="color:red;"></fa-icon></a><a style="padding: 10px;"><fa-icon [icon]="edit" style="color:green;"></fa-icon></a><a><fa-icon [icon]="eye"></fa-icon></a></td>                  
+                  <td><a style="padding: 10px;" (click)="delete(ride.id_ride,i)"><fa-icon [icon]="trash"style="color:red;"></fa-icon></a><a style="padding: 10px;"><fa-icon [icon]="edit" style="color:green;"></fa-icon></a><a [routerLink]="['../info/'+ride.id_ride]"><fa-icon [icon]="eye"></fa-icon></a></td>                  
                 </tr>
                 </tbody>
               </table>
               
               <div class="d-flex justify-content-between p-2">
-                <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()">
+                <ngb-pagination [collectionSize]="collectionSizeEnabledRidesByUser" [(page)]="pageEnabledRidesByUser" [pageSize]="pageSize" (pageChange)=" refreshEnabledRidesByUser()">
                 </ngb-pagination>
               
                 <!--<select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
@@ -52,7 +54,7 @@
  </ng-template>
         </li>
         <li ngbNavItem>
-          <a ngbNavLink>Second</a>
+          <a ngbNavLink>Vos voyages</a>
           <ng-template ngbNavContent>
             <table class="table table-striped">
                 <thead>
@@ -63,40 +65,35 @@
                   <th scope="col">date de destination</th>
                   <th scope="col">Nombre de passage</th>
                   <th scope="col">Type de trajet</th>
+                  <th scope="col">Prix</th>
                   <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let ride of RidesJoinedByUse">
-                  <th scope="row">{{ ride.motoristId}}</th>
+                <tr *ngFor="let ride of inPageRidesJoinedByUse">
                   <td>
                     <!--<img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">-->
                     {{ ride.starting_city_name}}
                   </td>
                   <td>{{ ride.destination_city_name }}</td>
-                  <td>{{ ride.starting_date  }}</td>
-                  <td>{{ ride.destination_date  }}</td>
-                  <td>{{ ride.nbPassengers  }}</td>
-                  <td>{{ ride.ride_type_name }}</td>    
-                  <td><a style="padding: 10px;"><fa-icon [icon]="trash"style="color:red;"></fa-icon></a><a><fa-icon [icon]="eye"></fa-icon></a></td>              
+                  <td>{{ ride.starting_date | date:'MMM d, y, h:mm:ss a' }}</td>
+                  <td>{{ ride.destination_date | date:'MMM d, y, h:mm:ss a'  }}</td>
+                  <td>{{ride.nbPassengers}} / {{ride.seats}}</td>
+                  <td>{{ ride.ride_type_name }}</td>
+                  <td>{{ ride.price }}</td>     
+                  <td><a style="padding: 10px;" (click)="unjoin(ride.id_ride)"><fa-icon [icon]="minus"style="color:red;"></fa-icon></a><a [routerLink]="['../info/'+ride.id_ride]"><fa-icon [icon]="eye"></fa-icon></a></td>              
                 </tr>
                 </tbody>
               </table>
               
               <div class="d-flex justify-content-between p-2">
-                <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()">
+                <ngb-pagination [collectionSize]="collectionSizeRidesJoinedByUse" [(page)]="pageRidesJoinedByUse" [pageSize]="pageSize" (pageChange)="  refreshRidesJoinedByUse()">
                 </ngb-pagination>
-              
-                <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
-                  <option [ngValue]="2">2 items per page</option>
-                  <option [ngValue]="4">4 items per page</option>
-                  <option [ngValue]="6">6 items per page</option>
-                </select>
               </div>  
           </ng-template>
         </li>
         <li ngbNavItem>
-          <a ngbNavLink>third</a>
+          <a ngbNavLink>En cours</a>
           <ng-template ngbNavContent>
             <table class="table table-striped">
                 <thead>
@@ -105,43 +102,38 @@
                   <th scope="col">Destination</th>
                   <th scope="col">date de depart</th>
                   <th scope="col">date de destination</th>
-                  <th scope="col">Nombre de passage</th>
+                  <th scope="col">Nombre de passage</th> 
                   <th scope="col">Type de trajet</th>
+                  <th scope="col">Prix</th>
+                 
                   <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let ride of DisabledRidesByUser">
-                  <th scope="row">{{ ride.motoristId}}</th>
+                <tr *ngFor="let ride of  inPageDisabledRidesByUser ; let i = index">
                   <td>
                     <!--<img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">-->
                     {{ ride.starting_city_name}}
                   </td>
                   <td>{{ ride.destination_city_name }}</td>
-                  <td>{{ ride.starting_date  }}</td>
-                  <td>{{ ride.destination_date  }}</td>
-                  <td>{{ ride.nbPassengers  }}</td>
-                  <td>{{ ride.ride_type_name }}</td>    
-                  <td><a style="padding: 10px;"><fa-icon [icon]="trash"style="color:red;"></fa-icon></a><a style="padding: 10px;"><fa-icon [icon]="edit" style="color:green;"></fa-icon></a><a><fa-icon [icon]="eye"></fa-icon></a></td>                  
+                  <td>{{ ride.starting_date | date:'MMM d, y, h:mm:ss a' }}</td>
+                  <td>{{ ride.destination_date | date:'MMM d, y, h:mm:ss a' }}</td>
+                  <td>{{ride.nbPassengers}} / {{ride.seats}}</td>
+                  <td>{{ ride.ride_type_name }}</td>
+                  <td>{{ ride.price }}</td>     
+                  <td><a style="padding: 10px;" (click)="delete(ride.id_ride,i)"><fa-icon [icon]="trash"style="color:red;"></fa-icon></a><a style="padding: 10px;"><fa-icon [icon]="edit" style="color:green;"></fa-icon></a><a [routerLink]="['../info/'+ride.id_ride]"><fa-icon [icon]="eye"></fa-icon></a></td>                  
                 </tr>
                 </tbody>
               </table>
               
               <div class="d-flex justify-content-between p-2">
-                <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()">
+                <ngb-pagination [collectionSize]="collectionSizeDisabledRidesByUser" [(page)]="pageDisabledRidesByUser" [pageSize]="pageSize" (pageChange)=" refreshDisabledRidesByUser()">
                 </ngb-pagination>
-              
-                <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
-                  <option [ngValue]="2">2 items per page</option>
-                  <option [ngValue]="4">4 items per page</option>
-                  <option [ngValue]="6">6 items per page</option>
-                </select>
               </div>  
           </ng-template>
         </li>
       </ul>
       <div [ngbNavOutlet]="nav"></div>
-
 </div>
 <div class="container">
 </div>

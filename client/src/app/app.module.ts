@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddRideComponent } from './add-ride/add-ride.component';
 import { InfoRideComponent } from './info-ride/info-ride.component';
 import { RideComponent } from './ride/ride.component';
+import { UpdateRideComponent } from './update-ride/update-ride.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { RideComponent } from './ride/ride.component';
     TeamComponent,
     AddRideComponent,
     InfoRideComponent,
-    RideComponent
+    RideComponent,
+    UpdateRideComponent
   ],
   imports: [
     BrowserModule,
