@@ -23,7 +23,7 @@ public class CityController {
 
     @GetMapping("/")
     public List<City> getAllCities(HttpServletRequest httpRequest){
-        if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
+       // if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
 
         return cityRepository.findAll();
@@ -31,7 +31,7 @@ public class CityController {
 
     @GetMapping("/{id}")
     public ResponseEntity<City> getCityById(@PathVariable long id, HttpServletRequest httpRequest){
-        if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
+       // if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
         City city = cityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("no city with id :" +id ));
         return ResponseEntity.ok(city);
@@ -39,7 +39,7 @@ public class CityController {
 
     @PostMapping("/")
     public  ResponseEntity<City> createCity(@RequestBody City cityDetails, HttpServletRequest httpRequest){
-        if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
+       // if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
         City city = new City();
         city.setCity_name(cityDetails.getCity_name());
@@ -49,7 +49,7 @@ public class CityController {
 
     @PutMapping("/{id}")
     public  ResponseEntity<City> updateCity(@PathVariable Long id, @RequestBody City cityDetails, HttpServletRequest httpRequest){
-        if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
+        //if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
         City city = cityRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no city with id :" +id ));
         city.setCity_name(cityDetails.getCity_name());
@@ -60,7 +60,7 @@ public class CityController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Boolean>> DeleteCity(@PathVariable Long id,HttpServletRequest httpRequest){
-        if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
+       // if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
 
         City city = cityRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no city with id :" +id));

@@ -16,7 +16,7 @@ export class AddRideComponent implements OnInit {
  public seats = 0;
  public starting_date : any
  public destination_city :any[] = [] ;
- public ride_type = '';
+ public ride_type :any;
  public starting_city :any[] =[]
  public motorist = '';
  id_city : any;
