@@ -16,9 +16,23 @@ export class RideService {
 
     return this.http.get<Ride[]>("/app/api/rides/enabled",{headers:this.getHeader()});
   }
+
   getRidesbyid(id_ride:number):Observable<Ride>{
     return this.http.get<Ride>("/app/api/rides/"+id_ride,{headers:this.getHeader()});
   }
+  
+  getAllEnabledRidesByUser():Observable<Ride[]>{
+    return this.http.get<Ride[]>("/app/api/rides/enabledRidesByUser",{headers:this.getHeader()});
+  }
+
+  getAllDisabledRidesByUser():Observable<Ride[]>{
+    return this.http.get<Ride[]>("/app/api/rides/disabledRidesByUser",{headers:this.getHeader()});
+  }
+
+  getAllRidesJoinedByUser():Observable<Ride[]>{
+    return this.http.get<Ride[]>("/app/api/rides/ridesJoinedByUser",{headers:this.getHeader()});
+  }
+
   deleteList(_id:any):Observable<Ride>{
     return this.http.delete<Ride>(`/app/api/rides/${_id}`,{headers:this.getHeader()});
   }

@@ -66,7 +66,8 @@ public class Ride {
         return passengers;
     }
     public int getNbPassengers(){
-        return passengers.size();
+        if(passengers==null) return  0;
+        return  passengers.size();
     }
 
     public String getMotorist(){
@@ -77,14 +78,17 @@ public class Ride {
     }
 
     public String getStarting_city_name() {
+        if(starting_city==null) return "";
         return starting_city.getCity_name();
     }
 
     public String getDestination_city_name() {
+        if(destination_city==null) return "";
         return destination_city.getCity_name();
     }
 
     public String getRide_type_name(){
+        if(ride_type==null) return "";
         return ride_type.getType();
     }
 

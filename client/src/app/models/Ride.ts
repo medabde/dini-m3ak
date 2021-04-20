@@ -16,6 +16,7 @@ export class Ride {
     nbPassengers:number;
     enabled:boolean;
     isUserJoined:boolean;
+    price:number;
 
     constructor(){
         this.nbPassengers=0;
@@ -32,6 +33,7 @@ export class Ride {
         this.enabled=false;
         this.isUserJoined =false;
         this.user=new User();
+        this.price=0;
     }
 
 }

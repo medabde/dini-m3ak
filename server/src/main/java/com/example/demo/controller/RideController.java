@@ -39,6 +39,30 @@ public class RideController {
         return rideRepository.findEnabledRides();
     }
 
+    @GetMapping("/enabledRidesByUser")
+    public List<Ride> getAllEnabledRidesByUser(HttpServletRequest httpRequest)
+    {
+        long id = (Integer) httpRequest.getAttribute("userId");
+        User user = userRepository.getOne(id);
+        return rideRepository.findEnabledRidesByUser(user);
+    }
+
+    @GetMapping("/disabledRidesByUser")
+    public List<Ride> getAllDisabledRidesByUser(HttpServletRequest httpRequest)
+    {
+        long id = (Integer) httpRequest.getAttribute("userId");
+        User user = userRepository.getOne(id);
+        return rideRepository.findDisabledRidesByUser(user);
+    }
+
+    @GetMapping("/ridesJoinedByUser")
+    public List<Ride> getAllRidesJoinedByUser(HttpServletRequest httpRequest)
+    {
+        long id = (Integer) httpRequest.getAttribute("userId");
+        User user = userRepository.getOne(id);
+        return rideRepository.findJoinedRidesByUser(user);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Ride> getRideById(@PathVariable long id, HttpServletRequest httpRequest){
 //        if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
