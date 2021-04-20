@@ -37,6 +37,7 @@ import { RideComponent } from './ride/ride.component';
     NgbModule,
     FormsModule,
     FontAwesomeModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MDBBootstrapModule.forRoot()
 

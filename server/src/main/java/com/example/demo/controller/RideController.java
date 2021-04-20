@@ -7,11 +7,15 @@ import com.example.demo.model.Ride;
 import com.example.demo.model.User;
 import com.example.demo.repository.RideRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.CityRepository;
+import com.example.demo.repository.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +29,12 @@ public class RideController {
     RideRepository rideRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    CityRepository cityRepository;
+    @Autowired
+    TypeRepository typeRepository;
+
+
 
     @GetMapping("/")
     public List<Ride> getAllRides(HttpServletRequest httpRequest){
@@ -72,20 +82,28 @@ public class RideController {
         return ResponseEntity.ok(ride);
     }
 
-    @PostMapping("/")
-    public ResponseEntity<Ride> createRide(@RequestBody Ride rideDetails, HttpServletRequest httpRequest){
+    @PostMapping("/add")
+    public ResponseEntity<Ride> createRide(@RequestBody Map<String,String> rideDetails, HttpServletRequest httpRequest) throws ParseException {
+        SimpleDateFormat dateFormatter=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+
+        System.out.println(rideDetails);
+
         long id = (Integer) httpRequest.getAttribute("userId");
         User user = userRepository.getOne(id);
         Ride ride = new Ride();
-
         ride.setUser(user);
-        ride.setPrice(rideDetails.getPrice());
-        ride.setSeats(rideDetails.getSeats());
+        ride.setPrice(Double.parseDouble(rideDetails.get("price")));
+        ride.setSeats((Integer.parseInt(rideDetails.get("seats"))));
+        ride.setStarting_city(cityRepository.getOne(Long.parseLong(rideDetails.get("starting_city"))));
+        ride.setDestination_city(cityRepository.getOne(Long.parseLong(rideDetails.get("destination_city"))));
+        ride.setRide_type(typeRepository.getOne(Long.parseLong(rideDetails.get("ride_type"))));
+        ride.setStarting_date(dateFormatter.parse(rideDetails.get("starting_date")));
+        ride.setDestination_date(dateFormatter.parse(rideDetails.get("destination_date")));
         ride  = rideRepository.save(ride);
-
         return ResponseEntity.ok(ride);
 
     }
+
 
     @PutMapping("/joinride/{id}")
     public ResponseEntity<Ride> joinRide(@PathVariable Long id,HttpServletRequest httpRequest){
