@@ -21,15 +21,24 @@ export class UpdateRideComponent implements OnInit {
    id_city : any;
    datedep:string = ""
   datedest:string =""
+  selectedType:any;
+  selectedStartingCity:any;
+  selectedDestinationCity:any;
+
    constructor(private rideservice:RideService,public datepipe: DatePipe,private cityService:CityService, private router: Router,private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute) { 
     this.rideservice.getRidesbyid(this.activatedRoute.snapshot.params.id).subscribe(data => {
       this.ride= data;
+      this.selectedType = this.ride.ride_type.id_type;
+      this.selectedStartingCity = this.ride.starting_city.id_city;
+      this.selectedDestinationCity = this.ride.destination_city.id_city;
+      console.log(this.selectedStartingCity+"hh")
+      this.getAllTypes();
+      this.getStartingCities();
+      this.getAllCities();
       this.datedep = this.datepipe.transform(this.ride.starting_date, 'yyyy-MM-ddTHH:mm:ss')||"";
       this.datedest = this.datepipe.transform(this.ride.destination_date, 'yyyy-MM-ddTHH:mm:ss')||"";
       });
-    this.getAllTypes();
-    this.getStartingCities();
-    this.getAllCities();
+    
 
   }
 
@@ -39,9 +48,14 @@ updateRide(){
   this.ride.starting_date = new Date(this.datedep);
   this.ride.destination_date = new Date(this.datedest);
   
-  this.rideservice.updateride(this.ride).subscribe(data => console.log(this.ride));
+  this.cityService.getTypeById(this.selectedType).subscribe(data =>{
+    this.ride.ride_type = data;
+    this.rideservice.updateride(this.ride).subscribe(data => this.router.navigate(['/ride']));
+  })
   
-  this.router.navigate(['/ride']);
+  
+  
+  
 }
 getAllTypes(){
   this.cityService.getTypes().subscribe(data => {
@@ -64,9 +78,9 @@ getAllTypes(){
            seats : ['',Validators.required],
            starting_date : ['',Validators.required],
            destination_date: ['', Validators.required],
-           destination_city : [data[0].id_city,Validators.required],
-           ride_type : ['',Validators.required],
-           starting_city : [data[0].id_city,Validators.required]
+           destination_city : [this.ride.destination_city.id_city,Validators.required],
+           ride_type : [this.ride.ride_type.id_type,Validators.required],
+           starting_city : [this.ride.starting_city.id_city,Validators.required]
            })
          
          /*this.destCity=data[0];

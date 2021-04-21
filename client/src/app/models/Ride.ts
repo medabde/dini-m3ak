@@ -1,4 +1,6 @@
 import decode from 'jwt-decode';
+import { City } from './City';
+import { RideType } from './RideType';
 import { User } from './User';
 
 export class Ride {
@@ -10,7 +12,10 @@ export class Ride {
     passengers:User[];
     starting_date:Date;
     starting_city_name:string;
+    starting_city:City;
+    destination_city:City;
     ride_type_name:string;
+    ride_type:RideType;
     destination_date:Date;
     destination_city_name:string;
     nbPassengers:number;
@@ -23,6 +28,9 @@ export class Ride {
         this.passengers = [];
         this.motorist = "";
         this.motorist = "";
+        this.starting_city=new City();
+        this.destination_city=new City();
+        this.ride_type=new RideType();
         this.seats = 0;
         this.starting_date = new Date();
         this.ride_type_name="";

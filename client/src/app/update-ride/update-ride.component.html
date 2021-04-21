@@ -59,7 +59,7 @@
                           <h6 class="mb-0">Ville de depart</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            <select class="form-control ecrituerModal" name="starting_city" id="starting_city" formControleName="starting_city"[value]="ride.starting_city_name">
+                            <select class="form-control ecrituerModal" name="starting_city" id="starting_city" formControleName="starting_city"  [(ngModel)]="selectedStartingCity">
                                 <option class="ecrituerModal" *ngFor="let dest of starting_city" [value]="dest.id_city" >{{dest.city_name}}</option>
                               </select>
                         </div>
@@ -70,9 +70,9 @@
                           <h6 class="mb-0">Ville de destination</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            <select class="form-control ecrituerModal" name="destination_city" id="destination_city" formControlName="destination_city" (change)="cityChange($event)" [value]="ride.destination_city_name">
+                            <select class="form-control ecrituerModal" name="destination_city" id="destination_city" formControlName="destination_city" (change)="cityChange($event)" [(ngModel)]="selectedDestinationCity">
         
-                                <option class="ecrituerModal" *ngFor="let dest of destination_city" [value]="dest.id_city">{{dest.city_name}}</option>
+                                <option class="ecrituerModal" *ngFor="let dest of destination_city" [value]="dest.id_city" >{{dest.city_name}}</option>
                               </select>
                         </div>
                       </div>
@@ -82,7 +82,7 @@
                           <h6 class="mb-0">Type Ride</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            <select class="form-control ecrituerModal" formControlName="ride_type" name="ride_type" id="ride_type" value="ride.ride_type_name">
+                            <select class="form-control ecrituerModal" formControlName="ride_type" name="ride_type" id="ride_type" [(ngModel)]="selectedType">
                                 <option class="ecrituerModal" *ngFor="let r of ride_type" [value]="r.id_type">{{r.type}}</option>
                               </select>
                         </div>
