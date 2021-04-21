@@ -61,6 +61,7 @@
                       <th scope="col">Automobiliste</th>
                       <th scope="col">Nombre de place</th>
                       <th scope="col">Type</th>
+                      <th scope="col">Prix</th>
                       <th scope="col"></th>
                       <th scope="col"></th>
                     </tr>
@@ -87,6 +88,9 @@
                       </th>
                       <th scope="row">
                         {{ride.ride_type_name}}
+                      </th>
+                      <th scope="row">
+                        {{ride.price}}
                       </th>
                       <th scope="row">
                         <p *ngIf="ride.nbPassengers == ride.seats && !ride.isUserJoined; else joinBlock">Full</p>
