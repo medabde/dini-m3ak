@@ -18,6 +18,8 @@ import { AddRideComponent } from './add-ride/add-ride.component';
 import { InfoRideComponent } from './info-ride/info-ride.component';
 import { RideComponent } from './ride/ride.component';
 import { UpdateRideComponent } from './update-ride/update-ride.component';
+import { DatePipe } from '@angular/common'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +46,7 @@ import { UpdateRideComponent } from './update-ride/update-ride.component';
     MDBBootstrapModule.forRoot()
 
   ],
-  providers: [],
+  providers:[DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

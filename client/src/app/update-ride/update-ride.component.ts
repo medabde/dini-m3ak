@@ -5,6 +5,8 @@ import {RideService} from 'src/app/services/ride.service';
 import {CityService} from 'src/app/services/city.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Ride } from '../models/Ride';
+import { DatePipe } from '@angular/common'
+
 @Component({
   selector: 'app-update-ride',
   templateUrl: './update-ride.component.html',
@@ -17,9 +19,14 @@ export class UpdateRideComponent implements OnInit {
    ride_type :any;
    public myForm : any
    id_city : any;
-   date:string = "2019-06-15T12:23:12"
-  constructor(private rideservice:RideService,private cityService:CityService, private router: Router,private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute) { 
-    this.rideservice.getRidesbyid(this.activatedRoute.snapshot.params.id).subscribe(data => this.ride= data);
+   datedep:string = ""
+  datedest:string =""
+   constructor(private rideservice:RideService,public datepipe: DatePipe,private cityService:CityService, private router: Router,private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute) { 
+    this.rideservice.getRidesbyid(this.activatedRoute.snapshot.params.id).subscribe(data => {
+      this.ride= data;
+      this.datedep = this.datepipe.transform(this.ride.starting_date, 'yyyy-MM-ddTHH:mm:ss')||"";
+      this.datedest = this.datepipe.transform(this.ride.destination_date, 'yyyy-MM-ddTHH:mm:ss')||"";
+      });
     this.getAllTypes();
     this.getStartingCities();
     this.getAllCities();
@@ -29,9 +36,12 @@ export class UpdateRideComponent implements OnInit {
   ngOnInit(): void {
   }
 updateRide(){
+  this.ride.starting_date = new Date(this.datedep);
+  this.ride.destination_date = new Date(this.datedest);
+  
   this.rideservice.updateride(this.ride).subscribe(data => console.log(this.ride));
   
-  this.router.navigate(['/home']);
+  this.router.navigate(['/ride']);
 }
 getAllTypes(){
   this.cityService.getTypes().subscribe(data => {
