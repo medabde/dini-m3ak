@@ -44,20 +44,6 @@ export class HeaderComponent implements OnInit {
 
     rideService.getRides().subscribe(data => {
       this.rides = data;
-      this.rides.push(new Ride());
-      this.rides.push(new Ride());
-      this.rides.push(new Ride());
-      this.rides.push(new Ride());
-      this.rides.push(new Ride());
-      this.rides.push(new Ride());
-      this.rides.push(new Ride());
-      this.rides.push(new Ride());
-      this.rides.push(new Ride());
-      this.rides.push(new Ride());
-      this.rides.push(new Ride());
-      this.rides.push(new Ride());
-      this.rides.push(new Ride());
-      this.rides.push(new Ride());
       this.collectionSize = this.rides.length;
       this.rides.forEach(r =>{
         r.isUserJoined = this.isUserJoined(r.passengers);

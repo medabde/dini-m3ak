@@ -75,37 +75,17 @@ export class RideComponent implements OnInit {
  }
  getdata(){
   this.rideService.getAllEnabledRidesByUser().subscribe(data => 
-    {this.EnabledRidesByUser = data ; 
-      this.EnabledRidesByUser.push(new  Ride());
-      this.EnabledRidesByUser.push(new  Ride());
-      this.EnabledRidesByUser.push(new  Ride());
-      this.EnabledRidesByUser.push(new  Ride());
-      this.EnabledRidesByUser.push(new  Ride());
-      this.EnabledRidesByUser.push(new  Ride());
-      this.EnabledRidesByUser.push(new  Ride());
+    {this.EnabledRidesByUser = data ;
       this.collectionSizeEnabledRidesByUser=this.EnabledRidesByUser.length;
       this.refreshEnabledRidesByUser();
     });
   this.rideService.getAllDisabledRidesByUser().subscribe(data => 
     {this.DisabledRidesByUser = data ; 
-      this.DisabledRidesByUser.push(new  Ride());
-      this.DisabledRidesByUser.push(new  Ride());
-      this.DisabledRidesByUser.push(new  Ride());
-      this.DisabledRidesByUser.push(new  Ride());
-      this.DisabledRidesByUser.push(new  Ride());
-      this.DisabledRidesByUser.push(new  Ride());
-      this.DisabledRidesByUser.push(new  Ride());
       this.collectionSizeDisabledRidesByUser=this.DisabledRidesByUser.length;
       this.refreshDisabledRidesByUser();
     });
   this.rideService.getAllRidesJoinedByUser().subscribe(data =>
      {this.RidesJoinedByUse = data ; 
-    this.RidesJoinedByUse.push(new  Ride());
-    this.RidesJoinedByUse.push(new  Ride()); 
-    this.RidesJoinedByUse.push(new  Ride()); 
-    this.RidesJoinedByUse.push(new  Ride()); 
-    this.RidesJoinedByUse.push(new  Ride()); 
-    this.RidesJoinedByUse.push(new  Ride()); 
     this.collectionSizeRidesJoinedByUse=this.RidesJoinedByUse.length;
     this.refreshRidesJoinedByUse(); 
     

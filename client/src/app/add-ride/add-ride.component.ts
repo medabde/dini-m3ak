@@ -91,7 +91,7 @@ export class AddRideComponent implements OnInit {
   saveRide():void {
     this.Rideservice.createRide(this.myForm.value['destination_date'],this.myForm.value['price'], this.myForm.value['seats'], this.myForm.value['starting_date'], this.myForm.value['destination_city']
     ,this.myForm.value['ride_type'], this.myForm.value['starting_city'], this.motorist).subscribe(data => {
-      console.log(data)
+      this.router.navigate(["ride"])
     
     });
     this.myForm.reset();

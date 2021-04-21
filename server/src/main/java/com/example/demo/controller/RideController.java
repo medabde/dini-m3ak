@@ -142,7 +142,7 @@ public class RideController {
         Ride ride = rideRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no city with id :" +id ));
 
         System.out.println(rideDetails.getRide_type().getType());
-
+        System.out.println(rideDetails.getStarting_city().getCity_name());
         ride.setPassengers(rideDetails.getPassengers());
         ride.setStarting_date(rideDetails.getStarting_date());
         ride.setStarting_city(rideDetails.getStarting_city());

@@ -19,21 +19,22 @@ export class UpdateRideComponent implements OnInit {
    ride_type :any;
    public myForm : any
    id_city : any;
-   datedep:string = ""
-  datedest:string =""
-  selectedType:any;
-  selectedStartingCity:any;
-  selectedDestinationCity:any;
+   datedep:string = "";
+   datedest:string ="";
+
+   newDepartureCityId:number=-1;
+   newDestinationCityId:number=-1;
+   newTypeId:number=-1;
 
    constructor(private rideservice:RideService,public datepipe: DatePipe,private cityService:CityService, private router: Router,private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute) { 
     this.rideservice.getRidesbyid(this.activatedRoute.snapshot.params.id).subscribe(data => {
       this.ride= data;
-      this.selectedType = this.ride.ride_type.id_type;
-      this.selectedStartingCity = this.ride.starting_city.id_city;
-      this.selectedDestinationCity = this.ride.destination_city.id_city;
-      console.log(this.selectedStartingCity+"hh")
+
+      this.newDepartureCityId = this.ride.starting_city.id_city;
+      this.newDestinationCityId = this.ride.destination_city.id_city;
+      this.newTypeId = this.ride.ride_type.id_type;
+
       this.getAllTypes();
-      this.getStartingCities();
       this.getAllCities();
       this.datedep = this.datepipe.transform(this.ride.starting_date, 'yyyy-MM-ddTHH:mm:ss')||"";
       this.datedest = this.datepipe.transform(this.ride.destination_date, 'yyyy-MM-ddTHH:mm:ss')||"";
@@ -48,13 +49,21 @@ updateRide(){
   this.ride.starting_date = new Date(this.datedep);
   this.ride.destination_date = new Date(this.datedest);
   
-  this.cityService.getTypeById(this.selectedType).subscribe(data =>{
+  console.log(this.newDepartureCityId);
+  console.log(this.newDestinationCityId);
+  console.log(this.newTypeId);
+
+  this.cityService.getTypeById(this.newTypeId).subscribe(data =>{
     this.ride.ride_type = data;
-    this.rideservice.updateride(this.ride).subscribe(data => this.router.navigate(['/ride']));
+    this.cityService.getCitieById(this.newDepartureCityId).subscribe(data =>{
+      this.ride.starting_city = data;
+      this.cityService.getCitieById(this.newDestinationCityId).subscribe(data=>{
+        this.ride.destination_city = data;
+        this.rideservice.updateride(this.ride).subscribe(data => this.router.navigate(['/ride']));
+      })
+    });
+    
   })
-  
-  
-  
   
 }
 getAllTypes(){
@@ -65,8 +74,14 @@ getAllTypes(){
     console.log(err);
   })
  }
- cityChange(event : any) {
-  this.id_city=event.target.value;
+  destcityChange(event : any) {
+    this.newDestinationCityId=event.target.value;
+  }
+  depcityChange(event : any) {
+    this.newDepartureCityId=event.target.value;
+  }
+  typeChange(event : any) {
+    this.newTypeId=event.target.value;
   }
  getAllCities(){
   this.cityService.getCities().subscribe((data : any[]) => {
@@ -92,12 +107,4 @@ getAllTypes(){
     console.log(err);
   })
  }
- getStartingCities(){
-  this.cityService.getCities().subscribe(data => {
-    this.starting_city = data;
-    console.log(data);
-      }, err => {
-    console.log(err);
-  })
-}
 }
