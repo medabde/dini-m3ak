@@ -22,7 +22,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Departure Date</h6>
+                        <h6 class="mb-0">Date de depart</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
                         {{ride.starting_date | date:'MMM d, y, h:mm:ss a'}}
@@ -31,7 +31,7 @@
                     <hr>
                     <div class="row">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Departure City</h6>
+                        <h6 class="mb-0">Ville de depart</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
                         {{ride.starting_city_name}}
@@ -40,7 +40,7 @@
                     <hr>
                     <div class="row">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Destination Date</h6>
+                        <h6 class="mb-0"> Date de destination</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
                         {{ride.destination_date | date:'MMM d, y, h:mm:ss a'}}
@@ -49,7 +49,7 @@
                     <hr>
                     <div class="row">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Destination City</h6>
+                        <h6 class="mb-0">Ville de destination</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
                         {{ride.destination_city_name}}
@@ -58,7 +58,7 @@
                     <hr>
                     <div class="row">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Seats</h6>
+                        <h6 class="mb-0">Nombre de place</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
                         {{ride.nbPassengers}} / {{ride.seats}}
@@ -113,7 +113,7 @@
                       <div class="card-body">
                         <div class="row">
                           <div class="col-sm-3">
-                            <h6 class="mb-0">Full Name</h6>
+                            <h6 class="mb-0">Nom</h6>
                           </div>
                           <div class="col-sm-9 text-secondary">
                             {{ride.user.first_name}} {{ride.user.last_name}}
@@ -131,7 +131,7 @@
                         <hr>
                         <div class="row">
                           <div class="col-sm-3">
-                            <h6 class="mb-0">Phone</h6>
+                            <h6 class="mb-0">Telephone</h6>
                           </div>
                           <div class="col-sm-9 text-secondary">
                             {{ride.user.phone}}
@@ -149,7 +149,7 @@
                         <hr>
                         <div class="row">
                           <div class="col-sm-3">
-                            <h6 class="mb-0">Address</h6>
+                            <h6 class="mb-0">Adresse</h6>
                           </div>
                           <div class="col-sm-9 text-secondary">
                             {{ride.user.address}}

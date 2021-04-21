@@ -65,7 +65,7 @@ export class RideService {
 
   updateride(newRide:Ride):Observable<Ride>{
    
-    return this.http.patch<Ride>(`/app/api/rides/${newRide.id_ride}`,newRide,{headers:this.getHeader()});
+    return this.http.put<Ride>(`/app/api/rides/${newRide.id_ride}`,newRide,{headers:this.getHeader()});
   }
   
   joinRide(id_ride:number):Observable<Ride>{

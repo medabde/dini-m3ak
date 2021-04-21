@@ -8,6 +8,7 @@ import {ProfilComponent} from './profil/profil.component';
 import {RideComponent} from './ride/ride.component';
 import { InfoRideComponent } from './info-ride/info-ride.component';
 import {AddRideComponent} from './add-ride/add-ride.component';
+import {UpdateRideComponent} from './update-ride/update-ride.component';
 const routes: Routes = [
 { path: 'login', component: LoginComponent },
 { path: 'register', component: RegisterComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
 { path: 'profile', component: ProfilComponent },
 { path: 'info/:id', component: InfoRideComponent },
 { path : 'add-ride', component: AddRideComponent},
+{ path : 'update/:id', component: UpdateRideComponent},
 { path: 'ride', component: RideComponent },
 { path: '**', component: HeaderComponent}
 ];

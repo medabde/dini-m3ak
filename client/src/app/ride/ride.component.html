@@ -36,7 +36,7 @@
                   <td>{{ride.nbPassengers}} / {{ride.seats}}</td>
                   <td>{{ ride.ride_type_name }}</td>
                   <td>{{ ride.price }}</td> 
-                  <td><a style="padding: 10px;" (click)="delete(ride.id_ride,i)"><fa-icon [icon]="trash"style="color:red;"></fa-icon></a><a style="padding: 10px;"><fa-icon [icon]="edit" style="color:green;"></fa-icon></a><a [routerLink]="['../info/'+ride.id_ride]"><fa-icon [icon]="eye"></fa-icon></a></td>                  
+                  <td><a style="padding: 10px;" (click)="delete(ride.id_ride,i)"><fa-icon [icon]="trash"style="color:red;"></fa-icon></a><a style="padding: 10px;" [routerLink]="['/update',ride.id_ride]" ><fa-icon [icon]="edit" style="color:green;"></fa-icon></a><a [routerLink]="['../info/'+ride.id_ride]"><fa-icon [icon]="eye"></fa-icon></a></td>                  
                 </tr>
                 </tbody>
               </table>
@@ -121,7 +121,7 @@
                   <td>{{ride.nbPassengers}} / {{ride.seats}}</td>
                   <td>{{ ride.ride_type_name }}</td>
                   <td>{{ ride.price }}</td>     
-                  <td><a style="padding: 10px;" (click)="delete(ride.id_ride,i)"><fa-icon [icon]="trash"style="color:red;"></fa-icon></a><a style="padding: 10px;"><fa-icon [icon]="edit" style="color:green;"></fa-icon></a><a [routerLink]="['../info/'+ride.id_ride]"><fa-icon [icon]="eye"></fa-icon></a></td>                  
+                  <td><a style="padding: 10px;" (click)="delete(ride.id_ride,i)"><fa-icon [icon]="trash"style="color:red;"></fa-icon></a><a style="padding: 10px;" [routerLink]="['/update',ride.id_ride]"><fa-icon [icon]="edit" style="color:green;"></fa-icon></a><a [routerLink]="['../info/'+ride.id_ride]"><fa-icon [icon]="eye"></fa-icon></a></td>                  
                 </tr>
                 </tbody>
               </table>

@@ -137,7 +137,7 @@ public class RideController {
 
     @PutMapping("/{id}")
     public  ResponseEntity<Ride> updateRide(@PathVariable Long id, @RequestBody Ride rideDetails, HttpServletRequest httpRequest){
-        if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
+       // if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
         Ride ride = rideRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no city with id :" +id ));
 
