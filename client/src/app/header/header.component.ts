@@ -43,9 +43,10 @@ export class HeaderComponent implements OnInit {
     config.showNavigationArrows = true;
     config.showNavigationIndicators = true;
 
-    const decodedToken:any = decode(JSON.parse(localStorage.getItem('profile')|| "").token);
-    this.userId = decodedToken.userId;
-
+    if(localStorage.getItem('profile')!=null){
+      const decodedToken:any = decode(JSON.parse(localStorage.getItem('profile')|| "").token);
+      this.userId = decodedToken.userId;
+    }
 
     rideService.getRides().subscribe(data => {
       this.rides = data;
