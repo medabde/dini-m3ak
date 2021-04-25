@@ -21,14 +21,14 @@ public class Ride {
     @Column(name = "starting_date")
     private Date starting_date;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     @JoinColumn(name = "starting_city", referencedColumnName = "id_city")
     private City starting_city;
 
     @Column(name = "destination_date")
     private Date destination_date;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     @JoinColumn(name = "destination_city", referencedColumnName = "id_city")
     private City destination_city;
 
@@ -38,7 +38,7 @@ public class Ride {
     @Column(name = "seats")
     private int seats;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     @JoinColumn(name = "ride_type", referencedColumnName = "id_type")
     private Type ride_type;
 

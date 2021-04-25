@@ -66,12 +66,14 @@ export class RideComponent implements OnInit {
     
     this.rideService.deleteRide(id).subscribe(res=>{
       this.rides.splice(i, 1);
-      this.router.navigate(['/ride']);
+      this.getdata();
     });
   }
 
  unjoin(rideId:any):void{
-  this.rideService.unjoinRide(rideId).subscribe(data =>{this.getdata()})
+  this.rideService.unjoinRide(rideId).subscribe(data =>{
+    this.getdata();
+  })
  }
  getdata(){
   this.rideService.getAllEnabledRidesByUser().subscribe(data => 

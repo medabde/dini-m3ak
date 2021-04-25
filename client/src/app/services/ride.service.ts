@@ -7,15 +7,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RideService {
-  private header:HttpHeaders;
   private baseURL = '/app/api/rides/add';
 
   constructor(private http:HttpClient) {
-    this.header =  new HttpHeaders({
-      'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('profile')||"{}").token,
-      'Access-Control-Allow-Origin':'*',
-    });
-   }
+  }
    
    createRide(destination_date:Date ,price : Number, seats : Number, starting_date : String, 
     destination_city:String,ride_type: String ,starting_city: Date, motorist : String):Observable<any>{
@@ -33,7 +28,7 @@ export class RideService {
 
     console.log("data in service" , data)
 
-    return this.http.post(`${this.baseURL}`,data,{headers:this.header});
+    return this.http.post(`${this.baseURL}`,data,{headers:this.getHeader()});
 
     }
 
