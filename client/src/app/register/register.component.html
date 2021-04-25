@@ -6,65 +6,82 @@
     <div class="col-7">
       <div class="pt-5 text-right register">
         <span>Vous avez deja un compte ? </span>
-        <button  [routerLink]="['/login']">Login</button>
+        <button  [routerLink]="['/login']">Se connecter</button>
       </div>
       <div class="form-container">
         <h1 class="text-left">
           <br>
           Dini M3ak 
         </h1>
-        <h3>Creer un neuveau compte</h3>
-        <label for="username">First Name</label>
-        <input id="username" class="form-control" type="text" [(ngModel)]="firstname" required minlength="4" #usernameForm="ngModel">
-        <label for="username">Last Name</label>
-        <input id="username" class="form-control" type="text" [(ngModel)]="lastname" required minlength="4" #usernameForm="ngModel">
+        <h3>Creer un nouveau compte</h3>
+        <label for="firstname">Prenom</label>
+        <input id="firstname" class="form-control" type="text" [(ngModel)]="firstname" required minlength="4" #firstnameForm="ngModel">
+        <label for="lastname">Nom</label>
+        <input id="lastname" class="form-control" type="text" [(ngModel)]="lastname" required minlength="4" #lastnameForm="ngModel">
         <label for="email">Email</label>
         <input id="email" class="form-control" type="email" [pattern]="emailRegex"  [(ngModel)]="email" required #emailForm="ngModel">
-        <label for="password">Password</label>
+        <label for="password">Mot de passe</label>
         <input id="password" class="form-control" type="{{ isVisible ? 'text' : 'password'}}" [(ngModel)]="password" minlength="8" required #passwordForm="ngModel">
         <span class="show-password" (click)="isVisible = !isVisible">
           <fa-icon [icon]="faeye"></fa-icon>
         </span>       
-        <label for="confirm-password">Confirme Password</label>
+        <label for="confirm-password">Confirmez le mot de passe</label>
         <input id="confirm-password" class="form-control" type="{{ isConfirmationVisible ? 'text' : 'password'}}" [(ngModel)]="confirmPassword"  minlength="8" required #confirmPasswordForm="ngModel">
         <span class="show-password" (click)="isConfirmationVisible = !isConfirmationVisible">
           <fa-icon [icon]="faeye"></fa-icon>
         </span><br>
         <!-- Validations -->
-        <!-- Username -->
-        <div class="text-center text-danger error-message" *ngIf="usernameForm.invalid && (usernameForm.dirty || usernameForm.touched)">
+        <!-- First Name -->
+        <div class="text-center text-danger error-message" *ngIf="firstnameForm.invalid && (firstnameForm.dirty || firstnameForm.touched)">
             <i class="fas fa-user-times pr-2"></i>
-            <span *ngIf="usernameForm?.errors?.required"> Le nom d'utilisateur doit être informé</span>
-            <span *ngIf="usernameForm?.errors?.minlength"> Le nom d'utilisateur doit comporter au moins 4 caractères</span>
+            <span *ngIf="firstnameForm?.errors?.required"> Le prenom doit être informé</span>
+            <span *ngIf="firstnameForm?.errors?.minlength"> Le prenom doit comporter au moins 4 caractères</span>
+        </div>
+        <!-- Last Name -->
+        <div class="text-center text-danger error-message" *ngIf="(lastnameForm.invalid && (lastnameForm.dirty || lastnameForm.touched)) && !firstnameForm.invalid">
+          <i class="fas fa-user-times pr-2"></i>
+          <span *ngIf="lastnameForm?.errors?.required"> Le nom doit être informé</span>
+          <span *ngIf="lastnameForm?.errors?.minlength"> Le nom doit comporter au moins 4 caractères</span>
         </div>
         <!-- Email -->
-        <div class="text-center text-danger error-message" *ngIf="emailForm.invalid && (emailForm.dirty || emailForm.touched)">
+        <div class="text-center text-danger error-message" *ngIf="emailForm.invalid && (emailForm.dirty || emailForm.touched)  && !firstnameForm.invalid && !lastnameForm.invalid">
             <i class="far fa-envelope pr-2"></i>
             <span *ngIf="emailForm?.errors?.required"> l' email doit ètre Informé
             </span>
             <span *ngIf="emailForm?.errors?.pattern"> Entrez une adresse mail valide</span>
         </div>
         <!-- Password -->
-        <div class="text-center text-danger error-message" *ngIf="passwordForm.invalid && (passwordForm.dirty || passwordForm.touched)">
+        <div class="text-center text-danger error-message" *ngIf="passwordForm.invalid && (passwordForm.dirty || passwordForm.touched)  && !firstnameForm.invalid && !lastnameForm.invalid && !emailForm.invalid">
             <i class="fas fa-lock pr-2"></i>
             <span *ngIf="passwordForm?.errors?.required"> Entrer un mot de passe</span>
             <span *ngIf="passwordForm?.errors?.minlength"> Votre mot de passe doit comporter au moins 8 caractères.</span>
         </div>
 
-        <div class="text-center text-danger error-message" *ngIf="confirmPasswordForm.invalid && (confirmPasswordForm.dirty || confirmPasswordForm.touched)">
-            <span *ngIf="confirmPasswordForm?.errors?.required"> Entrer un mot de passe</span>
-            <span *ngIf="confirmPasswordForm?.errors?.minlength">Votre mot de passe doit comporter au moins 8 caractères.</span>
+        <div class="text-center text-danger error-message" *ngIf="confirmPasswordForm.invalid && (confirmPasswordForm.dirty || confirmPasswordForm.touched)  && !firstnameForm.invalid && !lastnameForm.invalid && !emailForm.invalid && !passwordForm.invalid">
+          <i class="fas fa-lock pr-2"></i>  
+          <span *ngIf="confirmPasswordForm?.errors?.required"> Entrer un mot de passe</span>
+          <span *ngIf="confirmPasswordForm?.errors?.minlength">Votre mot de passe doit comporter au moins 8 caractères.</span>
         </div>
 
-        <div class="text-center text-danger error-message" *ngIf="confirmPasswordForm.value !== passwordForm.value && (confirmPasswordForm.dirty || confirmPasswordForm.touched)">
-            <span> Les mots de passe ne correspondent pas</span>
+        <div class="text-center text-danger error-message" *ngIf="confirmPasswordForm.value !== passwordForm.value && (confirmPasswordForm.dirty || confirmPasswordForm.touched)  && !firstnameForm.invalid && !lastnameForm.invalid && !emailForm.invalid && !passwordForm.invalid && !confirmPasswordForm.invalid">
+          <i class="fas fa-lock pr-2"></i>  
+          <span> Les mots de passe ne correspondent pas</span>
         </div>
         <div class="text-center text-danger error-message" *ngIf="messageError">
+          <i class="fas fa-lock pr-2"></i>
           <i class="fas fa-user-times pr-2 "></i> {{messageError}}
+        </div>
+        
+
+        <div class="alert alert-success" role="alert" *ngIf="showSuccess">
+          <h4 class="alert-heading">Bien fait!</h4>
+          <p>Maintenant, la prochaine étape consiste à confirmer votre e-mail pour terminer votre inscription.</p>
+          <hr>
+          <p class="mb-0">Vérifiez votre boîte de réception et cliquez sur le lien qui vous a été envoyé.</p>
         </div>
 
         <div class="text-center">
-          <button [disabled]="usernameForm.invalid || emailForm.invalid || passwordForm.invalid || confirmPasswordForm.invalid || passwordForm.value !== confirmPasswordForm.value" (click)="register()"> Inscrire</button>
+          <button [disabled]="lastnameForm.invalid || firstnameForm.invalid || emailForm.invalid || passwordForm.invalid || confirmPasswordForm.invalid || passwordForm.value !== confirmPasswordForm.value" (click)="register()"> Inscrire</button>
         </div>
       </div>
     </div>

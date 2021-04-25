@@ -12,7 +12,7 @@
         <div class="col-xl-8 col-md-6 col-sm-12">
           <div class="row max-viewport align-items-center">
             <div class="col text-center bg-light">
-                <h1 class="display-3">Info <strong class="text-uppercase">Trajet</strong></h1>
+                <h1 class="display-3"><strong class="text-uppercase">Trajet</strong></h1>
                 </div></div>
 
 <!------------------------------------------------------------------------------------>
@@ -25,7 +25,7 @@
                         <h6 class="mb-0">Date de depart</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        {{ride.starting_date | date:'MMM d, y, h:mm:ss a'}}
+                        {{ride.starting_date | date:"dd/MM/yyyy 'á' HH:mm"}}
                       </div>
                     </div>
                     <hr>
@@ -43,7 +43,7 @@
                         <h6 class="mb-0"> Date de destination</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        {{ride.destination_date | date:'MMM d, y, h:mm:ss a'}}
+                        {{ride.destination_date | date:"dd/MM/yyyy 'á' HH:mm"}}
                       </div>
                     </div>
                     <hr>
@@ -77,11 +77,14 @@
                 </div>
             <!-- <a href="" (click)="joinRide($event)" class="btn btn-outline-primary btn-lg mr-3"><i class="fa fa-hand-o-right mr-2">Join</i></a> -->
             
-            <p *ngIf="ride.nbPassengers == ride.seats && !ride.isUserJoined; else joinBlock">Full</p>
-            <ng-template #joinBlock>
-              <a href="" (click)="unJoinRide($event)" class="btn btn-outline-primary btn-lg mr-3" mdbWavesEffect *ngIf="ride.isUserJoined else plusBlock"><i class="fas fa-lg fa-minus"></i> UnJoin</a>
-              <ng-template #plusBlock>
-                <a href="" (click)="joinRide($event)" class="btn btn-outline-primary btn-lg mr-3" mdbWavesEffect><i class="fas fa-lg fa-plus"></i> Join</a>
+            <a href="" [routerLink]="['../../update/'+ride.id_ride]" class="btn btn-outline-primary btn-lg mr-3" mdbWavesEffect *ngIf="ride.user.id_user == userId;else notOwnerBlock"><i class="fas fa-lg fa-edit"></i>Modifier</a>
+            <ng-template #notOwnerBlock>
+              <p *ngIf="ride.nbPassengers == ride.seats && !ride.isUserJoined; else joinBlock">Full</p>
+              <ng-template #joinBlock>
+                <a href="" (click)="unJoinRide($event)" class="btn btn-outline-primary btn-lg mr-3" mdbWavesEffect *ngIf="ride.isUserJoined else plusBlock"><i class="fas fa-lg fa-minus"></i>Disjoindre</a>
+                <ng-template #plusBlock>
+                  <a href="" (click)="joinRide($event)" class="btn btn-outline-primary btn-lg mr-3" mdbWavesEffect><i class="fas fa-lg fa-plus"></i>Joindre</a>
+                </ng-template>
               </ng-template>
             </ng-template>
 

@@ -19,6 +19,11 @@ import { InfoRideComponent } from './info-ride/info-ride.component';
 import { RideComponent } from './ride/ride.component';
 import { UpdateRideComponent } from './update-ride/update-ride.component';
 import { DatePipe } from '@angular/common'
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { LOCALE_ID } from '@angular/core';
+// the second parameter 'fr' is optional
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
   declarations: [
@@ -46,7 +51,7 @@ import { DatePipe } from '@angular/common'
     MDBBootstrapModule.forRoot()
 
   ],
-  providers:[DatePipe],
+  providers:[DatePipe,{ provide: LOCALE_ID, useValue: "fr-FR" }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

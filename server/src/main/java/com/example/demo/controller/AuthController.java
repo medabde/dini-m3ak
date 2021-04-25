@@ -86,8 +86,8 @@ public class AuthController {
         user = userRepository.save(user);
 
         sendEmail(user.getEmail(),
-                "Hello "+user.getFirst_name()+" "+user.getLast_name()
-                        +",\nThank you for joining us , Please confirm your email by clicking the link below : \n\n"
+                "Salut "+user.getFirst_name()+" "+user.getLast_name()
+                        +",\nMerci de nous rejoindre, veuillez confirmer votre email en cliquant sur le lien ci-dessous: \n\n"
                         +"http://localhost:8081/app/auth/confirm/"+user.getToken());
 
         return new ResponseEntity<>(Utils.generateJWTToken(user), HttpStatus.OK);
@@ -102,9 +102,9 @@ public class AuthController {
 
         user.setEnabled(true);
         userRepository.save(user);
-        return "Thank you "+ user.getFirst_name() +" "+user.getLast_name()
-                +"<br>for confirming your email, now you can login to our website and enjoy our services.<br>Happy travelling :D"
-                +"<br><a href='http://localhost:4200/login'>Login Page</a>";
+        return "Merci "+ user.getFirst_name() +" "+user.getLast_name()
+                +"<br> d'avoir confirmé votre e-mail, vous pouvez maintenant vous connecter à notre site Web et profiter de nos services.<br>Bon voyage :D"
+                +"<br><a href='http://localhost:4200/login'>Se connecter</a>";
 
     }
 

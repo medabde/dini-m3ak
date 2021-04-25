@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import {AuthService} from 'src/app/services/auth.service';
 @Component({
@@ -12,6 +12,8 @@ export class RegisterComponent implements OnInit {
 
   validatingForm:any;
   faeye=faEye;
+
+  showSuccess:boolean = false;
 
   public firstname='';
   public lastname ='';
@@ -79,16 +81,19 @@ export class RegisterComponent implements OnInit {
   * Register
   */
   register():void{
-    //this.usersService.signUp(this.user.email,this.user.password,this.user.confirmPassword,this.user.firstname,this.user.lastname); 
     this.auth.signUpClient(this.email,this.password,this.firstname,this.lastname).subscribe(data =>
-    {//localStorage.setItem('profile',JSON.stringify(data));
-    //this.router.navigate(['login']);
-    this.messageError="Please confirm your email to complete your registration"
+    {
     this.firstname="";
     this.lastname="";
     this.email="";
     this.password="";
     this.confirmPassword="";
+
+    this.showSuccess = true;
+    setTimeout( () => {
+      this.showSuccess = false;
+    }, 7000);
+
   },error =>{this.messageError=error.error.message;});
    
   }

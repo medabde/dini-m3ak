@@ -20,6 +20,8 @@ export class HeaderComponent implements OnInit {
   viewMore = faEye;
   rides:Ride[] = [];
 
+  userId:number = -1;
+
   ridesInPage:Ride[] = [];
 
 
@@ -40,6 +42,9 @@ export class HeaderComponent implements OnInit {
     // customize default values of carousels used by this component tree
     config.showNavigationArrows = true;
     config.showNavigationIndicators = true;
+
+    const decodedToken:any = decode(JSON.parse(localStorage.getItem('profile')|| "").token);
+    this.userId = decodedToken.userId;
 
 
     rideService.getRides().subscribe(data => {
@@ -72,7 +77,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  joinRide(rideId:any):void{
+  joinRide(rideId:any,event:Event):void{
+    event.preventDefault();
     this.rideService.joinRide(rideId).subscribe(data =>{
       for (let index = 0; index < this.rides.length; index++) {
         if(this.rides[index].id_ride == data.id_ride) {
@@ -83,7 +89,8 @@ export class HeaderComponent implements OnInit {
       this.handlePageChange();
     });
   }
-  unJoinRide(rideId:any):void{
+  unJoinRide(rideId:any,event:Event):void{
+    event.preventDefault();
     this.rideService.unjoinRide(rideId).subscribe(data =>{
       for (let index = 0; index < this.rides.length; index++) {
         if(this.rides[index].id_ride == data.id_ride) {
@@ -103,8 +110,14 @@ export class HeaderComponent implements OnInit {
     
   }
 
-  infoRide(ride_id:any){
+  infoRide(ride_id:any,event:Event){
+    event.preventDefault();
     this.router.navigate(["info/"+ride_id]);
+  }
+
+  updateRide(ride_id:any,event:Event){
+    event.preventDefault();
+    this.router.navigate(["update/"+ride_id]);
   }
  
 }

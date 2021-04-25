@@ -13,6 +13,7 @@ import decode from 'jwt-decode';
 })
 export class InfoRideComponent implements OnInit {
   ride:Ride = new Ride;
+  userId:number = 0;
 
   constructor(private route: ActivatedRoute,private rideService:RideService) {
     rideService.getRidesbyid(parseInt(route.snapshot.paramMap.get('id')||"-1")).subscribe(data =>{ 
@@ -26,15 +27,20 @@ export class InfoRideComponent implements OnInit {
 
   private isUserJoined():boolean{
     const decodedToken:any = decode(JSON.parse(localStorage.getItem('profile')|| "").token);
-    const userId = decodedToken.userId;
+    this.userId = decodedToken.userId;
     
     for (let index = 0; index < this.ride.passengers.length; index++) {
-        if(this.ride.passengers[index].id_user == userId) {
+        if(this.ride.passengers[index].id_user == this.userId) {
             return true;
         }
     }
 
     return false;
+  }
+
+  updateRide(event:Event){
+    event.preventDefault();
+    
   }
 
 

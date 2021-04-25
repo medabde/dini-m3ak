@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     confirmPassword:''
   }
   
-  public username = '';
+  public email = '';
 
   /**
    * Password Field
@@ -35,6 +35,9 @@ export class LoginComponent implements OnInit {
    * message Error
    */
   public messageError: any;
+
+  public emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 
   /**
    * App Constructor
@@ -55,31 +58,30 @@ export class LoginComponent implements OnInit {
    
   }
 
+  onFocus(){
+    console.log("im getting focused");
+    this.messageError="";
+  }
+
   /**
    * Make a login request
    */
   
   public login(): void {
-    const data = {
-      'username' : this.username,
-      'password' : this.password,
-    };
-    if(this.username==''||this.password=='') this.messageError = "All fields are required";
+    if(this.email==''||this.password=='') this.messageError = "Tous les champs sont requis";
     else{
-      this.auth.signInClient(this.username,this.password).subscribe(data =>{this.messageError='';
+      this.auth.signInClient(this.email,this.password).subscribe(data =>{this.messageError='';
       //
       const decodedToken:any = decode(JSON.parse(JSON.stringify(data)|| "").token);
       if(decodedToken.is_enabled == false){
-        this.messageError="Please confirm your email to complete your registration"
+        this.messageError="Veuillez confirmer votre email pour terminer votre inscription"
       }
       else{
         localStorage.setItem('profile',JSON.stringify(data));
          this.router.navigate(['home']);
       }
      
-      },error =>{this.messageError=error.error.message;});
+      },error =>{this.messageError="Email ou mot de passe erroné";});
     }
-    console.log(this.username);
-    console.log(this.password)
   }
 }
