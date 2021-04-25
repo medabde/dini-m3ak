@@ -105,7 +105,7 @@ updateRide(){
           setTimeout( () => {
           this.showSuccess = false;
           this.router.navigate(['/ride'])
-        }, 8000);});
+        }, 1000);});
         
       })
     });

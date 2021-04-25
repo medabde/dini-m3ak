@@ -11,12 +11,12 @@ public interface RideRepository extends JpaRepository<Ride, Long> {
     @Query("SELECT r FROM Ride r WHERE r.isEnabled = true")
     List<Ride> findEnabledRides();
 
-    @Query("SELECT r FROM Ride r WHERE r.user = user AND r.isEnabled = true")
+    @Query("SELECT r FROM Ride r WHERE r.user = ?1 AND r.isEnabled = true")
     List<Ride> findEnabledRidesByUser(User user);
 
-    @Query("SELECT r FROM Ride r WHERE user member r.passengers")
+    @Query("SELECT r FROM Ride r WHERE ?1 member r.passengers")
     List<Ride> findJoinedRidesByUser(User user);
 
-    @Query("SELECT r FROM Ride r WHERE r.user = user AND r.isEnabled = false")
+    @Query("SELECT r FROM Ride r WHERE r.user = ?1 AND r.isEnabled = false")
     List<Ride> findDisabledRidesByUser(User user);
 }
