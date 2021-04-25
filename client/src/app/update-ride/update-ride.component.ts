@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+
 import { NgForm, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {RideService} from 'src/app/services/ride.service';
@@ -6,6 +8,38 @@ import {CityService} from 'src/app/services/city.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Ride } from '../models/Ride';
 import { DatePipe } from '@angular/common'
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+@Component({
+  selector: 'ngbd-modal-confirm',
+  template: `
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Modification du trajet
+    </h4>
+    <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p><strong>Etes-vous sûr que vous voulez modifier</strong></p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="no()">Annuler</button>
+    <button type="button" class="btn btn-danger" (click)="yes()">Ok</button>
+  </div>
+  `
+})
+export class  NgbdModalConfirm {
+  //@Input() name:any;
+  //options: ConfirmOptions;
+  constructor(public modal: NgbActiveModal) {}
+  yes() {
+    this.modal.close('confirmed');
+  }
+
+  no() {
+    this.modal.dismiss('not confirmed');
+  }
+}
 
 @Component({
   selector: 'app-update-ride',
@@ -25,8 +59,10 @@ export class UpdateRideComponent implements OnInit {
    newDepartureCityId:number=-1;
    newDestinationCityId:number=-1;
    newTypeId:number=-1;
+   showSuccess:boolean = false;
 
-   constructor(private rideservice:RideService,public datepipe: DatePipe,private cityService:CityService, private router: Router,private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute) { 
+
+   constructor(private rideservice:RideService,public datepipe: DatePipe,private cityService:CityService, private router: Router,private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute,private modalService: NgbModal) { 
     this.rideservice.getRidesbyid(this.activatedRoute.snapshot.params.id).subscribe(data => {
       this.ride= data;
 
@@ -46,7 +82,11 @@ export class UpdateRideComponent implements OnInit {
   ngOnInit(): void {
   }
 updateRide(){
-  this.ride.starting_date = new Date(this.datedep);
+  const modalRef = this.modalService.open(NgbdModalConfirm).result; 
+  modalRef.then(
+   () => {
+     console.log('updating...');
+      this.ride.starting_date = new Date(this.datedep);
   this.ride.destination_date = new Date(this.datedest);
   
   console.log(this.newDepartureCityId);
@@ -54,16 +94,28 @@ updateRide(){
   console.log(this.newTypeId);
 
   this.cityService.getTypeById(this.newTypeId).subscribe(data =>{
+    
     this.ride.ride_type = data;
     this.cityService.getCitieById(this.newDepartureCityId).subscribe(data =>{
       this.ride.starting_city = data;
       this.cityService.getCitieById(this.newDestinationCityId).subscribe(data=>{
         this.ride.destination_city = data;
-        this.rideservice.updateride(this.ride).subscribe(data => this.router.navigate(['/ride']));
+        this.rideservice.updateride(this.ride).subscribe(data =>{
+          this.showSuccess = true; 
+          setTimeout( () => {
+          this.showSuccess = false;
+          this.router.navigate(['/ride'])
+        }, 8000);});
+        
       })
     });
     
   })
+   },
+   () => {
+     console.log('not update...');
+   });
+ 
   
 }
 getAllTypes(){

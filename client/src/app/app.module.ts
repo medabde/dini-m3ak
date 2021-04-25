@@ -22,6 +22,9 @@ import { DatePipe } from '@angular/common'
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID } from '@angular/core';
+import {MatDialogModule,MAT_DIALOG_DATA} from '@angular/material/dialog';
+import{MatDialogRef} from '@angular/material/dialog';
+
 // the second parameter 'fr' is optional
 registerLocaleData(localeFr, 'fr');
 
@@ -47,11 +50,15 @@ registerLocaleData(localeFr, 'fr');
     FormsModule,
     FontAwesomeModule,
     ReactiveFormsModule,
+    MatDialogModule,
     HttpClientModule,
     MDBBootstrapModule.forRoot()
 
   ],
-  providers:[DatePipe,{ provide: LOCALE_ID, useValue: "fr-FR" }],
+  providers:[DatePipe,{ provide: LOCALE_ID, useValue: "fr-FR" },
+  { provide: MAT_DIALOG_DATA, useValue: {} },
+  { provide: MatDialogRef, useValue: {} }
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

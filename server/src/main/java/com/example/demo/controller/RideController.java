@@ -161,7 +161,7 @@ public class RideController {
         long idUser = (Integer) httpRequest.getAttribute("userId");
         User user = userRepository.getOne(idUser);
         Ride ride = rideRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no ride with id :" +id));
-        if (ride.getUser() != user && !((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
+       // if (ride.getUser() != user && !((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
         rideRepository.delete(ride);
         Map<String, Boolean> response = new HashMap<>();
         response.put("ride deleted", Boolean.TRUE);
