@@ -4,9 +4,6 @@
 <div class="profile" *ngIf="myForm">
     <form [formGroup]="myForm" (ngSubmit)="updateRide()">
     <div class="container">
-     <div class="alert alert-success" role="alert" *ngIf="showSuccess">
-        <h4 class="alert-heading">Votre trajet a ete modifié avec succès!</h4>
-      </div>
 
       <div class="row">
         <div class="col-xl-4 col-md-6 col-sm-12">

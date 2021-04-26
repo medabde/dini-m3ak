@@ -3,7 +3,7 @@
 <div class="header">
         <div class=" container text-center py-5">
             <h1 class="text-center">vos trajets !</h1>
-            <p class="Lead">vous pouvez modifier vos trajet et vous pouvez consulter les trajet qui vous joindr</p>
+            <p class="Lead">vous pouvez modifier vos trajet et aussi vous pouvez consulter vos voyages </p>
         </div>
     </div>
 <div class="container">
@@ -129,6 +129,7 @@
               <div class="d-flex justify-content-between p-2">
                 <ngb-pagination [collectionSize]="collectionSizeDisabledRidesByUser" [(page)]="pageDisabledRidesByUser" [pageSize]="pageSize" (pageChange)=" refreshDisabledRidesByUser()">
                 </ngb-pagination>
+                <p style="color: red;"> * En attente de l'approbation d'administrateur</p>
               </div>  
           </ng-template>
         </li>

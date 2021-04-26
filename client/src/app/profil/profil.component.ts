@@ -91,11 +91,6 @@ export class ProfilComponent implements OnInit {
         this.toastrService.success('Votre modification a été bien effectués');  
       localStorage.setItem('profile',JSON.stringify(data));
       this.refreshProfile();
-      this.showSuccess = true; 
-          setTimeout( () => {
-          this.showSuccess = false;
-          this.router.navigate(['/home'])
-        }, 1000);
     });
      },
      () => {

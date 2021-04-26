@@ -101,12 +101,9 @@ updateRide(){
       this.cityService.getCitieById(this.newDestinationCityId).subscribe(data=>{
         this.ride.destination_city = data;
         this.rideservice.updateride(this.ride).subscribe(data =>{
-          this.toastrService.success('Votre modification a été  bien effectués');  
-          this.showSuccess = true; 
-          setTimeout( () => {
-          this.showSuccess = false;
-          this.router.navigate(['/ride'])
-        }, 1000);});
+          this.toastrService.success('Votre modification a été  bien effectués'); 
+          this.router.navigate(['/ride']) 
+          });
         
       })
     });
