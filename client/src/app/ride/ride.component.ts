@@ -10,6 +10,7 @@ import { faMinus } from '@fortawesome/free-solid-svg-icons';
 import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 import {  MatDialogRef, MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'ngbd-modal-confirm',
@@ -113,7 +114,7 @@ export class RideComponent implements OnInit {
  
   
 
-  constructor(private rideService:RideService,private router:Router,private modalService: NgbModal) {
+  constructor(private rideService:RideService,private router:Router,private modalService: NgbModal,private toastrService: ToastrService) {
     this.getdata();
     this.refreshEnabledRidesByUser();
   }
@@ -140,6 +141,7 @@ export class RideComponent implements OnInit {
     () => {
       console.log('deleting...');
        this.rideService.deleteRide(id).subscribe(res=>{
+        this.toastrService.success('Vous avez supprimer ce trajet avec succès!');
       this.rides.splice(i, 1);
       this.getdata();
     });
@@ -159,6 +161,7 @@ export class RideComponent implements OnInit {
    () => {
      console.log('unjoin...');
        this.rideService.unjoinRide(rideId).subscribe(data =>{
+        this.toastrService.error('Vous avez disjoindre ce trajet avec succès!');
     this.getdata();
    })
    },
@@ -184,18 +187,6 @@ export class RideComponent implements OnInit {
     this.refreshRidesJoinedByUse(); 
     
   });
- }
- public onOpenModel(mode :string):void{
-   const container=document.getElementById("main-container");
-   const button=document.createElement("button");
-   button.type='button';
-   button.setAttribute('data-toggle','modal')
-   if(mode ==='delete'){
-     button.setAttribute('data-target','#delete');
-   }
-   container?.appendChild(button);
-   button.click();
- console.log("i m here");
  }
   ngOnInit(): void {
   }

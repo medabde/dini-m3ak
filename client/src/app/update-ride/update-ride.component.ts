@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-
+import { ToastrService} from 'ngx-toastr';
 import { NgForm, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {RideService} from 'src/app/services/ride.service';
@@ -62,7 +62,7 @@ export class UpdateRideComponent implements OnInit {
    showSuccess:boolean = false;
 
 
-   constructor(private rideservice:RideService,public datepipe: DatePipe,private cityService:CityService, private router: Router,private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute,private modalService: NgbModal) { 
+   constructor(private rideservice:RideService,public datepipe: DatePipe,private cityService:CityService, private router: Router,private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute,private modalService: NgbModal,private toastrService: ToastrService) { 
     this.rideservice.getRidesbyid(this.activatedRoute.snapshot.params.id).subscribe(data => {
       this.ride= data;
 
@@ -101,6 +101,7 @@ updateRide(){
       this.cityService.getCitieById(this.newDestinationCityId).subscribe(data=>{
         this.ride.destination_city = data;
         this.rideservice.updateride(this.ride).subscribe(data =>{
+          this.toastrService.success('Votre modification a été  bien effectués');  
           this.showSuccess = true; 
           setTimeout( () => {
           this.showSuccess = false;

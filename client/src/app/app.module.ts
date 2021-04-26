@@ -24,6 +24,9 @@ import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID } from '@angular/core';
 import {MatDialogModule,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import{MatDialogRef} from '@angular/material/dialog';
+import { ToastModule } from 'ng-uikit-pro-standard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 // the second parameter 'fr' is optional
 registerLocaleData(localeFr, 'fr');
@@ -52,7 +55,9 @@ registerLocaleData(localeFr, 'fr');
     ReactiveFormsModule,
     MatDialogModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
 
   ],
   providers:[DatePipe,{ provide: LOCALE_ID, useValue: "fr-FR" },

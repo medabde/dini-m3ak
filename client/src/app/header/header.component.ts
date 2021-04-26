@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 import { faPlus, faMinus,faEye } from '@fortawesome/free-solid-svg-icons';
 import decode from 'jwt-decode';
-
+import { ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
 import { RideService } from '../services/ride.service';
 import { Ride } from '../models/Ride';
@@ -11,7 +11,8 @@ import { User } from '../models/User';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+ 
 })
 export class HeaderComponent implements OnInit {
   title = 'appBootstrap';  
@@ -38,7 +39,7 @@ export class HeaderComponent implements OnInit {
   showNavigationIndicators = false;
   images = [ "assets/image/Carpool.png", "https://www.2iibm-tech.fr/images/site-de-covoiturage-france-3.jpg","assets/image/Carpool.png"];
 
-  constructor(config: NgbCarouselConfig,private router :Router,private rideService:RideService) {
+  constructor(config: NgbCarouselConfig,private router :Router,private rideService:RideService,private toastrService: ToastrService) {
     // customize default values of carousels used by this component tree
     config.showNavigationArrows = true;
     config.showNavigationIndicators = true;
@@ -81,8 +82,10 @@ export class HeaderComponent implements OnInit {
   joinRide(rideId:any,event:Event):void{
     event.preventDefault();
     this.rideService.joinRide(rideId).subscribe(data =>{
+      this.toastrService.success('Vous avez joindre ce trajet avec succès!');
       for (let index = 0; index < this.rides.length; index++) {
         if(this.rides[index].id_ride == data.id_ride) {
+         
           this.rides[index] = data;
           this.rides[index].isUserJoined = this.isUserJoined(this.rides[index].passengers);
         }
@@ -93,6 +96,7 @@ export class HeaderComponent implements OnInit {
   unJoinRide(rideId:any,event:Event):void{
     event.preventDefault();
     this.rideService.unjoinRide(rideId).subscribe(data =>{
+      this.toastrService.error('Vous avez disjoindre ce trajet');
       for (let index = 0; index < this.rides.length; index++) {
         if(this.rides[index].id_ride == data.id_ride) {
           this.rides[index] = data;

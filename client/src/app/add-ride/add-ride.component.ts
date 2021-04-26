@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import {RideService} from 'src/app/services/ride.service';
 import {CityService} from 'src/app/services/city.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ToastrService} from 'ngx-toastr';
+
 @Component({
   selector: 'app-add-ride',
   templateUrl: './add-ride.component.html',
@@ -31,7 +33,7 @@ export class AddRideComponent implements OnInit {
  startCity : any;
 
 
-  constructor(private Rideservice:RideService,private router:Router,private formBuilder: FormBuilder, private cityService : CityService) {
+  constructor(private Rideservice:RideService,private router:Router,private formBuilder: FormBuilder, private cityService : CityService,private toastrService: ToastrService) {
 
   
    }
@@ -91,6 +93,7 @@ export class AddRideComponent implements OnInit {
   saveRide():void {
     this.Rideservice.createRide(this.myForm.value['destination_date'],this.myForm.value['price'], this.myForm.value['seats'], this.myForm.value['starting_date'], this.myForm.value['destination_city']
     ,this.myForm.value['ride_type'], this.myForm.value['starting_city'], this.motorist).subscribe(data => {
+      this.toastrService.success('Votre trajet a été bien enregistré');  
       this.router.navigate(["ride"])
     
     });
