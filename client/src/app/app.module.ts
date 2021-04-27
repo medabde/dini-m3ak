@@ -14,7 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfilComponent } from './profil/profil.component';
 import { TeamComponent } from './team/team.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AddRideComponent } from './add-ride/add-ride.component';
+import { CreateRideComponent } from './create-ride/create-ride.component';
 import { InfoRideComponent } from './info-ride/info-ride.component';
 import { RideComponent } from './ride/ride.component';
 import { UpdateRideComponent } from './update-ride/update-ride.component';
@@ -41,10 +41,11 @@ registerLocaleData(localeFr, 'fr');
     FooterComponent,
     ProfilComponent,
     TeamComponent,
-    AddRideComponent,
+    CreateRideComponent,
     InfoRideComponent,
     RideComponent,
-    UpdateRideComponent
+    UpdateRideComponent,
+    CreateRideComponent
   ],
   imports: [
     BrowserModule,
