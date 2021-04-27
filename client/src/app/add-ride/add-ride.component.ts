@@ -4,21 +4,20 @@ import { Router } from '@angular/router';
 import {RideService} from 'src/app/services/ride.service';
 import {CityService} from 'src/app/services/city.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ToastrService} from 'ngx-toastr';
-
 @Component({
   selector: 'app-add-ride',
   templateUrl: './add-ride.component.html',
   styleUrls: ['./add-ride.component.scss']
 })
 export class AddRideComponent implements OnInit {
+    
   err: String = 'erreuuuur';
   public destination_date : Date =new Date();
  public price = 0;
  public seats = 0;
  public starting_date : any
  public destination_city :any[] = [] ;
- public ride_type :any;
+ public ride_type = '';
  public starting_city :any[] =[]
  public motorist = '';
  id_city : any;
@@ -32,11 +31,56 @@ export class AddRideComponent implements OnInit {
  destCity : any;
  startCity : any;
 
+ //message erreur
+ validationMessages = {
+  'price' : [
+    {type : "required",message: "Vous devez saisir un prix"},
+    {type : "pattern" , message : "le prix doit avoir seulement des chiffres"}
+  ],
+  'seats' :[
+    {type: "required",message: " Vous devez saisir le nombre de place"},
+    {type : "min",message:"Le nombre de place ne doit pas etre inferieur de 1 "},
+    {type : "max",message : " le nombre de place ne doit pas depacer 11"}
 
-  constructor(private Rideservice:RideService,private router:Router,private formBuilder: FormBuilder, private cityService : CityService,private toastrService: ToastrService) {
+  ],
 
+  'starting_date':[
+    {type: "required", message : " Vous devez choisir la date de depart"}
+  ],
+  'destination_date':[
+    {type: "required", message : " Vous devez choisir la date de destination"}
+  ],
+  'ride_type':[
+    {type: "required", message : " Vous devez choisir le type de votre trajet"}
+  ],
   
-   }
+  'starting_city':[
+    {type : "required" , message : " Vous devez choisir une ville de depart"}
+  ],
+  'destination_city':[
+    {type: "required", message : " Vous devez choisir une ville de destination"}
+  ]
+
+ }
+
+constructor(private Rideservice:RideService,private router:Router,private formBuilder: FormBuilder, private cityService : CityService) {
+  this.myForm = this.formBuilder.group({
+    price : ['',Validators.compose([Validators.required,Validators.pattern('^[0-9]+')])],
+    seats : ['',Validators.compose([Validators.required,Validators.min(1),Validators.max(10)])],
+    starting_date : ['',Validators.required],
+    destination_city : ['',Validators.required],
+    destination_date: ['', Validators.required],
+    ride_type : ['',Validators.required],
+    starting_city : ['',Validators.required]
+    })
+  
+  /*this.destCity=data[0];
+  this.startCity=data[0];
+  console.log(this.destCity)
+  console.log(this.startCity);*/
+
+
+ }
    ngOnInit(): void {
     this.getAllCities();
     this.getAllTypes();
@@ -44,32 +88,14 @@ export class AddRideComponent implements OnInit {
   }
 
  getAllCities(){
-   this.cityService.getCities().subscribe((data : any[]) => {
-     this.destination_city = data;
-     this.starting_city=data;
-        if(data.length>0){
-          this.myForm = this.formBuilder.group({
-            price : ['',Validators.required],
-            seats : ['',Validators.required],
-            starting_date : ['',Validators.required],
-            destination_date: ['', Validators.required],
-            destination_city : [data[0].id_city,Validators.required],
-            ride_type : ['',Validators.required],
-            starting_city : [data[0].id_city,Validators.required]
-            })
-          
-          /*this.destCity=data[0];
-          this.startCity=data[0];
-          console.log(this.destCity)
-          console.log(this.startCity);*/
-        }
-       }, err => {
-     console.log(err);
-   })
+    this.cityService.getCities().subscribe(data => {
+      this.destination_city = data;
+      console.log(data);
+        }, err => {
+      console.log(err);
+    })
   }
-  cityChange(event : any) {
-    this.id_city=event.target.value;
-    }
+
   getStartingCities(){
     this.cityService.getCities().subscribe(data => {
       this.starting_city = data;
@@ -93,8 +119,7 @@ export class AddRideComponent implements OnInit {
   saveRide():void {
     this.Rideservice.createRide(this.myForm.value['destination_date'],this.myForm.value['price'], this.myForm.value['seats'], this.myForm.value['starting_date'], this.myForm.value['destination_city']
     ,this.myForm.value['ride_type'], this.myForm.value['starting_city'], this.motorist).subscribe(data => {
-      this.toastrService.success('Votre trajet a été bien enregistré');  
-      this.router.navigate(["ride"])
+      console.log(data)
     
     });
     this.myForm.reset();

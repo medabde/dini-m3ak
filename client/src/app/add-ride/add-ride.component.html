@@ -19,76 +19,117 @@
                     <div class="card-body">
                       <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">Prix</h6>
+                          <h6 class="mb-0">Prix <span id="etoile">*</span></h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
                             <input type="text" class="form-control" id="price" placeholder="veuillez saisir le prix" formControlName="price">
+                            <ng-container *ngFor="let validation of validationMessages.price">
+                              <div class="text-danger" *ngIf="myForm.get('price').hasError(validation.type) && (myForm.get('price').dirty || myForm.get('price').touched)">
+                                {{ validation.message }}
+                              </div>
+                            </ng-container>
+                        
+                        
                         </div>
                       </div>
                       <hr>
                       <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">Nombre de place</h6>
+                          <h6 class="mb-0">Nombre de place <span id="etoile">*</span></h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
                             <input type="number" class="form-control" id="seats" placeholder="veuillez saisir le nombre de places" formControlName="seats">
-                        </div>
+                            <ng-container *ngFor="let validation of validationMessages.seats">
+                              <div class="text-danger" *ngIf="myForm.get('seats').hasError(validation.type) && (myForm.get('seats').dirty || myForm.get('seats').touched)">
+                                {{ validation.message }}
+                              </div>
+                            </ng-container>
+                          </div>
                       </div>
                       <hr>
                       <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">Date de depart</h6>
+                          <h6 class="mb-0">Date depart <span id="etoile">*</span></h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            <input type="datetime-local" placeholder=" starting_date" name="starting_date" formControlName="starting_date"  id="starting_date" >
-                        </div>
+                            <input type="datetime-local"  name="starting_date" formControlName="starting_date"  id="starting_date" >
+                            <ng-container *ngFor="let validation of validationMessages.starting_date">
+                              <div class="text-danger" *ngIf="myForm.get('starting_date').hasError(validation.type) && (myForm.get('starting_date').dirty || myForm.get('starting_date').touched)">
+                                {{ validation.message }}
+                              </div>
+                            </ng-container>
+                          </div>
                       </div>
                       <hr>
                       <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">Date de destination</h6>
+                          <h6 class="mb-0">Date destination <span id="etoile">*</span></h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            <input type="datetime-local" placeholder="" name="destination_date" formControlName="destination_date"  id="destination_date" >
-                        </div>
+                            <input type="datetime-local" name="destination_date" formControlName="destination_date"  id="destination_date" >
+                            <ng-container *ngFor="let validation of validationMessages.destination_date">
+                              <div class="text-danger" *ngIf="myForm.get('destination_date').hasError(validation.type) && (myForm.get('destination_date').dirty || myForm.get('destination_date').touched)">
+                                {{ validation.message }}
+                              </div>
+                            </ng-container>
+                          </div>
                       </div>
                       <hr>
                      
                       <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">Ville de depart</h6>
+                          <h6 class="mb-0">Ville de depart <span id="etoile">*</span></h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            <select class="form-control ecrituerModal" name="starting_city" id="starting_city" formControleName="starting_city">
-                                <option class="ecrituerModal" *ngFor="let dest of starting_city" [value]="dest.id_city">{{dest.city_name}}</option>
-                              </select>
+                          <select class="form-control ecrituerModal" formControlName="starting_city">
+                            <option value="">Choisir la  ville de depart</option> 
+                            <option class="ecrituerModal" *ngFor="let dest of starting_city" [value]="dest.id_city">{{dest.city_name}}</option>
+                          </select>
+                          <ng-container *ngFor="let validation of validationMessages.starting_city">
+                            <div class="text-danger" *ngIf="myForm.get('starting_city').hasError(validation.type) && (myForm.get('starting_city').dirty || myForm.get('starting_city').touched)">
+                              {{ validation.message }}
+                            </div>
+                          </ng-container>
                         </div>
                       </div>
                       <hr>
                       <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">Ville de destination</h6>
+                          <h6 class="mb-0">Ville de destination <span id="etoile">*</span></h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            <select class="form-control ecrituerModal" name="destination_city" id="destination_city" formControlName="destination_city" (change)="cityChange($event)">
-        
-                                <option class="ecrituerModal" *ngFor="let dest of destination_city" [value]="dest.id_city">{{dest.city_name}}</option>
-                              </select>
+                          <select class="form-control ecrituerModal" formControlName="destination_city">
+                            <option value="">Choisir la  ville de destnation</option> 
+                            <option class="ecrituerModal" *ngFor="let dest of starting_city" [value]="dest.id_city">{{dest.city_name}}</option>
+                          </select>
+                          <ng-container *ngFor="let validation of validationMessages.destination_city">
+                            <div class="text-danger" *ngIf="myForm.get('destination_city').hasError(validation.type) && (myForm.get('destination_city').dirty || myForm.get('destination_city').touched)">
+                              {{ validation.message }}
+                            </div>
+                          </ng-container>
                         </div>
                       </div>
                       <hr>
                       <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">Type Ride</h6>
+                          <h6 class="mb-0">Type Ride <span id="etoile">*</span></h6>
                         </div>
-                        <div class="col-sm-9 text-secondary">
-                            <select class="form-control ecrituerModal" formControlName="ride_type" name="ride_type" id="ride_type">
-                                <option class="ecrituerModal" *ngFor="let r of ride_type" [value]="r.id_type">{{r.type}}</option>
-                              </select>
+                        <div class="col-sm-9 text-secondary" >
+                          <select class="form-control ecrituerModal" formControlName="ride_type">
+                           
+                          <option value="">Choisir le type du trajet</option> 
+                          <option class="ecrituerModal" *ngFor="let r of ride_type" [value]="r.id_type">{{r.type}}</option>
+                        </select>
+                          <ng-container *ngFor="let validation of validationMessages.ride_type">
+                            <div class="text-danger" *ngIf="myForm.get('ride_type').hasError(validation.type) && (myForm.get('ride_type').dirty || myForm.get('ride_type').touched)">
+                              {{ validation.message }}
+                            </div>
+                          </ng-container>
                         </div>
                       </div>
+                      <div> <p id="champs"> * : Champs obligatoire </p></div>
                       </div>
-                      <button type="submit" class="btn btn-primary btn-lg">Ajouter trajet</button>
+                      <button [disabled]="!myForm.valid" type="submit" class="btn btn-primary btn-lg">Ajouter trajet</button>
                     </div>
                  </div>
                      
@@ -100,4 +141,3 @@
 </div>
 
 
-<app-footer></app-footer> 
