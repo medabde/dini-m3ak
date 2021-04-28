@@ -44,8 +44,7 @@ registerLocaleData(localeFr, 'fr');
     CreateRideComponent,
     InfoRideComponent,
     RideComponent,
-    UpdateRideComponent,
-    CreateRideComponent
+    UpdateRideComponent
   ],
   imports: [
     BrowserModule,
