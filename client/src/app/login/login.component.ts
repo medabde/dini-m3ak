@@ -59,7 +59,6 @@ export class LoginComponent implements OnInit {
   }
 
   onFocus(){
-    console.log("im getting focused");
     this.messageError="";
   }
 

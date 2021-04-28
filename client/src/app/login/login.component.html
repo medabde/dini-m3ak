@@ -13,9 +13,9 @@
           <h1 class="text-left">Se connecter à<img style="margin-bottom: 20px;" src="../../assets/image/dini-m3ak-logo.png" width="200px" height="70px"></h1>
           <h3>Entrez vos informations ci-dessous</h3>
           <label for="email">Email</label>
-          <input id="email" class="form-control" type="email" [pattern]="emailRegex"  [(ngModel)]="email" required #emailForm="ngModel">
+          <input id="email" class="form-control" type="email" [pattern]="emailRegex" (focus)="onFocus()"  [(ngModel)]="email" required #emailForm="ngModel">
           <label for="password">Mot de passe</label>
-          <input id="password" class="form-control" type="{{ isVisible ? 'text' : 'password'}}" [(ngModel)]="password" minlength="8" required #passwordForm="ngModel">
+          <input id="password" class="form-control" type="{{ isVisible ? 'text' : 'password'}}" (focus)="onFocus()" [(ngModel)]="password" minlength="8" required #passwordForm="ngModel">
           <span class="show-password" (click)="isVisible = !isVisible">
             <fa-icon [icon]="faeye"></fa-icon>
           </span> <br>  
