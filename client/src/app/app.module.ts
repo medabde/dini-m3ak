@@ -27,6 +27,9 @@ import{MatDialogRef} from '@angular/material/dialog';
 import { ToastModule } from 'ng-uikit-pro-standard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 // the second parameter 'fr' is optional
 registerLocaleData(localeFr, 'fr');
@@ -58,7 +61,9 @@ registerLocaleData(localeFr, 'fr');
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-
+    MatCardModule,
+    MatButtonModule,
+    MatButtonToggleModule
   ],
   providers:[DatePipe,{ provide: LOCALE_ID, useValue: "fr-FR" },
   { provide: MAT_DIALOG_DATA, useValue: {} },

@@ -1,150 +1,243 @@
 
 ngb-carousel img {
-    height: 110vh;
-    background-size: cover;
-    outline: none;
-    display: flex; 
-    background-position: center; 
-    justify-content: center;
-    align-items: center;
-    font-family: sans-serif;
+  height: 110vh;
+  background-size: cover;
+  outline: none;
+  display: flex; 
+  background-position: center; 
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  width: 100%;
+
 }
 h1{
-    color: white;
-    margin-bottom: 70px;
-    font-size: 45px;
-    letter-spacing: 2px;
-    text-align: center;
+  color: white;
+  margin-bottom: 70px;
+  font-size: 45px;
+  letter-spacing: 2px;
+  text-align: center;
+  }
+ input{
+height: 70px;
+background: #fff;
+border-radius: 0;
+border: 0;
+display: block;
+width: 100%;
+padding: 10px 20px 10px 45px;
+font-size: 16px;
+color: #555;
+font-weight: 400;
+font-family: 'Poppins', sans-serif;
+  }
+  .search-field.first{
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    width: 190px;
+  }
+  .search-field.second{
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    width: 190px;
+  }
+  .search-field.third{
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+  }
+  .search-field.fouth{
+    min-width: 190px;
+    max-width: 190px;
+    border-right: 0;
+  }
+  .search-field.fifth{
+    min-width: 190px;
+    max-width: 190px;
+    padding-left: 10px;
+    border-right: 0;
+  }
+select{
+height: 70px;
+background: #fff;
+border-radius: 0;
+border: 0;
+display: block;
+width: 100%;
+padding: 10px 20px 10px 45px;
+font-size: 16px;
+color: #555;
+font-weight: 400;
+font-family: 'Poppins', sans-serif;
+  
+  }
+  option{
+    background: #fff;
+    border-radius: 0;
+    border: 0;
+    height: 70px;
+    color: #666;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+    padding: 10px 32px 10px 45px;
+    border-radius: 0;
+  }
+.choices__inner .choices__list.choices__list--single {
+display: -ms-flexbox;
+display: flex;
+padding: 0;
+-ms-flex-align: center;
+ align-items: center;
+height: 100%;
+font-size: 16px;
+  }
+  .choices__inner .choices__item.choices__item--selectable.choices__placeholde{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+    height: 100%;
+    opacity: 1;
+    color: #9a9a9a;
+    text-transform: uppercase;
+  }
+  input.placeholder {
+    color: #9a9a9a;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  .search-field{
+   position: relative;
+   border-right: 1px solid #ddd;
+  }
+  form .search_form .search-field input:hover,form .search_form .search-field input:focus{
+    box-shadow: none;
+    outline: 0;
+  }
+  .search-btn{
+    height: 70px;
+    width: 100%;
+    background: #b78a62;
+    white-space: nowrap;
+    border-radius: .5px;
+    font-size: 20px;
+    color: #fff;
+    transition: all .2s ease-out, color .2s ease-out;
+    border: 0;
+    cursor: pointer;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+  }
+  .search-btn:hover{
+    background: #af7d51;
+  }
+  .search_form{  
+    width: 100%;
+    max-width: 1190px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 16px;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+   
+    .section-padding-100-50 {
+      padding-top: 100px;
+      padding-bottom: 50px;
+      padding: 100px 35px;
+      position: relative;
+      z-index: 1;
+  }
+  .section-heading h4 {
+    font-weight: 800;
+    line-height: 1;
+    color:black;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+  .bg-overlay-9 {
+    position: relative;
+    z-index: 1;
+}
+    .cards{
+      align-content: center;
     }
-   input{
-  height: 70px;
-  background: #fff;
-  border-radius: 0;
-  border: 0;
-  display: block;
-  width: 100%;
-  padding: 10px 20px 10px 45px;
-  font-size: 16px;
-  color: #555;
-  font-weight: 400;
-  font-family: 'Poppins', sans-serif;
-    }
-    .search-field.first{
-      -ms-flex-positive: 1;
-      flex-grow: 1;
-      width: 190px;
-    }
-    .search-field.second{
-      -ms-flex-positive: 1;
-      flex-grow: 1;
-      width: 190px;
-    }
-    .search-field.third{
-      -ms-flex-positive: 1;
-      flex-grow: 1;
-    }
-    .search-field.fouth{
-      min-width: 190px;
-      max-width: 190px;
-      border-right: 0;
-    }
-    .search-field.fifth{
-      min-width: 190px;
-      max-width: 190px;
-      padding-left: 10px;
-      border-right: 0;
-    }
- select{
-  height: 70px;
-  background: #fff;
-  border-radius: 0;
-  border: 0;
-  display: block;
-  width: 100%;
-  padding: 10px 20px 10px 45px;
-  font-size: 16px;
-  color: #555;
-  font-weight: 400;
-  font-family: 'Poppins', sans-serif;
-    
-    }
-    option{
+    .example-card {
+      margin: 10px 2%;
+      margin-bottom: 50px;
+      z-index: 1;
+      border-radius: 4px;
       background: #fff;
-      border-radius: 0;
-      border: 0;
-      height: 70px;
-      color: #666;
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-align: center;
-          align-items: center;
-      padding: 10px 32px 10px 45px;
-      border-radius: 0;
-    }
-    .choices__inner .choices__list.choices__list--single {
-  display: -ms-flexbox;
-  display: flex;
-  padding: 0;
-  -ms-flex-align: center;
-   align-items: center;
-  height: 100%;
-  font-size: 16px;
-    }
-    .choices__inner .choices__item.choices__item--selectable.choices__placeholde{
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-align: center;
-          align-items: center;
-      height: 100%;
-      opacity: 1;
-      color: #9a9a9a;
-      text-transform: uppercase;
-    }
-    input.placeholder {
-      color: #9a9a9a;
-      font-size: 16px;
-      font-weight: 400;
-      text-transform: uppercase;
-    }
-    .search-field{
-     position: relative;
-     border-right: 1px solid #ddd;
-    }
-    form .search_form .search-field input:hover,form .search_form .search-field input:focus{
-      box-shadow: none;
-      outline: 0;
-    }
-    .search-btn{
-      height: 70px;
-      width: 100%;
-      background: #b78a62;
-      white-space: nowrap;
-      border-radius: .5px;
-      font-size: 20px;
-      color: #fff;
-      transition: all .2s ease-out, color .2s ease-out;
-      border: 0;
+      box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+      transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+      padding: 14px 80px 18px 36px;
       cursor: pointer;
-      font-weight: 400;
-      font-family: 'Poppins', sans-serif;
+      -webkit-transition-duration: 500ms;
+      transition-duration: 500ms;
+
+      .example-header-image {
+        background-image: url('../../assets/image/NicePng_businessman-clipart-png_1446162.png');
+        background-size: cover;
+      }
+      &:nth-child(2n+2) {
+        .example-header-image {
+          background-image: url('../../assets/image/NicePng_businessman-clipart-png_1446162.png');
+        }
+      }
     }
-    .search-btn:hover{
+    .example-card:hover{
+      transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+    }
+    mat-card-content span  {
+      display: inline-block;
+      width: 60px;
+      position: relative;
+      margin-bottom: 0.625rem;
+      top: -35px;
+      left: 115px; 
+      /* Text */
+      color: #E35354;
+      text-align: center;
+      font-weight: bold;
+    }
+    mat-card-content sub{
+   color: grey;
+   top: -27px;
+   left: 110px;
+   font-family: italic;
+   font-size: 10px;
+   
+ }
+    mat-card-actions{
+      display: block;
+      line-height: 60px;
+      text-align: center;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+    button {
+    background: #b78a62;
+    border-radius: .5px;
+    font-size: 20px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 400;
+    display: inline-block;
+    text-decoration: none;
+
+    }
+    button:hover{
       background: #af7d51;
     }
-    .search_form{  
-      width: 100%;
-      max-width: 1190px;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 16px;
-      display: -ms-flexbox;
-      display: flex;
-      width: 100%;
-      -ms-flex-pack: justify;
-      justify-content: space-between;
-      -ms-flex-align: center;
-      align-items: center;
-    }
-     
     @media screen and (max-width: 992px) {
       form h1{
         font-size: 50px;

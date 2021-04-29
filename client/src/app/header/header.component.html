@@ -1,153 +1,99 @@
 <app-navbar></app-navbar>
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500" rel="stylesheet" />
 
-    <ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
-        <ng-template ngbSlide *ngFor="let image of images">
-          <div class="picsum-img-wrapper">
-            <img [src]="image" alt="Random slide">
-          </div>
-  <div class="carousel-caption d-flex h-100  align-items-center justify-content-center">
-  <form >           
-     <h1>Trouvez ou offrez un covoiturage ! ! </h1>
-    <div class="search_form">
-    <div class="search-field  first">
-      <input type="text" id="form11Example1" placeholder="Depart" />          
-        </div>
-        <div class="search-field second">
-          <div class="form-outline">    
-            <input type="text" id="form11Example3"  placeholder="Destination "/>
-          </div>
-        </div>
-        <div class="search-field third">
-          <div class="form-outline">
-            <input type="date" id="form11Example3" placeholder="" />     
-          </div>
-        </div>
-        <div class="search-field fouth">
-          <select class="choices__inner" name="choices-single-defaul">
-            <option selected>Persone...</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </select>
-      </div>
-        <div class="search-field fifth">
-          <button type="submit" class="search-btn"><i class="fas fa-search"></i>
-            rechercher</button>
-        </div>
-     </div>    
-   </form>   
+<ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+  <ng-template ngbSlide *ngFor="let image of images">
+    <div class="picsum-img-wrapper">
+      <img [src]="image" alt="Random slide">
+    </div>
+<div class="carousel-caption d-flex h-100  align-items-center justify-content-center">
+<form >           
+<h1>Trouvez ou offrez un covoiturage ! ! </h1>
+<div class="search_form">
+<div class="search-field  first">
+<input type="text" id="form11Example1" placeholder="Depart" />          
   </div>
-      </ng-template>
-      </ngb-carousel>
-
-
-      <div class="container-fluid mt--7" style="margin-top: 15px;">
-        
-        <div class="row">
-          <div class="col">
-            <div class="card shadow">
-              <div class="card-header border-0">
-                <h3 class="mb-0">Trajets</h3>
-              </div>
-              <div class="table-responsive">
-                <table class="table align-items-center table-flush">
-                  <thead class="thead-light">
-                    <tr>
-                      <th scope="col">Depart</th>
-                      <th scope="col">Date de depart</th>
-                      <th scope="col">Destination</th>
-                      <th scope="col">Date de destination </th>
-                      <th scope="col">Automobiliste</th>
-                      <th scope="col">Nombre de place</th>
-                      <th scope="col">Type</th>
-                      <th scope="col">Prix(DH)</th>
-                      <th scope="col"></th>
-                      <th scope="col"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let ride of ridesInPage">
-                      <th scope="row">
-                        {{ride.starting_city_name}}
-                      </th>
-                      <th scope="row">
-                        {{ride.starting_date | date:"dd/MM/yyyy 'á' HH:mm"}}
-                      </th>
-                      <th scope="row">
-                        {{ride.destination_city_name}}
-                      </th>
-                      <th scope="row">
-                        {{ride.destination_date | date:"dd/MM/yyyy 'á' HH:mm"}}
-                      </th>
-                      <th scope="row">
-                        {{ride.motorist}}
-                      </th>
-                      <th scope="row">
-                        {{ride.nbPassengers}} / {{ride.seats}}
-                      </th>
-                      <th scope="row">
-                        {{ride.ride_type_name}}
-                      </th>
-                      <th scope="row">
-                        {{ride.price}}
-                      </th>
-                      <th scope="row">
-                        <a (click)="updateRide(ride.id_ride,$event)" href="" mdbWavesEffect *ngIf="ride.user.id_user == userId;else notOwnerBlock"><i class="fas fa-lg fa-edit"></i></a>
-                        <ng-template #notOwnerBlock>
-                          <p *ngIf="ride.nbPassengers == ride.seats && !ride.isUserJoined; else joinBlock">Full</p>
-                          <ng-template #joinBlock>
-                            <a (click)="unJoinRide(ride.id_ride,$event)" href="" mdbWavesEffect *ngIf="ride.isUserJoined else plusBlock"><i class="fas fa-lg fa-minus"></i></a>
-                            <ng-template #plusBlock>
-                              <a (click)="joinRide(ride.id_ride,$event)" href="" mdbWavesEffect><i class="fas fa-lg fa-plus"></i></a>
-                            </ng-template>
-                          </ng-template>
-                        </ng-template>
-
-                      </th>
-                      <th scope="row">
-                        <a mdbWavesEffect (click)="infoRide(ride.id_ride,$event)" href=""><i class="fas fa-lg fa-eye"></i></a>
-                      </th>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="card-footer py-4">
-                <nav aria-label="...">
-                  <!-- <ul class="pagination justify-content-end mb-0">
-                    <li class="page-item disabled">
-                      <a class="page-link" href="javascript:void(0)" tabindex="-1">
-                        <i class="fas fa-angle-left"></i>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                    </li>
-                    <li class="page-item active">
-                      <a class="page-link" href="javascript:void(0)">1</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="javascript:void(0)">2 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                    <li class="page-item">
-                      <a class="page-link" href="javascript:void(0)">
-                        <i class="fas fa-angle-right"></i>
-                        <span class="sr-only">Next</span>
-                      </a>
-                    </li>
-                  </ul> -->
-                  <ngb-pagination class="pagination justify-content-end mb-0" [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="handlePageChange()">
-                  </ngb-pagination>
-                </nav>
-              </div>
+  <div class="search-field second">
+    <div class="form-outline">    
+      <input type="text" id="form11Example3"  placeholder="Destination "/>
+    </div>
+  </div>
+  <div class="search-field third">
+    <div class="form-outline">
+      <input type="date" id="form11Example3" placeholder="" />     
+    </div>
+  </div>
+  <div class="search-field fouth">
+    <select class="choices__inner" name="choices-single-defaul">
+      <option selected>Persone...</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
+</div>
+  <div class="search-field fifth">
+    <button type="submit" class="search-btn"><i class="fas fa-search"></i>
+      rechercher</button>
+  </div>
+</div>    
+</form>   
+</div>
+</ng-template>
+</ngb-carousel>
+      <div class="card-deck bg-overlay-9 section-padding-100-50">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+                <div class="section-heading text-center">
+                    <span></span>
+                    <h4>Top Trajets pour joindre </h4>
+                    <p>Trouvez rapidement un covoiturage à proximité parmi les millions de trajets proposés.</p>
+                </div>
             </div>
-          </div>
         </div>
+        <div class="row">
+          <div class="col-12 col-lg-6" *ngFor="let ride of ridesInPage">
+            <mat-card class="example-card d-sm-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s" >
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image "></div>
+            <mat-card-title>{{ride.motorist}}</mat-card-title>
+            <mat-card-subtitle><span style="font-weight: bold;">{{ride.starting_city_name}} </span><strong style="color: grey;font-size: 13px;  font-style: italic;
+              "><i class="far fa-calendar"></i>{{ride.starting_date | date:" d MMMM, y 'á' HH:mm"}}</strong></mat-card-subtitle>
+            <mat-card-subtitle><img src="https://www.flaticon.com/premium-icon/icons/svg/1492/1492713.svg" style="width: 30px;"></mat-card-subtitle>
+            <mat-card-subtitle><span style="font-weight: bold;">{{ride.destination_city_name}}</span> <strong style="color: grey;font-size: 13px;  font-style: italic;
+              "><i class="far fa-calendar"></i> {{ride.destination_date | date:"d MMMM, y 'á' HH:mm"}}</strong></mat-card-subtitle>
+            <mat-card-subtitle> </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content >
+            <p> <span>{{ride.price}}DH</span><sub>/personne</sub></p>
+          </mat-card-content>
+          <mat-card-actions >
+            <button mat-button (click)="updateRide(ride.id_ride,$event)" href="" mdbWavesEffect *ngIf="ride.user.id_user == userId;else notOwnerBlock"><i class="fas fa-lg fa-edit"></i></button>
+            <ng-template #notOwnerBlock>
+              <p *ngIf="ride.nbPassengers == ride.seats && !ride.isUserJoined; else joinBlock">Full</p>
+              <ng-template #joinBlock>
+                <button mat-button (click)="unJoinRide(ride.id_ride,$event)" href="" mdbWavesEffect *ngIf="ride.isUserJoined else plusBlock"><i class="fas fa-lg fa-minus"></i></button>
+                <ng-template #plusBlock>
+                  <button mat-button (click)="joinRide(ride.id_ride,$event)" href="" mdbWavesEffect><i class="fas fa-lg fa-plus"></i></button>
+                </ng-template>
+              </ng-template>
+            </ng-template>
+            <button mat-button (click)="infoRide(ride.id_ride,$event)" href="" >DEATILS</button>
+          </mat-card-actions>
+        </mat-card> 
+          </div> 
+        </div>
+
+         <ngb-pagination class="pagination justify-content-center "  [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="handlePageChange()">
+        </ngb-pagination> 
+        </div>
+         
       </div>
+     
 
 
 
-
-      <app-team></app-team>
+      <!--<app-team></app-team>-->
       <app-footer></app-footer>
     
   

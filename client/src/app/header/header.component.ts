@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
-import { faPlus, faMinus,faEye } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faMinus,faEye,faMap } from '@fortawesome/free-solid-svg-icons';
 import decode from 'jwt-decode';
 import { ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
   join = faPlus;
   unjoin =  faMinus;
   viewMore = faEye;
+  road=faMap;
   rides:Ride[] = [];
 
   userId:number = -1;
@@ -27,7 +28,7 @@ export class HeaderComponent implements OnInit {
 
 
   page = 1;
-  pageSize = 5;
+  pageSize = 4;
   collectionSize = 0;
 
 
