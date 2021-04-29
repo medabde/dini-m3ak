@@ -77,6 +77,10 @@ export class RegisterComponent implements OnInit {
   });
  }
 
+ onFocus(){
+  this.messageError="";
+}
+
  /**
   * Register
   */

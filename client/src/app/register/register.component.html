@@ -12,18 +12,18 @@
         <img style="margin-left: -18px;" class="text-left" src="../../assets/image/dini-m3ak-logo.png" width="200px" height="70px">
         <h3>Creer un nouveau compte</h3>
         <label for="firstname">Prenom</label>
-        <input id="firstname" class="form-control" type="text" [(ngModel)]="firstname" required minlength="4" #firstnameForm="ngModel">
+        <input id="firstname" class="form-control" type="text" (focus)="onFocus()" [(ngModel)]="firstname" required minlength="4" #firstnameForm="ngModel">
         <label for="lastname">Nom</label>
-        <input id="lastname" class="form-control" type="text" [(ngModel)]="lastname" required minlength="4" #lastnameForm="ngModel">
+        <input id="lastname" class="form-control" type="text" (focus)="onFocus()" [(ngModel)]="lastname" required minlength="4" #lastnameForm="ngModel">
         <label for="email">Email</label>
-        <input id="email" class="form-control" type="email" [pattern]="emailRegex"  [(ngModel)]="email" required #emailForm="ngModel">
+        <input id="email" class="form-control" type="email" (focus)="onFocus()" [pattern]="emailRegex"  [(ngModel)]="email" required #emailForm="ngModel">
         <label for="password">Mot de passe</label>
-        <input id="password" class="form-control" type="{{ isVisible ? 'text' : 'password'}}" [(ngModel)]="password" minlength="8" required #passwordForm="ngModel">
+        <input id="password" class="form-control" (focus)="onFocus()" type="{{ isVisible ? 'text' : 'password'}}" [(ngModel)]="password" minlength="8" required #passwordForm="ngModel">
         <span class="show-password" (click)="isVisible = !isVisible">
           <fa-icon [icon]="faeye"></fa-icon>
         </span>       
         <label for="confirm-password">Confirmez le mot de passe</label>
-        <input id="confirm-password" class="form-control" type="{{ isConfirmationVisible ? 'text' : 'password'}}" [(ngModel)]="confirmPassword"  minlength="8" required #confirmPasswordForm="ngModel">
+        <input id="confirm-password" (focus)="onFocus()" class="form-control" type="{{ isConfirmationVisible ? 'text' : 'password'}}" [(ngModel)]="confirmPassword"  minlength="8" required #confirmPasswordForm="ngModel">
         <span class="show-password" (click)="isConfirmationVisible = !isConfirmationVisible">
           <fa-icon [icon]="faeye"></fa-icon>
         </span><br>
