@@ -7,20 +7,20 @@
       <img [src]="image" alt="Random slide">
     </div>
 <div class="carousel-caption d-flex h-100  align-items-center justify-content-center">
-<form >           
+<form >
 <h1>Trouvez ou offrez un covoiturage ! ! </h1>
 <div class="search_form">
 <div class="search-field  first">
-<input type="text" id="form11Example1" placeholder="Depart" />          
+<input type="text" id="form11Example1" placeholder="Depart" />
   </div>
   <div class="search-field second">
-    <div class="form-outline">    
+    <div class="form-outline">
       <input type="text" id="form11Example3"  placeholder="Destination "/>
     </div>
   </div>
   <div class="search-field third">
     <div class="form-outline">
-      <input type="date" id="form11Example3" placeholder="" />     
+      <input type="date" id="form11Example3" placeholder="" />
     </div>
   </div>
   <div class="search-field fouth">
@@ -35,8 +35,8 @@
     <button type="submit" class="search-btn"><i class="fas fa-search"></i>
       rechercher</button>
   </div>
-</div>    
-</form>   
+</div>
+</form>
 </div>
 </ng-template>
 </ngb-carousel>
@@ -80,20 +80,19 @@
             </ng-template>
             <button mat-button (click)="infoRide(ride.id_ride,$event)" href="" >DEATILS</button>
           </mat-card-actions>
-        </mat-card> 
-          </div> 
+        </mat-card>
+          </div>
         </div>
 
          <ngb-pagination class="pagination justify-content-center "  [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="handlePageChange()">
-        </ngb-pagination> 
+        </ngb-pagination>
         </div>
-         
+
       </div>
-     
+
 
 
 
       <!--<app-team></app-team>-->
       <app-footer></app-footer>
-    
-  
+
