@@ -1,23 +1,44 @@
 
-ngb-carousel img {
-  height: 110vh;
-  background-size: cover;
-  outline: none;
-  display: flex; 
-  background-position: center; 
+.header{
+  min-height: 110vh;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
   justify-content: center;
+  -ms-flex-align: center;
   align-items: center;
-  font-family: sans-serif;
+  font-family: 'Poppins', sans-serif;
+  background-size: cover;
+  background-position: center center;
+  background-image: url('../../assets/image/Carpool.png');
+  padding: 15px; 
   width: 100%;
 
 }
-h1{
-  color: white;
-  margin-bottom: 70px;
-  font-size: 45px;
-  letter-spacing: 2px;
+.header form {
+  width: 100%;
+  max-width: 1190px;
+}
+
+.header form legend {
+  font-size: 60px;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 60px;
+  font-weight: 400;
   text-align: center;
-  }
+}
+.header form .search_form{  
+  background: rgba(0, 0, 0, 0.5);
+padding: 16px;
+display: -ms-flexbox;
+display: flex;
+width: 100%;
+-ms-flex-pack: justify;
+    justify-content: space-between;
+-ms-flex-align: center;
+    align-items: center;
+}
  input{
 height: 70px;
 background: #fff;
@@ -132,19 +153,6 @@ font-size: 16px;
   }
   .search-btn:hover{
     background: #af7d51;
-  }
-  .search_form{  
-    width: 100%;
-    max-width: 1190px;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 16px;
-    display: -ms-flexbox;
-    display: flex;
-    width: 100%;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -ms-flex-align: center;
-    align-items: center;
   }
    
     .section-padding-100-50 {
