@@ -12,10 +12,10 @@ import { User } from '../models/User';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
- 
+
 })
 export class HeaderComponent implements OnInit {
-  title = 'appBootstrap';  
+  title = 'appBootstrap';
   join = faPlus;
   unjoin =  faMinus;
   viewMore = faEye;
@@ -32,13 +32,13 @@ export class HeaderComponent implements OnInit {
   collectionSize = 0;
 
 
-    
-  model :any;  
+
+  model :any;
   name :string='';
 
   showNavigationArrows = false;
   showNavigationIndicators = false;
-  images = [ "assets/image/Carpool.png", "https://www.2iibm-tech.fr/images/site-de-covoiturage-france-3.jpg","assets/image/Carpool.png"];
+  images = [ "assets/image/voiture1.jpg", "assets/image/voiture5.jpg","assets/image/voiture3.jpg"];
 
   constructor(config: NgbCarouselConfig,private router :Router,private rideService:RideService,private toastrService: ToastrService) {
     // customize default values of carousels used by this component tree
@@ -55,10 +55,10 @@ export class HeaderComponent implements OnInit {
       this.collectionSize = this.rides.length;
       this.rides.forEach(r =>{
         r.isUserJoined = this.isUserJoined(r.passengers);
-      }) 
+      })
       this.handlePageChange();
 
-      
+
     },error =>{console.log(error)});
 
   }
@@ -66,7 +66,7 @@ export class HeaderComponent implements OnInit {
   private isUserJoined(passengers:User[]):boolean{
     const decodedToken:any = decode(JSON.parse(localStorage.getItem('profile')|| "").token);
     const userId = decodedToken.userId;
-    
+
     for (let index = 0; index < passengers.length; index++) {
         if(passengers[index].id_user == userId) {
             return true;
@@ -75,7 +75,7 @@ export class HeaderComponent implements OnInit {
 
     return false;
   }
- 
+
 
   ngOnInit(): void {
   }
@@ -86,7 +86,7 @@ export class HeaderComponent implements OnInit {
       this.toastrService.success('Vous avez joindre ce trajet avec succès!');
       for (let index = 0; index < this.rides.length; index++) {
         if(this.rides[index].id_ride == data.id_ride) {
-         
+
           this.rides[index] = data;
           this.rides[index].isUserJoined = this.isUserJoined(this.rides[index].passengers);
         }
@@ -112,8 +112,8 @@ export class HeaderComponent implements OnInit {
     this.ridesInPage = this.rides
       .map((ride, i) => ({id: i + 1, ...ride}))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-  
-    
+
+
   }
 
   infoRide(ride_id:any,event:Event){
@@ -125,5 +125,5 @@ export class HeaderComponent implements OnInit {
     event.preventDefault();
     this.router.navigate(["update/"+ride_id]);
   }
- 
+
 }
