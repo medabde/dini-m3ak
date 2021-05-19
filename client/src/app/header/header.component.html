@@ -1,39 +1,35 @@
 <app-navbar></app-navbar>
-<link
-  href="https://fonts.googleapis.com/css?family=Poppins:300,400,500"
-  rel="stylesheet"
-/>
-
-<ngb-carousel
-  *ngIf="images"
-  [showNavigationArrows]="showNavigationArrows"
-  [showNavigationIndicators]="showNavigationIndicators"
->
-  <ng-template ngbSlide *ngFor="let image of images">
-    <div class="picsum-img-wrapper">
-      <img [src]="image" alt="Random slide" />
-    </div>
-    <div
-      class="
-        carousel-caption
-        d-flex
-        h-100
-        align-items-center
-        justify-content-center
-      "
-    >
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="colorlib.com" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="header">
       <form>
-        <h1>Trouvez ou offrez un covoiturage ! !</h1>
+        <fieldset>
+          <legend>Trouvez ou offrez un covoiturage !</legend>
+        </fieldset>
         <div class="search_form">
           <div class="search-field first">
-            <input type="text" id="form11Example1" placeholder="Depart" />
+            <input type="text" id="form11Example1" placeholder="Dèpart..." />
           </div>
           <div class="search-field second">
             <div class="form-outline">
               <input
                 type="text"
                 id="form11Example3"
-                placeholder="Destination "
+                placeholder="Destination.. "
               />
             </div>
           </div>
@@ -51,128 +47,137 @@
             </select>
           </div>
           <div class="search-field fifth">
-            <button type="submit" (click)="search()" class="search-btn">
+            <button type="submit" class="search-btn">
               <i class="fas fa-search"></i> rechercher
             </button>
           </div>
         </div>
       </form>
     </div>
-  </ng-template>
-</ngb-carousel>
-<div class="card-deck bg-overlay-9 section-padding-100-50">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="section-heading text-center">
-          <span></span>
-          <h4>Top Trajets pour joindre</h4>
-          <p>
-            Trouvez rapidement un covoiturage à proximité parmi les millions de
-            trajets proposés.
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 col-lg-6" *ngFor="let ride of ridesInPage">
-        <mat-card
-          class="example-card d-sm-flex align-items-center wow fadeInUpBig"
-          data-wow-delay="0.2s"
-        >
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>{{ ride.motorist }}</mat-card-title>
-            <mat-card-subtitle
-              ><span style="font-weight: bold"
-                >{{ ride.starting_city_name }} </span
-              ><strong style="color: grey; font-size: 13px; font-style: italic"
-                ><i class="far fa-calendar"></i
-                >{{ ride.starting_date | date: " d MMMM, y 'á' HH:mm" }}</strong
-              ></mat-card-subtitle
-            >
-            <mat-card-subtitle
-              ><img
-                src="https://www.flaticon.com/premium-icon/icons/svg/1492/1492713.svg"
-                style="width: 30px"
-            /></mat-card-subtitle>
-            <mat-card-subtitle
-              ><span style="font-weight: bold">{{
-                ride.destination_city_name
-              }}</span>
-              <strong style="color: grey; font-size: 13px; font-style: italic"
-                ><i class="far fa-calendar"></i>
-                {{
-                  ride.destination_date | date: "d MMMM, y 'á' HH:mm"
-                }}</strong
-              ></mat-card-subtitle
-            >
-            <mat-card-subtitle> </mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>
-              <span>{{ ride.price }}DH</span><sub>/personne</sub>
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button
-              mat-button
-              (click)="updateRide(ride.id_ride, $event)"
-              href=""
-              mdbWavesEffect
-              *ngIf="ride.user.id_user == userId; else notOwnerBlock"
-            >
-              <i class="fas fa-lg fa-edit"></i>
-            </button>
-            <ng-template #notOwnerBlock>
-              <p
-                *ngIf="
-                  ride.nbPassengers == ride.seats && !ride.isUserJoined;
-                  else joinBlock
-                "
-              >
-                Full
+    <div class="card-deck bg-overlay-9 section-padding-100-50">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="section-heading text-center">
+              <span></span>
+              <h4>Top Trajets pour joindre</h4>
+              <p>
+                Trouvez rapidement un covoiturage à proximité parmi les millions
+                de trajets proposés.
               </p>
-              <ng-template #joinBlock>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-12 col-lg-6" *ngFor="let ride of ridesInPage">
+            <mat-card
+              class="example-card d-sm-flex align-items-center wow fadeInUpBig"
+              data-wow-delay="0.2s"
+            >
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{ ride.motorist }}</mat-card-title>
+                <mat-card-subtitle
+                  ><span style="font-weight: bold"
+                    >{{ ride.starting_city_name }} </span
+                  ><strong
+                    style="color: grey; font-size: 13px; font-style: italic"
+                    ><i class="far fa-calendar"></i
+                    >{{
+                      ride.starting_date | date: " d MMMM, y 'á' HH:mm"
+                    }}</strong
+                  ></mat-card-subtitle
+                >
+                <mat-card-subtitle
+                  ><img
+                    src="https://www.flaticon.com/premium-icon/icons/svg/1492/1492713.svg"
+                    style="width: 30px"
+                /></mat-card-subtitle>
+                <mat-card-subtitle
+                  ><span style="font-weight: bold"
+                    >{{ ride.destination_city_name }}
+                  </span>
+                  <strong
+                    style="color: grey; font-size: 13px; font-style: italic"
+                    ><i class="far fa-calendar"></i>
+                    {{
+                      ride.destination_date | date: "d MMMM, y 'á' HH:mm"
+                    }}</strong
+                  ></mat-card-subtitle
+                >
+                <mat-card-subtitle> </mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <p>
+                  <span>{{ ride.price }}DH</span><sub>/personne</sub>
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
                 <button
                   mat-button
-                  (click)="unJoinRide(ride.id_ride, $event)"
+                  (click)="updateRide(ride.id_ride, $event)"
                   href=""
                   mdbWavesEffect
-                  *ngIf="ride.isUserJoined; else plusBlock"
+                  *ngIf="ride.user.id_user == userId; else notOwnerBlock"
                 >
-                  <i class="fas fa-lg fa-minus"></i>
+                  <i class="fas fa-lg fa-edit"></i>
                 </button>
-                <ng-template #plusBlock>
-                  <button
-                    mat-button
-                    (click)="joinRide(ride.id_ride, $event)"
-                    href=""
-                    mdbWavesEffect
+                <ng-template #notOwnerBlock>
+                  <p
+                    *ngIf="
+                      ride.nbPassengers == ride.seats && !ride.isUserJoined;
+                      else joinBlock
+                    "
                   >
-                    <i class="fas fa-lg fa-plus"></i>
-                  </button>
+                    Full
+                  </p>
+                  <ng-template #joinBlock>
+                    <button
+                      mat-button
+                      (click)="unJoinRide(ride.id_ride, $event)"
+                      href=""
+                      mdbWavesEffect
+                      *ngIf="ride.isUserJoined; else plusBlock"
+                    >
+                      <i class="fas fa-lg fa-minus"></i>
+                    </button>
+                    <ng-template #plusBlock>
+                      <button
+                        mat-button
+                        (click)="joinRide(ride.id_ride, $event)"
+                        href=""
+                        mdbWavesEffect
+                      >
+                        <i class="fas fa-lg fa-plus"></i>
+                      </button>
+                    </ng-template>
+                  </ng-template>
                 </ng-template>
-              </ng-template>
-            </ng-template>
-            <button mat-button (click)="infoRide(ride.id_ride, $event)" href="">
-              DEATILS
-            </button>
-          </mat-card-actions>
-        </mat-card>
+                <button
+                  mat-button
+                  (click)="infoRide(ride.id_ride, $event)"
+                  href=""
+                >
+                  DETAILS
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+
+        <ngb-pagination
+          class="pagination justify-content-center"
+          [collectionSize]="collectionSize"
+          [(page)]="page"
+          [pageSize]="pageSize"
+          (pageChange)="handlePageChange()"
+        >
+        </ngb-pagination>
       </div>
     </div>
 
-    <ngb-pagination
-      class="pagination justify-content-center"
-      [collectionSize]="collectionSize"
-      [(page)]="page"
-      [pageSize]="pageSize"
-      (pageChange)="handlePageChange()"
-    >
-    </ngb-pagination>
-  </div>
-</div>
-
-<!--<app-team></app-team>-->
-<app-footer></app-footer>
+    <!--<app-team></app-team>-->
+    <app-footer></app-footer>
+  </body>
+</html>
