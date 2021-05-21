@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping("app/api/users")
 public class UserController {
 
@@ -44,7 +44,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @PutMapping("/")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Map<String,String>> updateUser(@RequestBody User userDetails, HttpServletRequest httpRequest){
         long id = (Integer) httpRequest.getAttribute("userId");
         if (id != userDetails.getId_user() && !((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
@@ -64,7 +64,7 @@ public class UserController {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Map<String, Boolean>> DeleteUser(@PathVariable Long id,HttpServletRequest httpRequest){
         if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
