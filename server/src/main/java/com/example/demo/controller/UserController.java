@@ -45,8 +45,7 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Map<String,String>> updateUser(@RequestBody User userDetails, HttpServletRequest httpRequest){
-        long id = (Integer) httpRequest.getAttribute("userId");
+    public ResponseEntity<User> updateUser(@PathVariable long id, @RequestBody User userDetails, HttpServletRequest httpRequest){
         if (id != userDetails.getId_user() && !((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
         User user = userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no user with id :" +id ));
@@ -58,9 +57,7 @@ public class UserController {
         user.setCIN(userDetails.getCIN());
 
         User updateUser = userRepository.save(user);
-
-
-        return new ResponseEntity<>(Utils.generateJWTToken(updateUser), HttpStatus.OK);
+        return ResponseEntity.ok(updateUser);
     }
 
 

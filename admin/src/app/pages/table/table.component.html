@@ -8,6 +8,7 @@
         <div class="table-responsive">
           <table class="table">
             <thead class=" text-primary">
+              <th>Id</th>
               <th>
                 first name
               </th>
@@ -26,6 +27,7 @@
             </thead>
             <tbody>
               <tr *ngFor = "let user of users ">
+                <td>{{user.id_user}}</td>
                 <td>
                   {{user.first_name}}
                 </td>

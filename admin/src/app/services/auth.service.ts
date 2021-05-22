@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
   constructor(private http:HttpClient) { }
   signInClient(email:string,password:string):Observable<any>{
-    return this.http.post('/app/auth/login',{email,password,role:1});
+    return this.http.post('/app/auth/login',{email,password,role:2});
   }
 
 

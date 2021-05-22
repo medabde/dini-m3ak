@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'app/services/auth.service';
 
 
 @Component({
@@ -8,5 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminLayoutComponent implements OnInit {
 
-  ngOnInit() { }
+  constructor(
+    private router: Router,private auth :AuthService
+  ) {
+    //if(localStorage.getItem('profile'))this.router.navigate(['home']);
+
+  }
+
+
+  ngOnInit() { 
+
+    if(!this.auth.isAcces()){
+      this.router.navigateByUrl("/login");
+    }
+
+  }
 }

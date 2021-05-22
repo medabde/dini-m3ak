@@ -8,7 +8,7 @@ export class User{
     cin:string;
     
     constructor(){
-        this.id_user = -1;
+        this.id_user ;
         this.first_name ="";
         this.last_name="";
         this.phone="";
