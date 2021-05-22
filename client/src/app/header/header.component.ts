@@ -101,15 +101,19 @@ search(){
   console.log(this.rides);
   console.log(this.starting_date);
   this.rides=this.rides.filter((ride)=>{
-  if(ride.starting_city.id_city == this.starting_city_name && ride.destination_city.id_city==this.destination_city&&ride.starting_date.getTime === this.starting_date.getTime && ride.seats==this.nbPassengers ){
+  if(ride.starting_city.id_city == this.starting_city_name && ride.destination_city.id_city==this.destination_city
+    &&ride.starting_date.getTime === this.starting_date.getTime && ride.seats==this.nbPassengers ){
+    this.isHidden=true;
     return true;
-  }else {
-    this.isHidden=false;
-    this.messageerr='aucun résultat ne correspond à votre recherche.';
-}
+  }
+  
   return false;
   
 })
+if(this.rides.length ==0) {
+    this.isHidden=false;
+    this.messageerr='aucun résultat ne correspond à votre recherche.';
+}
   this.handlePageChange();
 }
   
