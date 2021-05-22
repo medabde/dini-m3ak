@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="text-primary">
+              <th>Ville de depart</th>
+              <th>Date de depart</th>
+              <th>Ville de destination</th>
+              <th>Date de destination</th>
+              <th>Pix</th>
+              <th>Nombre de place</th>
+              <th>Automobiliste</th>
+              <th>Type</th>
+              <th>Est Active</th>
+              <th>Modifier</th>
+              <th>Supprimer</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ride of rides">
+                <td>{{ ride.starting_city_name }}</td>
+                <td>{{ ride.starting_date | date: " d MMMM, y 'á' HH:mm" }}</td>
+                <td>{{ ride.destination_city_name }}</td>
+                <td>
+                  {{ ride.destination_date | date: " d MMMM, y 'á' HH:mm" }}
+                </td>
+                <td>{{ ride.price }} DH</td>
+                <td>{{ ride.nbPassengers }}/{{ ride.seats }}</td>
+                <td>{{ ride.motorist }}</td>
+                <td>{{ ride.ride_type_name }}</td>
+                <td>
+                  <button
+                    *ngIf="ride.enabled; else disableBlock"
+                    class="btn btn-danger"
+                    (click)="disableRide(ride.id_ride)"
+                  >
+                    Desactiver
+                  </button>
+                  <ng-template #disableBlock
+                    ><button
+                      class="btn btn-success"
+                      (click)="enableRide(ride.id_ride)"
+                    >
+                      Activer
+                    </button></ng-template
+                  >
+                </td>
+                <td>
+                  <button class="btn btn-warning">
+                    <i class="nc-icon nc-settings"></i>
+                  </button>
+                </td>
+                <td>
+                  <button
+                    class="btn btn-danger"
+                    (click)="deleteRide(ride.id_ride)"
+                  >
+                    <i class="nc-icon nc-simple-remove"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-5">
+      <div class="left-container bg">
+      </div>
+    </div>
+    <div class="col-7">
+      <div class="form-container">
+        <h1 class="text-left">Se connecter à<img style="margin-bottom: 20px;" src="../../assets/img/bg5.jpg" width="200px" height="70px"></h1>
+        <h3>Entrez vos informations ci-dessous</h3>
+        <label for="email">Email</label>
+        <input id="email" class="form-control" type="email" [pattern]="emailRegex" (focus)="onFocus()"  [(ngModel)]="email" required #emailForm="ngModel">
+        <label for="password">Mot de passe</label>
+        <input id="password" class="form-control" type="{{ isVisible ? 'text' : 'password'}}" (focus)="onFocus()" [(ngModel)]="password" minlength="8" required #passwordForm="ngModel">
+        <span class="show-password" (click)="isVisible = !isVisible">
+          <!--<fa-icon [icon]="faeye"></fa-icon>-->
+        </span> <br>
+        <div class="text-center text-danger error-message" *ngIf="(emailForm.invalid && (emailForm.dirty || emailForm.touched))">
+          <i class="far fa-envelope pr-2"></i>
+          <span  *ngIf="emailForm?.errors?.required"> L'email doit ètre Informé
+          </span>
+          <span *ngIf="emailForm?.errors?.pattern"> Entrez une adresse mail valide</span>
+
+        </div>
+
+        <div class="text-center text-danger error-message" *ngIf="(passwordForm.invalid && (passwordForm.dirty || passwordForm.touched)) && !(emailForm.invalid && (emailForm.dirty || emailForm.touched))">
+          <i class="fas fa-lock pr-2"></i>
+          <span> </span>
+          <span *ngIf="passwordForm?.errors?.required"> Entrer un mot de passe</span>
+          <span *ngIf="passwordForm?.errors?.minlength"> Votre mot de passe doit comporter au moins 8 caractères.</span>
+        </div>
+
+        <div class="text-center text-danger error-message" *ngIf="messageError">
+          <i class="fas fa-lock pr-2 "></i> {{messageError}}
+        </div>
+
+        <div class="text-center">
+          <button   [disabled]="emailForm.invalid || passwordForm.invalid" (click)="login()"> Se connecter </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

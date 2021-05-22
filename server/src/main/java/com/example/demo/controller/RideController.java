@@ -105,6 +105,25 @@ public class RideController {
 
     }
 
+    @PutMapping("/enable/{id}")
+    public ResponseEntity<Map<String, Boolean>> enableRide(@PathVariable Long id){
+        Ride ride = rideRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no ride with id :" +id));
+        ride.setEnabled(true);
+        rideRepository.save(ride);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("ride enabled", Boolean.TRUE);
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/disable/{id}")
+    public ResponseEntity<Map<String, Boolean>> disableRide(@PathVariable Long id){
+        Ride ride = rideRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no ride with id :" +id));
+        ride.setEnabled(false);
+        rideRepository.save(ride);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("ride disabled", Boolean.TRUE);
+        return ResponseEntity.ok(response);
+    }
 
     @PutMapping("/joinride/{id}")
     public ResponseEntity<Ride> joinRide(@PathVariable Long id,HttpServletRequest httpRequest){
