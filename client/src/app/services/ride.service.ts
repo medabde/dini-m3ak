@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import {Ride} from '../models/Ride';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ export class RideService {
 
   constructor(private http:HttpClient) {
   }
+ 
    
    createRide(destination_date:Date ,price : Number, seats : Number, starting_date : String, 
     destination_city:String,ride_type: String ,starting_city: Date, motorist : String):Observable<any>{

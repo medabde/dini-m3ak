@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,Pipe, PipeTransform , EventEmitter } from '@angular/core';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 import { faPlus, faMinus,faEye,faMap } from '@fortawesome/free-solid-svg-icons';
 import decode from 'jwt-decode';
@@ -7,7 +7,10 @@ import {Router} from '@angular/router';
 import { RideService } from '../services/ride.service';
 import { Ride } from '../models/Ride';
 import { User } from '../models/User';
-
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {CityService} from 'src/app/services/city.service';
+import { DatePipe } from '@angular/common';
+import {formatDate} from '@angular/common';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -15,22 +18,27 @@ import { User } from '../models/User';
 
 })
 export class HeaderComponent implements OnInit {
+  //search form
+  messageerr:string='';
+  starting_city_name=0;
+  destination_city=0 ;
+  //string = formatDate(new Date(),'dd-MM-yyyy','fr');
+  starting_date: Date = new Date()
+  nbPassengers=0;
+  all_city: any[] = [];
   title = 'appBootstrap';
   join = faPlus;
   unjoin =  faMinus;
   viewMore = faEye;
   road=faMap;
   rides:Ride[] = [];
-
   userId:number = -1;
-
   ridesInPage:Ride[] = [];
 
 
   page = 1;
   pageSize = 4;
   collectionSize = 0;
-
 
 
   model :any;
@@ -40,8 +48,9 @@ export class HeaderComponent implements OnInit {
   showNavigationIndicators = false;
   images = [ "assets/image/voiture1.jpg", "assets/image/voiture5.jpg","assets/image/voiture3.jpg"];
 
-  constructor(config: NgbCarouselConfig,private router :Router,private rideService:RideService,private toastrService: ToastrService) {
+  constructor(config: NgbCarouselConfig,private router :Router,private rideService:RideService,private toastrService: ToastrService,private fb: FormBuilder, private cityService: CityService) {
     // customize default values of carousels used by this component tree
+    //this.starting_date=dd/MM/yyyy;
     config.showNavigationArrows = true;
     config.showNavigationIndicators = true;
 
@@ -62,7 +71,14 @@ export class HeaderComponent implements OnInit {
     },error =>{console.log(error)});
 
   }
-
+  getAllCities() {
+    this.cityService.getCities().subscribe(data => {
+      this.all_city = data;
+      console.log(data);
+    }, err => {
+      console.log(err);
+    });
+  }
   private isUserJoined(passengers:User[]):boolean{
     const decodedToken:any = decode(JSON.parse(localStorage.getItem('profile')|| "").token);
     const userId = decodedToken.userId;
@@ -76,8 +92,28 @@ export class HeaderComponent implements OnInit {
     return false;
   }
 
+search(){
+  console.log(this.rides);
+  
+  console.log(this.starting_date);
+  //&& ride.starting_date === this.starting_date
+  this.rides=this.rides.filter((ride)=>{
 
+  if(ride.starting_city.id_city == this.starting_city_name && ride.destination_city.id_city==this.destination_city&&ride.starting_date.getTime === this.starting_date.getTime && ride.seats==this.nbPassengers ){
+   return true;
+  }
+  else{
+    this.messageerr='aucun résultat ne correspond à votre recherche';
+
+  }
+  return false;
+
+    //return ride.starting_city.id_city == this.starting_city_name && ride.destination_city.id_city==this.destination_city&&ride.starting_date.getTime === this.starting_date.getTime && ride.seats==this.nbPassengers ; 
+});
+  this.handlePageChange();
+}
   ngOnInit(): void {
+    this.getAllCities();
   }
 
   joinRide(rideId:any,event:Event):void{

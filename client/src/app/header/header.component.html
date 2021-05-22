@@ -16,28 +16,28 @@
   </fieldset>
 <div class="search_form">
 <div class="search-field  first">
-<input type="text" id="form11Example1" placeholder="Dèpart..." />
-  </div>
+  <select class="choices__inner" name="starting_city_name" [(ngModel)]="starting_city_name"  placeholder="Depart" name="choices-single-defaul" >
+    <option selected>Depart...</option>
+    <option *ngFor="let dest of all_city" [value]="dest.id_city">{{dest.city_name}}</option>
+  </select>  </div>
   <div class="search-field second">
-    <div class="form-outline">    
-      <input type="text" id="form11Example3"  placeholder="Destination.. "/>
-    </div>
+    <select class="choices__inner" name="destination_city" [(ngModel)]="destination_city" placeholder="Destination" name="choices-single-defaul" >
+      <option selected>Destination...</option>
+      <option *ngFor="let dest of all_city" [value]="dest.id_city">{{dest.city_name}}</option>
+    </select>
   </div>
   <div class="search-field third">
     <div class="form-outline">
-      <input type="date" id="form11Example3" placeholder="" />     
+      <input type="date" name="starting_date" [(ngModel)]="starting_date" placeholder=""  />     
     </div>
   </div>
-  <div class="search-field fouth">
-    <select class="choices__inner" name="choices-single-defaul">
-      <option selected>Persone...</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-    </select>
+  <div class="search-field fouth"> 
+    <div class="form-outline">
+      <input type="text" name="nbPassengers" [(ngModel)]="nbPassengers" placeholder=""  />     
+    </div>
 </div>
   <div class="search-field fifth">
-    <button type="submit" class="search-btn"><i class="fas fa-search"></i>
+    <button type="submit" class="search-btn" (click)="search()"><i class="fas fa-search" ></i>
       rechercher</button>
   </div>
 </div>    
@@ -51,11 +51,12 @@
                     <span></span>
                     <h4>Top Trajets pour joindre </h4>
                     <p>Trouvez rapidement un covoiturage à proximité parmi les millions de trajets proposés.</p>
+                    <p style="color: red;">{{messageerr}}</p>
                 </div>
             </div>
         </div><br>
         <div class="row">
-          <div class="col-12 col-lg-6" *ngFor="let ride of ridesInPage">
+          <div class="col-12 col-lg-6" *ngFor="let ride of ridesInPage " >
             <mat-card class="example-card d-sm-flex align-items-center wow fadeInUpBig" data-wow-delay="0.2s" >
           <mat-card-header>
             <div mat-card-avatar class="example-header-image "></div>

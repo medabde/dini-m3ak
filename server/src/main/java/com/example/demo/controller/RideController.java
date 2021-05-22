@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,9 +78,9 @@ public class RideController {
     public ResponseEntity<Ride> getRideById(@PathVariable long id, HttpServletRequest httpRequest){
 //        if (!((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
 
-        Ride ride = rideRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("no ride with id :" +id ));
+       Ride rides = rideRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("no ride with id :" +id ));
 
-        return ResponseEntity.ok(ride);
+        return ResponseEntity.ok(rides);
     }
 
     @PostMapping("/add")

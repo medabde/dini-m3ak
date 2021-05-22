@@ -30,6 +30,7 @@ import { ToastrModule } from 'ngx-toastr';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { FilterPipe } from './filter.pipe';
 
 // the second parameter 'fr' is optional
 registerLocaleData(localeFr, 'fr');
@@ -47,7 +48,9 @@ registerLocaleData(localeFr, 'fr');
     CreateRideComponent,
     InfoRideComponent,
     RideComponent,
-    UpdateRideComponent
+    UpdateRideComponent,
+    FilterPipe,
+    
   ],
   imports: [
     BrowserModule,
