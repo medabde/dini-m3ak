@@ -1,0 +1,115 @@
+<div class="profile" >
+  <div *ngIf="msg">{{msg}}</div>
+<form *ngIf="existe" [formGroup]="myForm" (ngSubmit)="updateUser()">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="ml-5 pb-3">
+          <div class="user rounded-circle" >
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-8 col-md-6 col-sm-12">
+        <div class="row max-viewport align-items-center">
+          <div class="col text-center bg-light">
+            <h1 class="display-3">Modifier  <strong class="text-uppercase"></strong></h1>
+          </div></div>
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">First name<span id="etoile">*</span></h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" id="price"  formControlName="first_name">
+                <ng-container *ngFor="let validation of validationMessages.price">
+                  <div class="text-danger" *ngIf="myForm.get('first_name')?.hasError(validation.type) && (myForm.get('first_name')?.dirty || myForm.get('first_name')?.touched)">
+                    {{ validation.message }}
+                  </div>
+                </ng-container>
+
+
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Nom <span id="etoile">*</span></h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" id="nom"  formControlName="last_name">
+                <ng-container *ngFor="let validation of validationMessages.seats">
+                  <div class="text-danger" *ngIf="myForm.get('last_name')?.hasError(validation.type) && (myForm.get('last_name')?.dirty || myForm.get('last_name')?.touched)">
+                    {{ validation.message }}
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">CIN<span id="etoile">*</span></h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" id="cin"  formControlName="cin">
+                <ng-container *ngFor="let validation of validationMessages.cin">
+                  <div class="text-danger" *ngIf="myForm.get('cin')?.hasError(validation.type) && (myForm.get('cin')?.dirty || myForm.get('cin')?.touched)">
+                    {{ validation.message }}
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Email<span id="etoile">*</span></h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" id="email"  formControlName="email">
+                <ng-container *ngFor="let validation of validationMessages.seats">
+                  <div class="text-danger" *ngIf="myForm.get('email')?.hasError(validation.type) && (myForm.get('email')?.dirty || myForm.get('email')?.touched)">
+                    {{ validation.message }}
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Phone<span id="etoile">*</span></h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" id="phone"  formControlName="phone">
+                <ng-container *ngFor="let validation of validationMessages.seats">
+                  <div class="text-danger" *ngIf="myForm.get('phone')?.hasError(validation.type) && (myForm.get('phone')?.dirty || myForm.get('phone')?.touched)">
+                    {{ validation.message }}
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Adress<span id="etoile">*</span></h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" id="address"  formControlName="address">
+                <ng-container *ngFor="let validation of validationMessages.address">
+                  <div class="text-danger" *ngIf="myForm.get('address')?.hasError(validation.type) && (myForm.get('address')?.dirty || myForm.get('address')?.touched)">
+                    {{ validation.message }}
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <button  type="submit" class="btn btn-primary btn-lg">Modifier</button>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</form>
+</div>

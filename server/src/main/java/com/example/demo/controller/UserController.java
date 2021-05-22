@@ -44,7 +44,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @PutMapping("/")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Map<String,String>> updateUser(@RequestBody User userDetails, HttpServletRequest httpRequest){
         long id = (Integer) httpRequest.getAttribute("userId");
         if (id != userDetails.getId_user() && !((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
