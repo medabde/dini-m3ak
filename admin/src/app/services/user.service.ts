@@ -29,7 +29,7 @@ export class UserService {
     return this.http.get<User>("/app/api/users/"+id_user,{headers:this.getHeader()});
   }*/
 
-
+  
   updateuser(id: number , user : User):Observable<User>{
     return this.http.put<User>(`/app/api/users/update/${id}`,user,{headers:this.getHeader()});
   }
@@ -37,6 +37,10 @@ export class UserService {
     return this.http.delete<User>(`/app/api/users/delete/${id}`, {
       headers: this.getHeader(),
     });
+
+  }
+  updateProfile(user:User):Observable<User>{
+    return this.http.put<User>("app/api/users/",user,{headers:this.getHeader()});
   }
 
 

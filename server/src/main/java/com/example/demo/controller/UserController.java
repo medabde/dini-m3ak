@@ -59,6 +59,24 @@ public class UserController {
         User updateUser = userRepository.save(user);
         return ResponseEntity.ok(updateUser);
     }
+    @PutMapping("/")
+    public ResponseEntity<Map<String,String>> updateProfile(@RequestBody User userDetails, HttpServletRequest httpRequest){
+        long id = (Integer) httpRequest.getAttribute("userId");
+        if (id != userDetails.getId_user() && !((Boolean) httpRequest.getAttribute("is_admin"))) throw new AuthException("you don't have the right to access to this information");
+
+        User user = userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("no user with id :" +id ));
+        user.setFirst_name(userDetails.getFirst_name());
+        user.setLast_name(userDetails.getLast_name());
+        user.setEmail(userDetails.getEmail());
+        user.setPhone(userDetails.getPhone());
+        user.setAddress(userDetails.getAddress());
+        user.setCIN(userDetails.getCIN());
+
+        User updateProfile = userRepository.save(user);
+
+
+        return new ResponseEntity<>(Utils.generateJWTToken(updateProfile), HttpStatus.OK);
+    }
 
 
     @DeleteMapping("/{id}")
