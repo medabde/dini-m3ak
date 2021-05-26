@@ -8,13 +8,13 @@ export interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-  { path: "/dashboard", title: "Dashboard", icon: "nc-bank", class: "" },
+  { path: "/dashboard", title: "acceuil", icon: "nc-bank", class: "" },
 
 
-  { path: "/user", title: "User Profile", icon: "nc-single-02", class: "" },
-  { path: "/table", title: "Table List", icon: "nc-tile-56", class: "" },
+  { path: "/user", title: "Profile", icon: "nc-single-02", class: "" },
+  { path: "/table", title: "Utilisateurs", icon: "nc-tile-56", class: "" },
 
-  { path: "/rides", title: "Rides", icon: "nc-tile-56", class: "" },
+  { path: "/rides", title: "Trajets", icon: "nc-tile-56", class: "" },
   // { path: '/upgrade',       title: 'Upgrade to PRO',    icon:'nc-spaceship',  class: 'active-pro' },
 ];
 

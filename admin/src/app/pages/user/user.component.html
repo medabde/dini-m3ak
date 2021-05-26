@@ -2,20 +2,20 @@
   <div class="col-md-4">
     <div class="card card-user">
       <div class="image">
-        
+
       </div>
       <div class="card-body">
         <div class="author">
           <a href="#">
             <img class="avatar border-gray" src="assets/img/default-avatar.png" alt="...">
-            <h5 class="title">Mohammed</h5>
+            <h5 class="title">{{user.first_name}}</h5>
           </a>
           <p class="description">
-            @NoOne
+
           </p>
         </div>
         <p class="description text-center">
-          bla bla bla
+
 
         </p>
       </div>
@@ -76,15 +76,15 @@
                 <label>CIN</label>
                 <input type="text" class="form-control" [(ngModel)]="user.cin" placeholder="CIN" value="" name="cin">
               </div>
-            </div>  
+            </div>
             <div class="col-md-4 pr-1">
               <div class="form-group">
                 <label>Telephone</label>
                 <input type="text" class="form-control" [(ngModel)]="user.phone"  placeholder="Telephone" value="" name="phone">
               </div>
-            </div> 
+            </div>
           </div>
-          
+
           <div class="row">
             <div class="update ml-auto mr-auto">
               <button type="submit" class="btn btn-primary btn-round" (click)="updateProfile()">Modifier</button>
