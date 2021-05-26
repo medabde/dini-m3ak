@@ -125,10 +125,9 @@ export class RideService {
     );
   }
 
-  getHeader(): HttpHeaders {
+  private getHeader():HttpHeaders{
     return new HttpHeaders({
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjExNjIyNjMsImV4cCI6MTYyMTE2OTQ2MywidXNlcklkIjoxMiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwiZmlyc3RfbmFtZSI6InRlc3QiLCJsYXN0X25hbWUiOiJ0ZXN0IiwiY2luIjoiRiIsInBob25lIjoiMDciLCJpc19lbmFibGVkIjp0cnVlLCJpc19hZG1pbiI6dHJ1ZX0.qNe_h8NOtsRhpaCiD3HbkJPR5n4cmvMJclx3T36rZc0",
+      'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('profile')||"{}").token
     });
   }
 }
