@@ -21,7 +21,6 @@ import java.util.Map;
 @RequestMapping("app/api/users")
 public class UserController {
 
-
     @Autowired
     private UserRepository userRepository;
     @Autowired
