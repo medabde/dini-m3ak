@@ -8,6 +8,37 @@ import { ToastrService} from 'ngx-toastr';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
+  selector: 'ngbd-modal-confirm',
+  template: `
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Modification du profile
+    </h4>
+    <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p><strong>Etes-vous sûr que vous voulez modifier</strong></p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="no()">Annuler</button>
+    <button type="button" class="btn btn-danger" (click)="yes()">Ok</button>
+  </div>
+  `
+})
+export class  NgbdModalConfirm {
+  //@Input() name:any;
+  //options: ConfirmOptions;
+  constructor(public modal: NgbActiveModal) {}
+  yes() {
+    this.modal.close('confirmed');
+  }
+
+  no() {
+    this.modal.dismiss('not confirmed');
+  }
+}
+@Component({
   selector: 'user.cmp',
   moduleId: module.id,
   templateUrl: './user.component.html'
@@ -42,12 +73,20 @@ export class UserComponent implements OnInit {
     }
 
     updateProfile(){
-  
+      const modalRef = this.modalService.open(NgbdModalConfirm).result; 
+      modalRef.then(
+       () => {
          this.userService.updateProfile(this.user).subscribe(data =>{
            
         localStorage.setItem('profile',JSON.stringify(data));
         this.refreshProfile();
+         
       });
+    },
+
+    () => {
+      console.log('not deleting...');
+    });
           
     }
 
