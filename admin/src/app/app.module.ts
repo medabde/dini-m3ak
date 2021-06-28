@@ -8,7 +8,7 @@ import { SidebarModule } from "./sidebar/sidebar.module";
 import { FooterModule } from "./shared/footer/footer.module";
 import { NavbarModule } from "./shared/navbar/navbar.module";
 import { FixedPluginModule } from "./shared/fixedplugin/fixedplugin.module";
-
+import { ChartsModule } from 'ng2-charts';
 import { AppComponent } from "./app.component";
 import { AppRoutes } from "./app.routing";
 
@@ -25,6 +25,7 @@ import { UpdateUserComponent } from './update-user/update-user.component';
     RouterModule.forRoot(AppRoutes, {
       useHash: true,
     }),
+    ChartsModule,
     ReactiveFormsModule,
     FormsModule,
     SidebarModule,

@@ -10,7 +10,7 @@ import { ToastrService} from 'ngx-toastr';
   selector: 'ngbd-modal-confirm',
   template: `
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-title">Suppression du trajet
+    <h4 class="modal-title" id="modal-title">Suppression d'utilisateur
     </h4>
     <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
@@ -63,7 +63,6 @@ export class TableComponent implements OnInit{
   }
 
   modifier(id){
-    console.log(id);
     this.router.navigate(['update-user', id]);
   }
   /*

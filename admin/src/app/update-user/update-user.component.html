@@ -65,7 +65,7 @@
                 <h6 class="mb-0">Email<span id="etoile">*</span></h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                <input type="text" class="form-control" id="email"  formControlName="email">
+                <input type="text" class="form-control" id="email"  formControlName="email" disabled>
                 <ng-container *ngFor="let validation of validationMessages.seats">
                   <div class="text-danger" *ngIf="myForm.get('email')?.hasError(validation.type) && (myForm.get('email')?.dirty || myForm.get('email')?.touched)">
                     {{ validation.message }}
